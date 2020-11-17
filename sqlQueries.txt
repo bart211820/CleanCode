@@ -1,0 +1,58 @@
+CREATE TABLE User(
+    userID INT PRIMARY KEY AUTO_INCREMENT,
+    fullName VARCHAR(191),
+    postcode VARCHAR(191),
+    streetnumber VARCHAR(191),
+    emailAddress VARCHAR(191),
+    password CHAR(60),
+    roles VARCHAR(191),
+    UNIQUE (emailAddress)
+);
+
+CREATE TABLE Item(
+    itemID INT PRIMARY KEY AUTO_INCREMENT,
+    itemName VARCHAR(191),
+    itemDescription VARCHAR(191),
+    itemPrice INT,
+    itemImage VARCHAR(191),
+    itemType VARCHAR(191),
+    itemAnimatorID INT
+);
+
+CREATE TABLE Animator(
+    animatorID INT PRIMARY KEY AUTO_INCREMENT,
+    animatorName VARCHAR(191),
+    animatorLink VARCHAR(191),
+    animatorImage VARCHAR(191)
+);
+
+CREATE TABLE Basket(
+    basketID INT PRIMARY KEY AUTO_INCREMENT,
+    basketUserID INT,
+    basketItemID INT,
+    basketItemAmount INT
+);
+
+CREATE TABLE MadeOrder(
+    orderID INT PRIMARY KEY AUTO_INCREMENT,
+    orderUserID INT,
+    orderItemID INT,
+    orderItemAmount INT,
+    orderDelivery DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+
+
+INSERT INTO User (fullname, postcode, streetnumber, emailAddress, password, roles) VALUES ('Admin', '2211XR', '67', 'admin', '$2a$10$q693x8mza/amGV.XDlaAM.smrGyCnmcOfiY6cRVnwnr1vKnPrE3By', 'GUEST ADMIN');
+
+INSERT INTO Item (itemName, itemDescription, itemPrice, itemImage, itemType, itemAnimatorID) VALUES ('The Odd 1s Out Book', 'DESCRIPTION', 20, 'https://cdn.shopify.com/s/files/1/0033/1762/8983/products/Book_720x.jpg?v=1529191180', 'Book', 1);
+INSERT INTO Item (itemName, itemDescription, itemPrice, itemImage, itemType, itemAnimatorID) VALUES ('Ari Plush', 'Jaiden has a dog..', 14, 'https://cdn.shopify.com/s/files/1/0034/0590/6035/products/Plush1_590x.jpg?v=1535989539', 'Plush', 2);
+
+INSERT INTO Animator (animatorName, animatorLink, animatorImage) VALUES ('TheOdd1sOut', 'https://www.youtube.com/channel/UCo8bcnLyZH8tBIH9V1mLgqQ', 'https://yt3.ggpht.com/a-/AAuE7mAdLPVNtqjYHu9gffkZSRsNDtdPW6T228iO9Q=s288-mo-c-c0xffffffff-rj-k-no');
+INSERT INTO Animator (animatorName, animatorLink, animatorImage) VALUES ('Jaiden Animations', 'https://www.youtube.com/channel/UCGwu0nbY2wSkW8N-cghnLpA', 'https://yt3.ggpht.com/a-/AAuE7mBIrCpIdm5MYtFos91XRTNePDE_Kh4hWi_ruA=s288-mo-c-c0xffffffff-rj-k-no');
+
+INSERT INTO Basket (basketUserID, basketItemID, basketItemAmount) VALUES (1, 2, 6);
+INSERT INTO Basket (basketUserID, basketItemID, basketItemAmount) VALUES (1, 1, 9);
+
+INSERT INTO MadeOrder (orderUserID, orderItemID, orderItemAmount) VALUES (1, 1, 2);
+INSERT INTO MadeOrder (orderUserID, orderItemID, orderItemAmount) VALUES (1, 2, 1);

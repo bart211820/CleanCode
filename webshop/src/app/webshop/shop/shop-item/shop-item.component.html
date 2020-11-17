@@ -1,0 +1,5 @@
+<div class="shopItem" [routerLink]="[item.getItemID()]">
+  <img src="{{ item.getItemImage() }}" alt="{{ item.getItemName() }}">
+  <h3>{{ item.getItemName() }}</h3>
+  <div class="shopPrice">&euro;{{ item.getItemPrice() }}</div>
+</div>

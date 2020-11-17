@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ItemResource.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">workshop-api</a> &gt; <a href="index.source.html" class="el_package">nl.hsleiden.resource</a> &gt; <span class="el_source">ItemResource.java</span></div><h1>ItemResource.java</h1><pre class="source lang-java linenums">package nl.hsleiden.resource;
+
+import com.fasterxml.jackson.annotation.JsonView;
+import com.google.inject.Singleton;
+import nl.hsleiden.View;
+import nl.hsleiden.model.Item;
+import nl.hsleiden.service.ItemService;
+
+import javax.annotation.security.RolesAllowed;
+import javax.inject.Inject;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import java.util.Collection;
+
+@Singleton
+@Path(&quot;/items&quot;)
+@Produces(MediaType.APPLICATION_JSON)
+public class ItemResource {
+
+    private final ItemService service;
+
+    @Inject
+    public ItemResource(ItemService service)
+<span class="nc" id="L24">    {</span>
+<span class="nc" id="L25">        this.service = service;</span>
+<span class="nc" id="L26">    }</span>
+
+    @GET
+    @JsonView(View.Public.class)
+    public Collection&lt;Item&gt; retrieveAll()
+    {
+<span class="nc" id="L32">        return service.getAll();</span>
+    }
+
+    @GET
+    @Path(&quot;/{itemID}&quot;)
+    @JsonView(View.Public.class)
+    public Item retrieve(@PathParam(&quot;itemID&quot;) int itemID)
+    {
+<span class="nc" id="L40">        return service.getOne(itemID);</span>
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @JsonView(View.Protected.class)
+    @RolesAllowed(&quot;ADMIN&quot;)
+    public void create(Item item)
+    {
+<span class="nc" id="L49">        service.create(item);</span>
+<span class="nc" id="L50">    }</span>
+
+    @PUT
+    @Path(&quot;/{id}&quot;)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @JsonView(View.Protected.class)
+    @RolesAllowed(&quot;ADMIN&quot;)
+    public void update(@PathParam(&quot;id&quot;) int id, Item item)
+    {
+<span class="nc" id="L59">        service.update(id, item);</span>
+<span class="nc" id="L60">    }</span>
+
+    @DELETE
+    @Path(&quot;/{itemID}&quot;)
+    @RolesAllowed(&quot;ADMIN&quot;)
+    public void delete(@PathParam(&quot;itemID&quot;) int id)
+    {
+<span class="nc" id="L67">        service.delete(id);</span>
+<span class="nc" id="L68">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

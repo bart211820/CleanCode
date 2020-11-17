@@ -1,0 +1,20 @@
+<app-header></app-header>
+<div id="itemContentContainer" *ngIf="readyToDisplay">
+  <div id="itemInfoLeft">
+    <h2>{{ itemObject.getItemName() }} ({{ itemObject.getItemType() }})</h2>
+    <div id="itemShadowGiver"></div>
+    <img src="{{ itemObject.getItemImage() }}" alt="{{ itemObject.getItemName() }}">
+  </div>
+  <div id="itemInfoRight">
+    <div id="animatorBar">
+      <img src="{{ animatorObject.getAnimatorImage() }}" alt="animatorObject.getAnimatorName()">
+      <div id="animatorBarRight">
+        <h3>{{ animatorObject.getAnimatorName() }}</h3>
+        <a href="{{ animatorObject.getAnimatorLink() }}" target="_blank">Click to watch on Youtube</a>
+      </div>
+    </div>
+    <p>{{ itemObject.getItemDescription() }}</p>
+    <div id="itemPrice"><h6>&euro; {{ itemObject.getItemPrice() }}</h6></div>
+    <div class="yamsButton" (click)="tryAddToCard()">Add to cart</div>
+  </div>
+</div>

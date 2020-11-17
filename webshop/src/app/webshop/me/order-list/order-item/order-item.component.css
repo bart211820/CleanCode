@@ -1,0 +1,33 @@
+.itemImageContainer{
+  width: 10vw;
+  padding: 0.2vw;
+}
+
+.itemImageContainer img{
+  width: 9.6vw;
+  height: 9.6vw;
+}
+
+.itemNameContainer{
+  width: 30vw;
+  line-height: 9.8vw;
+  text-align: center;
+}
+
+.itemPriceContainer{
+  width: 15vw;
+  line-height: 9.8vw;
+  text-align: center;
+}
+
+.itemAmountContainer{
+  width: 10vw;
+  line-height: 9.8vw;
+  text-align: center;
+}
+
+.deliveryDateContainer{
+  width: 25vw;
+  line-height: 9.8vw;
+  text-align: center;
+}

@@ -1,0 +1,32 @@
+h1{
+  font-size: 3.8vw;
+  margin-top: 5vh;
+  margin-bottom: 7vh;
+  text-align: center;
+  font-weight: normal;
+}
+
+#linkContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+a{
+  display: block;
+  margin-left: 3vw;
+  margin-right: 3vw;
+}
+
+.adminIndexLink{
+  background-color: #4290de;
+  width: 24vw;
+  height: 24vw;
+  text-align: center;
+  color: white;
+  padding-top: 5vw;
+  font-size: 2.7vw;
+  font-weight: bold;
+  border-radius: 4vw;
+  box-shadow: inset 0px 0px 0.5vw 0.2vw white;
+}

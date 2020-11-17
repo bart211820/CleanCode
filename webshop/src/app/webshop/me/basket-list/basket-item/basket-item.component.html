@@ -1,0 +1,22 @@
+<div class="itemContainer" *ngIf="readyToDisplay">
+  <div class="itemImageContainer">
+    <img src="{{ itemObject.getItemImage() }}" alt="{{ itemObject.getItemName() }}">
+  </div>
+  <div class="itemNameContainer">
+    {{ itemObject.getItemName() }}
+  </div>
+  <div class="itemPriceContainer">
+    &euro; {{ itemObject.getItemPrice() }} (per Unit)
+  </div>
+  <div class="itemAmountContainer">
+    <form (ngSubmit)="updateAmount(f)" #f="ngForm">
+      <input name="itemAmount" type="number" [(ngModel)]="itemAmount">
+      <button value="Update" class="yamsButton" type="submit">Update</button>
+    </form>
+  </div>
+  <div class="itemRemoveContainer">
+    <form (ngSubmit)="removeBasket(f)" #f="ngForm">
+      <button value="Remove item" class="redYamsButton" type="submit">Remove item</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+#basketOrderContainer{
+  width: 90%;
+  margin: 0 auto;
+  padding-bottom: 3vh;
+}
+
+.meSeparation{
+  width: 95%;
+  background-color: #4290de;
+  box-shadow: 0px 0vh 0.7vh 0.3vh #4290de;
+  margin: 2vh auto;
+  margin-bottom: 3.5vh;
+}
+
+h2{
+  font-size: 1.9vw;
+  margin-bottom: 0.8vh;
+}
+
+.itemsHolder{
+
+}
+
+.itemContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.itemContainer div{
+  border-top: 0.1vh solid #4290de;
+  border-left: 0.1vh solid #4290de;
+  border-right: 0.1vh solid #4290de;
+  border-bottom: 0.1vh solid #4290de;
+  height: 10vw;
+  font-size: 1.4vw;
+}
+
+.noItemsMessage{
+  text-align: center;
+  font-size: 1.4vw;
+  padding-top: 9vh;
+  padding-bottom: 12vh;
+}

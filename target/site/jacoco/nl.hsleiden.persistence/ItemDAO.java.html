@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ItemDAO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">workshop-api</a> &gt; <a href="index.source.html" class="el_package">nl.hsleiden.persistence</a> &gt; <span class="el_source">ItemDAO.java</span></div><h1>ItemDAO.java</h1><pre class="source lang-java linenums">package nl.hsleiden.persistence;
+
+import nl.hsleiden.Database;
+import nl.hsleiden.model.Item;
+
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ItemDAO {
+    private Database database;
+    private PreparedStatement statement;
+    private String query;
+    private List&lt;Item&gt; results;
+
+<span class="nc" id="L19">    public ItemDAO() {</span>
+<span class="nc" id="L20">        this.database = Database.getInstance();</span>
+<span class="nc" id="L21">    }</span>
+
+    public List&lt;Item&gt; selectItems(PreparedStatement statement) throws SQLException{
+<span class="nc" id="L24">        ResultSet items = database.select(statement);</span>
+<span class="nc" id="L25">        List&lt;Item&gt; resultList = new ArrayList&lt;&gt;();</span>
+
+<span class="nc bnc" id="L27" title="All 2 branches missed.">        while (items.next()){</span>
+<span class="nc" id="L28">            Item item = new Item(</span>
+<span class="nc" id="L29">                    items.getInt(&quot;itemID&quot;),</span>
+<span class="nc" id="L30">                    items.getString(&quot;itemName&quot;),</span>
+<span class="nc" id="L31">                    items.getString(&quot;itemDescription&quot;),</span>
+<span class="nc" id="L32">                    items.getDouble(&quot;itemPrice&quot;),</span>
+<span class="nc" id="L33">                    items.getString(&quot;itemImage&quot;),</span>
+<span class="nc" id="L34">                    items.getString(&quot;itemType&quot;),</span>
+<span class="nc" id="L35">                    items.getInt(&quot;itemAnimatorID&quot;)</span>
+            );
+
+<span class="nc" id="L38">            resultList.add(item);</span>
+<span class="nc" id="L39">        }</span>
+
+
+<span class="nc" id="L42">        return resultList;</span>
+    }
+
+    public List&lt;Item&gt; getAllItems() {
+        try {
+<span class="nc" id="L47">            query = &quot;SELECT * FROM Item;&quot;;</span>
+<span class="nc" id="L48">            statement = database.prepareStatement(query);</span>
+
+<span class="nc" id="L50">            return selectItems(statement);</span>
+        }
+<span class="nc" id="L52">        catch (SQLException e) {</span>
+<span class="nc" id="L53">            throw new RuntimeException(e);</span>
+        }
+    }
+
+    public Item getItem(int itemID){
+        try {
+<span class="nc" id="L59">            query = &quot;SELECT * FROM Item WHERE itemID = ?;&quot;;</span>
+<span class="nc" id="L60">            statement = database.prepareStatement(query);</span>
+<span class="nc" id="L61">            statement.setInt(1, itemID);</span>
+
+<span class="nc" id="L63">            return selectItems(statement).get(0);</span>
+        }
+<span class="nc" id="L65">        catch (SQLException e) {</span>
+<span class="nc" id="L66">            throw new RuntimeException(e);</span>
+        }
+      }
+
+    public void createItem(String itemName, String itemDescription, double itemPrice, String itemImage, String itemType, int itemAnimatorID) {
+        try {
+<span class="nc" id="L72">            query = &quot;INSERT INTO Item (itemName, itemDescription, itemPrice, itemImage, itemType, itemAnimatorID) VALUES (?, ?, ?, ?, ?, ?);&quot;;</span>
+
+<span class="nc" id="L74">            statement = database.prepareStatement(query);</span>
+<span class="nc" id="L75">            statement.setString(1, itemName);</span>
+<span class="nc" id="L76">            statement.setString(2, itemDescription);</span>
+<span class="nc" id="L77">            statement.setDouble(3, itemPrice);</span>
+<span class="nc" id="L78">            statement.setString(4, itemImage);</span>
+<span class="nc" id="L79">            statement.setString(5, itemType);</span>
+<span class="nc" id="L80">            statement.setInt(6, itemAnimatorID);</span>
+
+<span class="nc" id="L82">            database.update(statement);</span>
+        }
+<span class="nc" id="L84">        catch (SQLException e) {</span>
+<span class="nc" id="L85">            throw new RuntimeException(e);</span>
+<span class="nc" id="L86">        }</span>
+<span class="nc" id="L87">    }</span>
+
+    public void updateItem(String itemName, String itemDescription, double itemPrice, String itemImage, String itemType, int itemAnimatorID, int itemID) {
+        try {
+<span class="nc" id="L91">            query = &quot;UPDATE Item SET itemName = ?, itemDescription = ?, itemPrice = ?, itemImage = ?, itemType = ?, itemAnimatorID = ? WHERE itemID = ?;&quot;;</span>
+
+<span class="nc" id="L93">            statement = database.prepareStatement(query);</span>
+<span class="nc" id="L94">            statement.setString(1, itemName);</span>
+<span class="nc" id="L95">            statement.setString(2, itemDescription);</span>
+<span class="nc" id="L96">            statement.setDouble(3, itemPrice);</span>
+<span class="nc" id="L97">            statement.setString(4, itemImage);</span>
+<span class="nc" id="L98">            statement.setString(5, itemType);</span>
+<span class="nc" id="L99">            statement.setInt(6, itemAnimatorID);</span>
+<span class="nc" id="L100">            statement.setInt(7, itemID);</span>
+
+<span class="nc" id="L102">            database.update(statement);</span>
+        }
+<span class="nc" id="L104">        catch (SQLException e) {</span>
+<span class="nc" id="L105">            throw new RuntimeException(e);</span>
+<span class="nc" id="L106">        }</span>
+<span class="nc" id="L107">    }</span>
+
+    public void deleteItem(int itemID) {
+        try {
+<span class="nc" id="L111">            query = &quot;DELETE FROM Item WHERE itemID = ?;&quot;;</span>
+
+<span class="nc" id="L113">            statement = database.prepareStatement(query);</span>
+<span class="nc" id="L114">            statement.setInt(1, itemID);</span>
+
+<span class="nc" id="L116">            database.update(statement);</span>
+        }
+<span class="nc" id="L118">        catch (SQLException e) {</span>
+<span class="nc" id="L119">            throw new RuntimeException(e);</span>
+<span class="nc" id="L120">        }</span>
+<span class="nc" id="L121">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

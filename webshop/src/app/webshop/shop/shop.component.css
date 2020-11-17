@@ -1,0 +1,28 @@
+#websiteIntroImage{
+  width: 100%;
+  height: 90vh;
+  background-image: url(https://i.ytimg.com/vi/OJXP7s7_EVQ/maxresdefault.jpg);
+  background-size: 100% 140%;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  padding-top: 25vh;
+}
+
+#websiteIntroImage h1{
+  width: 90%;
+  margin: 0px auto;
+  text-align: center;
+  font-size: 7.5vw;
+  color: #4290de;
+  text-shadow: -3px -3px 0 #192154, 3px -3px 0 #192154, -3px 3px 0 #192154, 3px 3px 0 #192154;
+  border-bottom: 0.3vh solid #4290de;
+  padding-bottom: 2vh;
+  box-shadow: 0vh 0.3vh 0.7vh 0vh #4290de;
+}
+
+#shopItemsContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}

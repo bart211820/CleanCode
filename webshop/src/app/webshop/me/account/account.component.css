@@ -1,0 +1,66 @@
+#accountContainer{
+  height: 20vw;
+}
+
+h1{
+  font-size: 2.5vw;
+}
+
+#logOutButton{
+  position: absolute;
+  border: none;
+  right: 2vw;
+  margin-top: 2vw;
+  font-size: 1.5vw;
+  padding: 0.4vw;
+  padding-top: 0.2vw;
+}
+
+#profileImage{
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  width: 20vw;
+  height: 20vw;
+  margin-left: 1vw;
+  margin-right: 3vw;
+  float: left;
+}
+
+#accountDetails{
+  padding-top: 2vw;
+  font-size: 1.4vw;
+}
+
+#accountDetails form{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.accountInfoHolder{
+  width: 18vw;
+  height: 6vw;
+  margin-right: 1vw;
+}
+
+.accountInfoHolder *{
+  width: 100%;
+}
+
+.accountInfoHolder label{
+  font-size: 1.6vw;
+}
+
+.accountInfoHolder input{
+  font-size: 1.5vw;
+}
+
+.accountInfoHolder button{
+  height: 4vw;
+  font-size: 2vw;
+  border: none;
+  width: 90%;
+  margin: 0px auto;
+  display: block;
+}
+

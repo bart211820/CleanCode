@@ -1,0 +1,32 @@
+<div id="accountContainer">
+  <button (click)="logOut()" id="logOutButton" class="yamsButton">Log out</button>
+  <img src="https://art.pixilart.com/121acf26d7b0be6.png" alt="profileImage" id="profileImage">
+  <div id="accountDetails">
+    <h1>Welcome {{ fullName }}, here is all your data:</h1>
+    <form (ngSubmit)="editAccount()" #f="ngForm">
+      <div class="accountInfoHolder">
+        <label>Fullname:</label>
+        <input type="text" [(ngModel)]="fullName" name="fullName">
+      </div>
+      <div class="accountInfoHolder">
+        <label>Email:</label>
+        <input type="text" [(ngModel)]="emailAddress" name="emailAddress">
+      </div>
+      <div class="accountInfoHolder">
+        <label>Password:</label>
+        <input type="password" [(ngModel)]="password" name="password">
+      </div>
+      <div class="accountInfoHolder">
+        <label>Postcode:</label>
+        <input type="text" [(ngModel)]="postcode" name="postcode">
+      </div>
+      <div class="accountInfoHolder">
+        <label>Streetnumber:</label>
+        <input type="text" [(ngModel)]="streetnumber" name="streetnumber">
+      </div>
+      <div class="accountInfoHolder">
+        <button value="Update data" class="yamsButton" type="submit">Update data</button>
+      </div>
+    </form>
+  </div>
+</div>

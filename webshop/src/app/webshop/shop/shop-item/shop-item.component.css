@@ -1,0 +1,37 @@
+.shopItem{
+  box-shadow: 0px 0.3vh 0.7vh 0.3vh #4290de;
+  margin-bottom: 7vh;
+  margin-top: 2vh;
+  margin-left: 1vw;
+  margin-right: 1vw;
+  cursor: pointer;
+  width: 25vw;
+  height: 28vw;
+}
+
+.shopItem img{
+  display: block;
+  width: 20vw;
+  height: 20vw;
+  margin: 1vw auto;
+}
+
+.shopItem h3{
+  text-align: center;
+  font-weight: normal;
+  font-size: 2vw;
+}
+
+.shopPrice{
+  background-color: #4290de;
+  font-size: 2.1vw;
+  font-weight: bold;
+  display: block;
+  width: 6vw;
+  height: 6vw;
+  margin: 0vh auto;
+  padding-right: 0.4vw;
+  border-radius: 3vw;
+  text-align: center;
+  line-height: 5.4vw;
+}

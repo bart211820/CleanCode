@@ -1,0 +1,23 @@
+.blueTransparentBox{
+  background-color: rgb(190, 217, 244, 0.8);
+  padding: 0.6vw 1vw;
+  box-shadow: inset 0 0 1vh 0.3vh #4290de;
+}
+
+.yamsButton{
+  background-color: #93bfec;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0.3vh 0.3vh 0.5vh #4290de;
+  cursor: pointer;
+  text-align: center;
+}
+
+.redYamsButton{
+  background-color: #ff291a;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0.3vh 0.3vh 0.5vh #B20C00;
+  cursor: pointer;
+  text-align: center;
+}

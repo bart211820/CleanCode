@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OrderDAO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">workshop-api</a> &gt; <a href="index.source.html" class="el_package">nl.hsleiden.persistence</a> &gt; <span class="el_source">OrderDAO.java</span></div><h1>OrderDAO.java</h1><pre class="source lang-java linenums">package nl.hsleiden.persistence;
+
+import nl.hsleiden.Database;
+import nl.hsleiden.model.Basket;
+import nl.hsleiden.model.Order;
+
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+public class OrderDAO {
+
+    private Database database;
+    private PreparedStatement statement;
+    private String query;
+    private List&lt;Order&gt; results;
+
+<span class="nc" id="L22">    public OrderDAO() {</span>
+<span class="nc" id="L23">        this.database = Database.getInstance();</span>
+<span class="nc" id="L24">    }</span>
+
+    public List&lt;Order&gt; selectOrders(PreparedStatement statement) throws SQLException {
+<span class="nc" id="L27">        ResultSet orders = database.select(statement);</span>
+<span class="nc" id="L28">        List&lt;Order&gt; resultList = new ArrayList&lt;&gt;();</span>
+
+<span class="nc bnc" id="L30" title="All 2 branches missed.">        while (orders.next()){</span>
+<span class="nc" id="L31">            Order order = new Order(</span>
+<span class="nc" id="L32">                    orders.getInt(&quot;orderID&quot;),</span>
+<span class="nc" id="L33">                    orders.getInt(&quot;orderUserID&quot;),</span>
+<span class="nc" id="L34">                    orders.getInt(&quot;orderItemID&quot;),</span>
+<span class="nc" id="L35">                    orders.getInt(&quot;orderItemAmount&quot;),</span>
+<span class="nc" id="L36">                    orders.getDate(&quot;orderDelivery&quot;)</span>
+            );
+
+<span class="nc" id="L39">            resultList.add(order);</span>
+<span class="nc" id="L40">        }</span>
+
+<span class="nc" id="L42">        return resultList;</span>
+    }
+
+    public List&lt;Order&gt; getAllOrders() {
+        try {
+<span class="nc" id="L47">            query = &quot;SELECT * FROM MadeOrder;&quot;;</span>
+<span class="nc" id="L48">            statement = database.prepareStatement(query);</span>
+
+<span class="nc" id="L50">            return selectOrders(statement);</span>
+        }
+<span class="nc" id="L52">        catch (SQLException e) {</span>
+<span class="nc" id="L53">            throw new RuntimeException(e);</span>
+        }
+    }
+
+    public Order getOrder(int orderID){
+        try {
+<span class="nc" id="L59">            query = &quot;SELECT * FROM MadeOrder WHERE orderID = ?;&quot;;</span>
+<span class="nc" id="L60">            statement = database.prepareStatement(query);</span>
+<span class="nc" id="L61">            statement.setInt(1, orderID);</span>
+
+<span class="nc" id="L63">            return selectOrders(statement).get(0);</span>
+        }
+<span class="nc" id="L65">        catch (SQLException e) {</span>
+<span class="nc" id="L66">            throw new RuntimeException(e);</span>
+        }
+    }
+
+    public List&lt;Order&gt; getOrderFromUser(int orderUserID) {
+        try {
+<span class="nc" id="L72">            query = &quot;SELECT * FROM MadeOrder WHERE orderUserID = ?;&quot;;</span>
+<span class="nc" id="L73">            statement = database.prepareStatement(query);</span>
+<span class="nc" id="L74">            statement.setInt(1, orderUserID);</span>
+
+<span class="nc" id="L76">            return selectOrders(statement);</span>
+        }
+<span class="nc" id="L78">        catch (SQLException e) {</span>
+<span class="nc" id="L79">            throw new RuntimeException(e);</span>
+        }
+    }
+
+    public void createOrder(int orderUserID, int orderItemID, int orderItemAmount, Date orderDelivery) {
+        try {
+<span class="nc" id="L85">            query = &quot;INSERT INTO MadeOrder (orderUserID, orderItemID, orderItemAmount, orderDelivery) VALUES (?, ?, ?, ?);&quot;;</span>
+
+<span class="nc" id="L87">            statement = database.prepareStatement(query);</span>
+<span class="nc" id="L88">            statement.setInt(1, orderUserID);</span>
+<span class="nc" id="L89">            statement.setInt(2, orderItemID);</span>
+<span class="nc" id="L90">            statement.setInt(3, orderItemAmount);</span>
+<span class="nc" id="L91">            statement.setDate(4, orderDelivery);</span>
+
+<span class="nc" id="L93">            database.update(statement);</span>
+        }
+<span class="nc" id="L95">        catch (SQLException e) {</span>
+<span class="nc" id="L96">            throw new RuntimeException(e);</span>
+<span class="nc" id="L97">        }</span>
+<span class="nc" id="L98">    }</span>
+
+    public void updateOrder(int orderUserID, int orderItemID, int orderItemAmount, Date orderDelivery, int orderID) {
+        try {
+<span class="nc" id="L102">            query = &quot;UPDATE MadeOrder SET orderUserID = ?, orderItemID = ?, orderItemAmount = ?, orderDelivery = ? WHERE orderID = ?;&quot;;</span>
+
+<span class="nc" id="L104">            statement = database.prepareStatement(query);</span>
+<span class="nc" id="L105">            statement.setInt(1, orderUserID);</span>
+<span class="nc" id="L106">            statement.setInt(2, orderItemID);</span>
+<span class="nc" id="L107">            statement.setInt(3, orderItemAmount);</span>
+<span class="nc" id="L108">            statement.setDate(4, orderDelivery);</span>
+<span class="nc" id="L109">            statement.setInt(5, orderID);</span>
+
+<span class="nc" id="L111">            database.update(statement);</span>
+        }
+<span class="nc" id="L113">        catch (SQLException e) {</span>
+<span class="nc" id="L114">            throw new RuntimeException(e);</span>
+<span class="nc" id="L115">        }</span>
+<span class="nc" id="L116">    }</span>
+
+    public void deleteOrder(int orderID) {
+        try {
+<span class="nc" id="L120">            query = &quot;DELETE FROM MadeOrder WHERE orderID = ?;&quot;;</span>
+
+<span class="nc" id="L122">            statement = database.prepareStatement(query);</span>
+<span class="nc" id="L123">            statement.setInt(1, orderID);</span>
+
+<span class="nc" id="L125">            database.update(statement);</span>
+        }
+<span class="nc" id="L127">        catch (SQLException e) {</span>
+<span class="nc" id="L128">            throw new RuntimeException(e);</span>
+<span class="nc" id="L129">        }</span>
+<span class="nc" id="L130">    }</span>
+
+    public void deleteOrderFromUser(int orderUserID) {
+        try {
+<span class="nc" id="L134">            query = &quot;DELETE FROM MadeOrder WHERE orderUserID = ?;&quot;;</span>
+
+<span class="nc" id="L136">            statement = database.prepareStatement(query);</span>
+<span class="nc" id="L137">            statement.setInt(1, orderUserID);</span>
+
+<span class="nc" id="L139">            database.update(statement);</span>
+        }
+<span class="nc" id="L141">        catch (SQLException e) {</span>
+<span class="nc" id="L142">            throw new RuntimeException(e);</span>
+<span class="nc" id="L143">        }</span>
+<span class="nc" id="L144">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

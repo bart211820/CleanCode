@@ -1,0 +1,64 @@
+#registInBackground{
+  min-height: 80vh;
+  width: 100%;
+  background-image: url(https://i.ytimg.com/vi/OJXP7s7_EVQ/maxresdefault.jpg);
+  background-size: 100% 150%;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  padding-top: 17.5vh;
+}
+
+#registInContainer{
+  width: 40vw;
+  min-height: 1vh;
+  background-color: #a8ccf0;
+  margin: 0vh auto;
+  padding-bottom: 1.5vh;
+}
+
+h2{
+  text-align: center;
+  font-size: 1.9vw;
+  margin-bottom: 1.4vh;
+}
+
+.registinForm{
+  display: block;
+  margin: 0px auto;
+  width: 65%;
+  padding-bottom: 2vh;
+}
+
+.formRow{
+  margin: 0.1vh auto;
+  margin-bottom: 0.3vh;
+  height: 2.4vw;
+}
+
+.registinForm .formRow label{
+  float: left;
+  font-size: 1.5vw;
+  margin-right: 0.5vw;
+  width: 9vw;
+
+}
+
+.registinForm .formRow input{
+  float: left;
+  font-size: 1.4vw;
+}
+
+.registinForm .yamsButton{
+  display: block;
+  width: 80%;
+  margin: 0.9vh auto;
+  font-size: 1.5vw;
+  height: 3vw;
+  border: none;
+}
+
+.otherFormOption{
+  padding-left: 1vw;
+  font-size: 1.4vw;
+  cursor: pointer;
+}

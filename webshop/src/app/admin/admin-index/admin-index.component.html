@@ -1,0 +1,12 @@
+<h1>You are logged in as {{ loginName }}.</h1>
+<div id="linkContainer">
+  <a [routerLink]="['/admin/items']">
+    <div class="adminIndexLink">Items</div>
+  </a>
+  <a [routerLink]="['/admin/animators']">
+    <div class="adminIndexLink">Animators</div>
+  </a>
+  <a [routerLink]="['/admin/admins']">
+    <div class="adminIndexLink">New Admin</div>
+  </a>
+</div>

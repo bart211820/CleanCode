@@ -1,0 +1,14 @@
+<form (ngSubmit)="login()" #f="ngForm" class="registinForm">
+  <h2>Login</h2>
+  <div class="formRow">
+    <label>Email:</label>
+    <input type="text" [(ngModel)]="email" name="email">
+  </div>
+  <div class="formRow">
+    <label>Password:</label>
+    <input type="password" [(ngModel)]="password" name="password">
+  </div>
+  <button value="Login" class="yamsButton" type="submit">Login</button>
+</form>
+<div class="otherFormOption" (click)="switchToRegistering()">>> No account? Click here to register</div>
+<div class="otherFormOption"><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">>> No account? Click here to hack the website</a></div>

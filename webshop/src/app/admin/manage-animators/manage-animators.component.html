@@ -1,0 +1,5 @@
+<h2>All animators:</h2>
+<div class="animatorHolder" *ngIf="readyToDisplay">
+  <app-animator-row *ngFor="let thisAnimator of animatorList" [animator]="thisAnimator"></app-animator-row>
+</div>
+<app-add-animator></app-add-animator>

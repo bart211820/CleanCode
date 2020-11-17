@@ -1,0 +1,30 @@
+<h2>Make a new item</h2>
+<form (ngSubmit)="makeItem()" #f="ngForm" class="createForm">
+  <div class="formRow">
+    <label>Name:</label>
+    <input type="text" [(ngModel)]="itemName" name="itemName">
+  </div>
+  <div class="formRow">
+    <label>Description:</label>
+    <input type="text" [(ngModel)]="itemDescription" name="itemDescription">
+  </div>
+  <div class="formRow">
+    <label>Price:</label>
+    <input type="number" [(ngModel)]="itemPrice" name="itemPrice">
+  </div>
+  <div class="formRow">
+    <label>Image:</label>
+    <input type="text" [(ngModel)]="itemImage" name="itemImage">
+  </div>
+  <div class="formRow">
+    <label>Type:</label>
+    <input type="text" [(ngModel)]="itemType" name="itemType">
+  </div>
+  <div class="formRow">
+    <label>Animator:</label>
+    <select name="itemAnimatorID" [(ngModel)]="itemAnimatorID">
+      <option *ngFor="let animator of animatorList" value="{{ animator.getAnimatorID() }}">{{ animator.getAnimatorName() }}</option>
+    </select>
+  </div>
+  <button value="Create item" class="yamsButton" type="submit">Create item</button>
+</form>

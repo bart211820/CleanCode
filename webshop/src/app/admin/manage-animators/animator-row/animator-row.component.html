@@ -1,0 +1,12 @@
+<div class="animatorRow">
+  <form (ngSubmit)="editAnimator()" #f="ngForm">
+    <input type="text" name="animatorName" [(ngModel)]="animatorName" class="nameBox">
+    <input type="text" name="animatorLink" [(ngModel)]="animatorLink" class="linkBox">
+    <input type="text" name="animatorImage" [(ngModel)]="animatorImage" class="imageBox">
+    <button value="Update" class="yamsButton" type="submit">Update</button>
+  </form>
+  <form (ngSubmit)="deleteAnimator()" #f="ngForm">
+    <button value="Delete" class="redYamsButton" type="submit">Delete</button>
+  </form>
+</div>
+

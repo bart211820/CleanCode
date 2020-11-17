@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Basket.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">workshop-api</a> &gt; <a href="index.source.html" class="el_package">nl.hsleiden.model</a> &gt; <span class="el_source">Basket.java</span></div><h1>Basket.java</h1><pre class="source lang-java linenums">package nl.hsleiden.model;
+
+public class Basket {
+    private int basketID;
+    private int basketUserID;
+    private int basketItemID;
+    private int basketItemAmount;
+
+<span class="nc" id="L9">    public Basket() {</span>
+
+<span class="nc" id="L11">    }</span>
+
+<span class="nc" id="L13">    public Basket(int basketID, int basketUserID, int basketItemID, int basketItemAmount) {</span>
+<span class="nc" id="L14">        this.basketID = basketID;</span>
+<span class="nc" id="L15">        this.basketUserID = basketUserID;</span>
+<span class="nc" id="L16">        this.basketItemID = basketItemID;</span>
+<span class="nc" id="L17">        this.basketItemAmount = basketItemAmount;</span>
+<span class="nc" id="L18">    }</span>
+
+    public int getBasketID() {
+<span class="nc" id="L21">        return basketID;</span>
+    }
+
+    public void setBasketID(int basketID) {
+<span class="nc" id="L25">        this.basketID = basketID;</span>
+<span class="nc" id="L26">    }</span>
+
+    public int getBasketUserID() {
+<span class="nc" id="L29">        return basketUserID;</span>
+    }
+
+    public void setBasketUserID(int basketUserID) {
+<span class="nc" id="L33">        this.basketUserID = basketUserID;</span>
+<span class="nc" id="L34">    }</span>
+
+    public int getBasketItemID() {
+<span class="nc" id="L37">        return basketItemID;</span>
+    }
+
+    public void setBasketItemID(int basketItemID) {
+<span class="nc" id="L41">        this.basketItemID = basketItemID;</span>
+<span class="nc" id="L42">    }</span>
+
+    public int getBasketItemAmount() {
+<span class="nc" id="L45">        return basketItemAmount;</span>
+    }
+
+    public void setBasketItemAmount(int basketItemAmount) {
+<span class="nc" id="L49">        this.basketItemAmount = basketItemAmount;</span>
+<span class="nc" id="L50">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -1,0 +1,24 @@
+<h2>Make a new admin account</h2>
+<form (ngSubmit)="makeAccount()" #f="ngForm" class="createForm">
+  <div class="formRow">
+    <label>Fullname:</label>
+    <input type="text" [(ngModel)]="fullName" name="fullname">
+  </div>
+  <div class="formRow">
+    <label>Email:</label>
+    <input type="text" [(ngModel)]="email" name="email">
+  </div>
+  <div class="formRow">
+    <label>Password:</label>
+    <input type="password" [(ngModel)]="password" name="password">
+  </div>
+  <div class="formRow">
+    <label>Postcode:</label>
+    <input type="text" [(ngModel)]="postcode" name="postcode">
+  </div>
+  <div class="formRow">
+    <label>Streetnumber:</label>
+    <input type="text" [(ngModel)]="streetnumber" name="streetnumber">
+  </div>
+  <button value="Create admin" class="yamsButton" type="submit">Create admin</button>
+</form>

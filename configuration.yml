@@ -1,0 +1,17 @@
+apiName: "Ants API"
+
+assets:
+  mappings:
+    /assets: /
+  overrides:
+    /: webshop\dist\webshop
+
+server:
+  rootPath: /api/*
+  adminContextPath: /admin
+  applicationConnectors:
+    - type: http
+      port: 8002
+  adminConnectors:
+    - type: http
+      port: 8003

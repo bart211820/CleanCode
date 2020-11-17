@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BasketResource.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">workshop-api</a> &gt; <a href="index.source.html" class="el_package">nl.hsleiden.resource</a> &gt; <span class="el_source">BasketResource.java</span></div><h1>BasketResource.java</h1><pre class="source lang-java linenums">package nl.hsleiden.resource;
+
+import com.fasterxml.jackson.annotation.JsonView;
+import com.google.inject.Singleton;
+import nl.hsleiden.View;
+import nl.hsleiden.model.Basket;
+import nl.hsleiden.service.BasketService;
+
+import javax.annotation.security.RolesAllowed;
+import javax.inject.Inject;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import java.util.Collection;
+
+@Singleton
+@Path(&quot;/baskets&quot;)
+@Produces(MediaType.APPLICATION_JSON)
+public class BasketResource {
+
+    private final BasketService service;
+
+    @Inject
+    public BasketResource(BasketService service)
+<span class="nc" id="L24">    {</span>
+<span class="nc" id="L25">        this.service = service;</span>
+<span class="nc" id="L26">    }</span>
+
+    @GET
+    @JsonView(View.Public.class)
+    @RolesAllowed(&quot;GUEST&quot;)
+    public Collection&lt;Basket&gt; retrieveAll()
+    {
+<span class="nc" id="L33">        return service.getAll();</span>
+    }
+
+    @GET
+    @Path(&quot;/{basketID}&quot;)
+    @JsonView(View.Public.class)
+    @RolesAllowed(&quot;GUEST&quot;)
+    public Basket retrieve(@PathParam(&quot;basketID&quot;) int basketID)
+    {
+<span class="nc" id="L42">        return service.getOne(basketID);</span>
+    }
+
+    @GET
+    @Path(&quot;/from/{userID}&quot;)
+    @JsonView(View.Public.class)
+    @RolesAllowed(&quot;GUEST&quot;)
+<span class="nc" id="L49">    public Collection&lt;Basket&gt; retrieveFromUser(@PathParam(&quot;userID&quot;) int userID) { return service.getBasketsFromUser(userID); }</span>
+
+    @GET
+    @Path(&quot;/from/{userID}/{itemID}&quot;)
+    @JsonView(View.Public.class)
+    @RolesAllowed(&quot;GUEST&quot;)
+<span class="nc" id="L55">    public Collection&lt;Basket&gt; retrieveFromUserWithItem(@PathParam(&quot;userID&quot;) int userID, @PathParam(&quot;itemID&quot;) int itemID) { return service.getBasketsFromUserWithItem(userID, itemID); }</span>
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @JsonView(View.Protected.class)
+    @RolesAllowed(&quot;GUEST&quot;)
+    public void create(Basket basket)
+    {
+<span class="nc" id="L63">        service.create(basket);</span>
+<span class="nc" id="L64">    }</span>
+
+    @PUT
+    @Path(&quot;/{id}&quot;)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @JsonView(View.Protected.class)
+    @RolesAllowed(&quot;GUEST&quot;)
+    public void update(@PathParam(&quot;id&quot;) int id, Basket basket)
+    {
+<span class="nc" id="L73">        service.update(id, basket);</span>
+<span class="nc" id="L74">    }</span>
+
+    @DELETE
+    @Path(&quot;/{basketID}&quot;)
+    @RolesAllowed(&quot;GUEST&quot;)
+    public void delete(@PathParam(&quot;basketID&quot;) int id)
+    {
+<span class="nc" id="L81">        service.delete(id);</span>
+<span class="nc" id="L82">    }</span>
+
+    @DELETE
+    @Path(&quot;/from/{basketUserID}&quot;)
+    @RolesAllowed(&quot;GUEST&quot;)
+    public void deleteFromUser(@PathParam(&quot;basketUserID&quot;) int id)
+    {
+<span class="nc" id="L89">        service.deleteFromUser(id);</span>
+<span class="nc" id="L90">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

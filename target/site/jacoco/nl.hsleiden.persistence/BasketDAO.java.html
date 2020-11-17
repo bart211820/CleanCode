@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BasketDAO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">workshop-api</a> &gt; <a href="index.source.html" class="el_package">nl.hsleiden.persistence</a> &gt; <span class="el_source">BasketDAO.java</span></div><h1>BasketDAO.java</h1><pre class="source lang-java linenums">package nl.hsleiden.persistence;
+
+import nl.hsleiden.Database;
+import nl.hsleiden.model.Animator;
+import nl.hsleiden.model.Basket;
+import nl.hsleiden.model.Item;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class BasketDAO {
+
+    private Database database;
+    private PreparedStatement statement;
+    private String query;
+    private List&lt;Basket&gt; results;
+
+<span class="nc" id="L21">    public BasketDAO() {</span>
+<span class="nc" id="L22">        this.database = Database.getInstance();</span>
+<span class="nc" id="L23">    }</span>
+
+    public List&lt;Basket&gt; selectBaskets(PreparedStatement statement) throws SQLException {
+<span class="nc" id="L26">        ResultSet baskets = database.select(statement);</span>
+<span class="nc" id="L27">        List&lt;Basket&gt; resultList = new ArrayList&lt;&gt;();</span>
+
+<span class="nc bnc" id="L29" title="All 2 branches missed.">        while (baskets.next()){</span>
+<span class="nc" id="L30">            Basket basket = new Basket(</span>
+<span class="nc" id="L31">                    baskets.getInt(&quot;basketID&quot;),</span>
+<span class="nc" id="L32">                    baskets.getInt(&quot;basketUserID&quot;),</span>
+<span class="nc" id="L33">                    baskets.getInt(&quot;basketItemID&quot;),</span>
+<span class="nc" id="L34">                    baskets.getInt(&quot;basketItemAmount&quot;)</span>
+            );
+
+<span class="nc" id="L37">            resultList.add(basket);</span>
+<span class="nc" id="L38">        }</span>
+
+<span class="nc" id="L40">        return resultList;</span>
+    }
+
+    public List&lt;Basket&gt; getAllBaskets() {
+        try {
+<span class="nc" id="L45">            query = &quot;SELECT * FROM Basket;&quot;;</span>
+<span class="nc" id="L46">            statement = database.prepareStatement(query);</span>
+
+<span class="nc" id="L48">            return selectBaskets(statement);</span>
+        }
+<span class="nc" id="L50">        catch (SQLException e) {</span>
+<span class="nc" id="L51">            throw new RuntimeException(e);</span>
+        }
+    }
+
+    public Basket getBasket(int basketID){
+        try {
+<span class="nc" id="L57">            query = &quot;SELECT * FROM Basket WHERE basketID = ?;&quot;;</span>
+<span class="nc" id="L58">            statement = database.prepareStatement(query);</span>
+<span class="nc" id="L59">            statement.setInt(1, basketID);</span>
+
+<span class="nc" id="L61">            return selectBaskets(statement).get(0);</span>
+        }
+<span class="nc" id="L63">        catch (SQLException e) {</span>
+<span class="nc" id="L64">            throw new RuntimeException(e);</span>
+        }
+    }
+
+    public List&lt;Basket&gt; getBasketsFromUser(int basketUserID) {
+        try {
+<span class="nc" id="L70">            query = &quot;SELECT * FROM Basket WHERE basketUserID = ?;&quot;;</span>
+<span class="nc" id="L71">            statement = database.prepareStatement(query);</span>
+<span class="nc" id="L72">            statement.setInt(1, basketUserID);</span>
+
+<span class="nc" id="L74">            return selectBaskets(statement);</span>
+        }
+<span class="nc" id="L76">        catch (SQLException e) {</span>
+<span class="nc" id="L77">            throw new RuntimeException(e);</span>
+        }
+    }
+
+    public List&lt;Basket&gt; getBasketsFromUserWithItem(int basketUserID, int basketItemID) {
+        try {
+<span class="nc" id="L83">            query = &quot;SELECT * FROM Basket WHERE basketUserID = ? AND basketItemID = ?;&quot;;</span>
+<span class="nc" id="L84">            statement = database.prepareStatement(query);</span>
+<span class="nc" id="L85">            statement.setInt(1, basketUserID);</span>
+<span class="nc" id="L86">            statement.setInt(2, basketItemID);</span>
+
+<span class="nc" id="L88">            return selectBaskets(statement);</span>
+        }
+<span class="nc" id="L90">        catch (SQLException e) {</span>
+<span class="nc" id="L91">            throw new RuntimeException(e);</span>
+        }
+    }
+
+    public void createBasket(int basketUserID, int basketItemID, int basketItemAmount) {
+        try {
+<span class="nc" id="L97">            query = &quot;INSERT INTO Basket (basketUserID, basketItemID, basketItemAmount) VALUES (?, ?, ?);&quot;;</span>
+
+<span class="nc" id="L99">            statement = database.prepareStatement(query);</span>
+<span class="nc" id="L100">            statement.setInt(1, basketUserID);</span>
+<span class="nc" id="L101">            statement.setInt(2, basketItemID);</span>
+<span class="nc" id="L102">            statement.setInt(3, basketItemAmount);</span>
+
+<span class="nc" id="L104">            database.update(statement);</span>
+        }
+<span class="nc" id="L106">        catch (SQLException e) {</span>
+<span class="nc" id="L107">            throw new RuntimeException(e);</span>
+<span class="nc" id="L108">        }</span>
+<span class="nc" id="L109">    }</span>
+
+    public void updateBasket(int basketUserID, int basketItemID, int basketItemAmount, int basketID) {
+        try {
+<span class="nc" id="L113">            query = &quot;UPDATE Basket SET basketUserID = ?, basketItemID = ?, basketItemAmount = ? WHERE basketID = ?;&quot;;</span>
+
+<span class="nc" id="L115">            statement = database.prepareStatement(query);</span>
+<span class="nc" id="L116">            statement.setInt(1, basketUserID);</span>
+<span class="nc" id="L117">            statement.setInt(2, basketItemID);</span>
+<span class="nc" id="L118">            statement.setInt(3, basketItemAmount);</span>
+<span class="nc" id="L119">            statement.setInt(4, basketID);</span>
+
+<span class="nc" id="L121">            database.update(statement);</span>
+        }
+<span class="nc" id="L123">        catch (SQLException e) {</span>
+<span class="nc" id="L124">            throw new RuntimeException(e);</span>
+<span class="nc" id="L125">        }</span>
+<span class="nc" id="L126">    }</span>
+
+    public void deleteBasket(int basketID) {
+        try {
+<span class="nc" id="L130">            query = &quot;DELETE FROM Basket WHERE basketID = ?;&quot;;</span>
+
+<span class="nc" id="L132">            statement = database.prepareStatement(query);</span>
+<span class="nc" id="L133">            statement.setInt(1, basketID);</span>
+
+<span class="nc" id="L135">            database.update(statement);</span>
+        }
+<span class="nc" id="L137">        catch (SQLException e) {</span>
+<span class="nc" id="L138">            throw new RuntimeException(e);</span>
+<span class="nc" id="L139">        }</span>
+<span class="nc" id="L140">    }</span>
+
+    public void deleteBasketFromUser(int userID) {
+        try {
+<span class="nc" id="L144">            query = &quot;DELETE FROM Basket WHERE basketUserID = ?;&quot;;</span>
+
+<span class="nc" id="L146">            statement = database.prepareStatement(query);</span>
+<span class="nc" id="L147">            statement.setInt(1, userID);</span>
+
+<span class="nc" id="L149">            database.update(statement);</span>
+        }
+<span class="nc" id="L151">        catch (SQLException e) {</span>
+<span class="nc" id="L152">            throw new RuntimeException(e);</span>
+<span class="nc" id="L153">        }</span>
+<span class="nc" id="L154">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

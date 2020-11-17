@@ -1,0 +1,60 @@
+.itemImageContainer{
+  width: 10vw;
+  padding: 0.2vw;
+}
+
+.itemImageContainer img{
+  width: 9.6vw;
+  height: 9.6vw;
+}
+
+.itemNameContainer{
+  width: 30vw;
+  line-height: 9.8vw;
+  text-align: center;
+}
+
+.itemPriceContainer{
+  width: 10vw;
+  line-height: 9.8vw;
+  text-align: center;
+}
+
+.itemAmountContainer{
+  width: 20vw;
+  text-align: center;
+}
+
+.itemAmountContainer form{
+  padding-top: 3.5vw;
+}
+
+.itemAmountContainer input{
+  font-size: 1.4vw;
+  width: 4vw;
+  height: 3vw;
+  text-align: center;
+  margin-right: 0.5vw;
+}
+
+.itemAmountContainer button{
+  border: none;
+  width: 8vw;
+  height: 2.8vw;
+  line-height: 3vw;
+  font-size: 1.5vw;
+}
+
+.itemRemoveContainer{
+  width: 20vw;
+  text-align: center;
+}
+
+.itemRemoveContainer button{
+  border: none;
+  width: 15vw;
+  height: 4.5vw;
+  line-height: 4.3vw;
+  font-size: 1.9vw;
+  margin-top: 2.5vw;
+}
