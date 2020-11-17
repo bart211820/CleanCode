@@ -47,5 +47,5 @@ public class BasketService {
 
     public void delete(int basketID) { dao.deleteBasket(basketID); }
 
-    public void deleteFromUser(int basketUserID) { dao.deleteBasketFromUser(basketUserID); }
+    public void deleteFromUser(int basketUserID) { dao.getBasketsFromUser(basketUserID); }
 }

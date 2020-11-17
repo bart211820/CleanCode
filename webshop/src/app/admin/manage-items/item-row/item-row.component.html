@@ -1,5 +1,5 @@
 <div class="itemRow">
-  <form (ngSubmit)="editItem()" #f="ngForm">
+  <form (ngSubmit)="editItem(f)" #f="ngForm">
     <input type="text" name="itemName" [(ngModel)]="itemName" class="nameBox">
     <input type="text" name="itemDescription" [(ngModel)]="itemDescription" class="descriptionBox">
     <input type="number" name="itemPrice" [(ngModel)]="itemPrice" class="priceBox">
@@ -10,7 +10,7 @@
     </select>
     <button value="Update" class="yamsButton" type="submit">Update</button>
   </form>
-  <form (ngSubmit)="deleteItem()" #f="ngForm">
+  <form (ngSubmit)="deleteItem(f)" #f="ngForm">
     <button value="Delete" class="redYamsButton" type="submit">Delete</button>
   </form>
 </div>

@@ -22,16 +22,16 @@ import {Basket} from "../../../shared/modelsAndTheirServices/basket";
 export class ItemRowComponent implements OnInit {
 
   @Input() item;
-  itemName;
-  itemDescription;
-  itemPrice;
-  itemImage;
-  itemType;
-  itemAnimatorID;
+  private itemName;
+  private itemDescription;
+  private itemPrice;
+  private itemImage;
+  private itemType;
+  private itemAnimatorID;
 
-  animators;
-  animatorList = [];
-  readyToDisplay = false;
+  private animators;
+  private animatorList = [];
+  private readyToDisplay = false;
 
   constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private itemService: ItemService, private animatorService: AnimatorService) { }
 

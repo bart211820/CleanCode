@@ -19,9 +19,9 @@ import {OrderService} from "../../shared/modelsAndTheirServices/order.service";
 })
 export class ManageItemsComponent implements OnInit {
 
-  items;
-  itemList = [];
-  readyToDisplay = false;
+  private items;
+  private itemList = [];
+  private readyToDisplay = false;
 
   constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private itemService: ItemService) { }
 

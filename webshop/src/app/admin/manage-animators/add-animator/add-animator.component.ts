@@ -17,9 +17,9 @@ import {Animator} from "../../../shared/modelsAndTheirServices/animator";
 })
 export class AddAnimatorComponent implements OnInit {
 
-  animatorName;
-  animatorLink;
-  animatorImage;
+  private animatorName;
+  private animatorLink;
+  private animatorImage;
 
   constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private animatorService: AnimatorService) { }
 

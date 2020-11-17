@@ -17,8 +17,8 @@ import {ItemService} from "../../shared/modelsAndTheirServices/item.service";
   ]
 })
 export class ShopComponent implements OnInit {
-  items;
-  itemList = [];
+  private items;
+  private itemList = [];
 
   constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private itemService: ItemService) { }
 

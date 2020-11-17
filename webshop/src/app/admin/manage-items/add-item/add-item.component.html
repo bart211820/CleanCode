@@ -1,5 +1,5 @@
 <h2>Make a new item</h2>
-<form (ngSubmit)="makeItem()" #f="ngForm" class="createForm">
+<form (ngSubmit)="makeItem(f)" #f="ngForm" class="createForm">
   <div class="formRow">
     <label>Name:</label>
     <input type="text" [(ngModel)]="itemName" name="itemName">

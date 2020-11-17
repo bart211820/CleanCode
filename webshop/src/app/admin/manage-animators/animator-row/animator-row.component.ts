@@ -14,10 +14,10 @@ import {Animator} from "../../../shared/modelsAndTheirServices/animator";
 export class AnimatorRowComponent implements OnInit {
 
   @Input() animator;
-  animatorName;
-  animatorLink;
-  animatorImage;
-  readyToDisplay = false;
+  private animatorName;
+  private animatorLink;
+  private animatorImage;
+  private readyToDisplay = false;
 
   constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private animatorService: AnimatorService) { }
 

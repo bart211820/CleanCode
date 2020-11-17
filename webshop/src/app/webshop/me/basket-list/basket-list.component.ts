@@ -24,11 +24,11 @@ import {Order} from "../../../shared/modelsAndTheirServices/order";
 export class BasketListComponent implements OnInit {
 
   @Input() userID;
-  baskets;
-  basketList = [];
-  itemList = [];
-  totalPrice = 0;
-  readyToDisplay = false;
+  private baskets;
+  private basketList = [];
+  private itemList = [];
+  private totalPrice = 0;
+  private readyToDisplay = false;
 
   constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private basketService: BasketService, private itemService: ItemService, private orderService: OrderService) { }
 
@@ -55,7 +55,7 @@ export class BasketListComponent implements OnInit {
 
   getItemsFromAPI() {
     for(let basket of this.basketList) {
-      const item = this.itemService.getOne(basket.getBasketItemID());
+      const item = this.itemService.getOne(basket.getBasketID());
       this.getItem(item);
     }
   }
@@ -75,10 +75,7 @@ export class BasketListComponent implements OnInit {
   }
 
   recalculateTotalPrice(agreed: boolean) {
-    setTimeout(() => {
-      this.getAllBasketsFromAPI();
-    }, 1000);
-
+    this.getAllBasketsFromAPI();
   }
 
   orderEverything() {

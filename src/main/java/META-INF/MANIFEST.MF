@@ -1,4 +1,0 @@
-Manifest-Version: 1.0
-Class-Path: mysql-connector-java-8.0.12.jar jbcrypt-0.3m.jar jsch-0.1.54.jar protobuf-java-2.6.0.jar activation-1.1.jar javax.mail-1.6.0.jar
-Main-Class: nl.hsleiden.ApiApplication
-

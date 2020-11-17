@@ -39,28 +39,39 @@ public class AnimatorDAO {
     }
 
     public List<Animator> getAllAnimators() {
-        try {
-            query = "SELECT * FROM Animator;";
-            statement = database.prepareStatement(query);
-
-            return selectAnimators(statement);
-        }
-        catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            query = "SELECT * FROM Animator;";
+//            statement = database.prepareStatement(query);
+//
+//            return selectAnimators(statement);
+//        }
+//        catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+        Animator animator1 = new Animator(1, "TheOdd1sOut", "https://www.youtube.com/channel/UCo8bcnLyZH8tBIH9V1mLgqQ", "https://yt3.ggpht.com/a-/AAuE7mAdLPVNtqjYHu9gffkZSRsNDtdPW6T228iO9Q=s288-mo-c-c0xffffffff-rj-k-no");
+        Animator animator2 = new Animator(2, "Jaiden Animations", "https://www.youtube.com/channel/UCGwu0nbY2wSkW8N-cghnLpA", "https://yt3.ggpht.com/a-/AAuE7mBIrCpIdm5MYtFos91XRTNePDE_Kh4hWi_ruA=s288-mo-c-c0xffffffff-rj-k-no");
+        List temporaryList = new ArrayList();
+        temporaryList.add(animator1);
+        temporaryList.add(animator2);
+        return temporaryList;
     }
 
     public Animator getAnimator(int animatorID){
-        try {
-            query = "SELECT * FROM Animator WHERE animatorID = ?;";
-            statement = database.prepareStatement(query);
-            statement.setInt(1, animatorID);
+//        try {
+//            query = "SELECT * FROM Animator WHERE animatorID = ?;";
+//            statement.setInt(1, animatorID);
+//            statement = database.prepareStatement(query);
+//
+//            return selectAnimators(statement).get(0);
+//        }
+//        catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
 
-            return selectAnimators(statement).get(0);
+        if(animatorID == 1){
+            return new Animator(1, "TheOdd1sOut", "https://www.youtube.com/channel/UCo8bcnLyZH8tBIH9V1mLgqQ", "https://yt3.ggpht.com/a-/AAuE7mAdLPVNtqjYHu9gffkZSRsNDtdPW6T228iO9Q=s288-mo-c-c0xffffffff-rj-k-no");
         }
-        catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        return new Animator(2, "Jaiden Animations", "https://www.youtube.com/channel/UCGwu0nbY2wSkW8N-cghnLpA", "https://yt3.ggpht.com/a-/AAuE7mBIrCpIdm5MYtFos91XRTNePDE_Kh4hWi_ruA=s288-mo-c-c0xffffffff-rj-k-no");
     }
 
     public void createAnimator(String animatorName, String animatorLink, String animatorImage) {
@@ -81,7 +92,7 @@ public class AnimatorDAO {
 
     public void updateAnimator(String animatorName, String animatorLink, String animatorImage, int animatorID) {
         try {
-            query = "UPDATE Animator SET animatorName = ?, animatorLink = ?, animatorImage = ? WHERE animatorID = ?;";
+            query = "UPDATE Animator animatorName = ?, animatorLink = ?, animatorImage = ? WHERE animatorID = ?";
 
             statement = database.prepareStatement(query);
             statement.setString(1, animatorName);
@@ -98,7 +109,7 @@ public class AnimatorDAO {
 
     public void deleteAnimator(int animatorID) {
         try {
-            query = "DELETE FROM Animator WHERE animatorID = ?;";
+            query = "DELETE FROM animator WHERE animatorID = ?;";
 
             statement = database.prepareStatement(query);
             statement.setInt(1, animatorID);

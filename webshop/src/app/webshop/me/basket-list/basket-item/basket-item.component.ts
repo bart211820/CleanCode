@@ -23,10 +23,10 @@ export class BasketItemComponent implements OnInit {
 
   @Input() basket: Basket;
   @Output() totalPriceUpdate = new EventEmitter<boolean>();
-  item;
-  itemObject: Item;
+  private item;
+  private itemObject: Item;
   itemAmount: number;
-  readyToDisplay = false;
+  private readyToDisplay = false;
 
   constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private itemService: ItemService, private basketService: BasketService) { }
 
@@ -48,7 +48,7 @@ export class BasketItemComponent implements OnInit {
       basketID: this.basket.getBasketID(),
       basketUserID: this.basket.getBasketUserID(),
       basketItemID: this.basket.getBasketItemID(),
-      basketItemAmount: this.itemAmount
+      basketItemAmount: this.basket.getBasketItemAmount()
     };
     const newBasket = new Basket(basketData);
     this.basketService.update(newBasket);

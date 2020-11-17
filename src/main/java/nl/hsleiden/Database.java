@@ -8,15 +8,6 @@ public class Database {
     private static Connection connection;
     private static PreparedStatement preparedStatement;
 
-    private Database() {
-        try {
-            connect(Credentials.DATABASE_HOST, Credentials.DATABASE_NAME, Credentials.DATABASE_USER, Credentials.DATABASE_PASSWORD);
-        }
-        catch (Exception exception) {
-            System.err.println(String.format("Database failure: %s", exception.getMessage()));
-        }
-    }
-
     public PreparedStatement prepareStatement(String query) {
         try {
             preparedStatement = connection.prepareStatement(query);
@@ -36,17 +27,17 @@ public class Database {
     }
 
     private void connect(String host, String name, String user, String password) throws SQLException {
-        String connectionString = String.format("jdbc:mysql://%s/%s?user=%s&password=%s&serverTimezone=UTC", host, name, user, password);
-
-        if (!hasConnection()) {
-            try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-            }
-            catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-            connection = DriverManager.getConnection(connectionString);
-        }
+//        String connectionString = String.format("jdbc:mysql://%s/%s?user=%s&password=%s&serverTimezone=UTC", host, name, user, password);
+//
+//        if (!hasConnection()) {
+//            try {
+//                Class.forName("com.mysql.cj.jdbc.Driver");
+//            }
+//            catch (ClassNotFoundException e) {
+//                e.printStackTrace();
+//            }
+//            connection = DriverManager.getConnection(connectionString);
+//        }
     }
 
     private void disconnect() throws SQLException {
@@ -60,6 +51,6 @@ public class Database {
     }
 
     public void update(PreparedStatement statement) throws SQLException {
-        statement.executeUpdate();
+        // statement.executeUpdate();
     }
 }

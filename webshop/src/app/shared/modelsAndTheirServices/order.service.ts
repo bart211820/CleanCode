@@ -31,7 +31,7 @@ export class OrderService {
     const data = order.getData();
     this.api.post<void>('orders', data).subscribe (
       data => {
-        // alert('Order aangemaakt.');
+        alert('Order aangemaakt.');
         location.reload();
       },
       error => {

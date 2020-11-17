@@ -35,10 +35,11 @@ export class BasketService {
     const data = basket.getData();
     this.api.post<void>('baskets', data).subscribe (
       data => {
-        alert('Item was added to your basket.');
+        alert('Basket aangemaakt.');
+        location.reload();
       },
       error => {
-        alert('Could not add this item to your basket.');
+        alert('Could not make a new basket.');
       }
     );
   }

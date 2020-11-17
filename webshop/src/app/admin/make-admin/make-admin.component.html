@@ -1,5 +1,5 @@
 <h2>Make a new admin account</h2>
-<form (ngSubmit)="makeAccount()" #f="ngForm" class="createForm">
+<form (ngSubmit)="makeAccount(f)" #f="ngForm" class="createForm">
   <div class="formRow">
     <label>Fullname:</label>
     <input type="text" [(ngModel)]="fullName" name="fullname">

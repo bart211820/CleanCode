@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminIndexComponent implements OnInit {
 
-  loginName = '';
+  private loginName = '';
 
   constructor() { }
 

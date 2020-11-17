@@ -22,14 +22,14 @@ import {BasketService} from "../../shared/modelsAndTheirServices/basket.service"
   ]
 })
 export class ItemComponent implements OnInit {
-  item;
-  itemObject: Item;
-  animator;
-  animatorObject: Animator;
-  basket;
-  basketObject: Basket;
-  itemID;
-  readyToDisplay = false;
+  private item;
+  private itemObject: Item;
+  private animator;
+  private animatorObject: Animator;
+  private basket;
+  private basketObject: Basket;
+  private itemID;
+  private readyToDisplay = false;
 
   constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private itemService: ItemService, private animatorService: AnimatorService, private basketService: BasketService, private route: ActivatedRoute) { }
 

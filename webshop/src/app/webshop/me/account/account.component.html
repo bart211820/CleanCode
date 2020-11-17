@@ -3,7 +3,7 @@
   <img src="https://art.pixilart.com/121acf26d7b0be6.png" alt="profileImage" id="profileImage">
   <div id="accountDetails">
     <h1>Welcome {{ fullName }}, here is all your data:</h1>
-    <form (ngSubmit)="editAccount()" #f="ngForm">
+    <form (ngSubmit)="editAccount(f)" #f="ngForm">
       <div class="accountInfoHolder">
         <label>Fullname:</label>
         <input type="text" [(ngModel)]="fullName" name="fullName">

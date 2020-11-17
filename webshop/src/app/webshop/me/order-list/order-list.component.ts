@@ -18,9 +18,9 @@ import {Order} from "../../../shared/modelsAndTheirServices/order";
 export class OrderListComponent implements OnInit {
 
   @Input() userID;
-  orders;
-  orderList = [];
-  readyToDisplay = false;
+  private orders;
+  private orderList = [];
+  private readyToDisplay = false;
 
   constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private orderService: OrderService) { }
 

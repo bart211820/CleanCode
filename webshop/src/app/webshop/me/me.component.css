@@ -36,10 +36,3 @@ h2{
   height: 10vw;
   font-size: 1.4vw;
 }
-
-.noItemsMessage{
-  text-align: center;
-  font-size: 1.4vw;
-  padding-top: 9vh;
-  padding-bottom: 12vh;
-}

@@ -1,9 +1,4 @@
 <h2>Your orders:</h2>
-<div *ngIf="orderList.length == 0" class="noItemsMessage">
-  <p>You havn't made any orders yet.</p>
-</div>
-<div *ngIf="orderList.length > 0">
-  <div class="itemsHolder" *ngIf="readyToDisplay">
-    <app-order-item *ngFor="let thisOrder of orderList" [order]="thisOrder"></app-order-item>
-  </div>
+<div class="itemsHolder" *ngIf="readyToDisplay">
+  <app-order-item *ngFor="let thisOrder of orderList" [order]="thisOrder"></app-order-item>
 </div>

@@ -1,5 +1,5 @@
 <h2>Make a new animator</h2>
-<form (ngSubmit)="makeAnimator()" #f="ngForm" class="createForm">
+<form (ngSubmit)="makeAnimator(f)" #f="ngForm" class="createForm">
   <div class="formRow">
     <label>Name:</label>
     <input type="text" [(ngModel)]="animatorName" name="animatorName">
@@ -10,7 +10,7 @@
   </div>
   <div class="formRow">
     <label>Image:</label>
-    <input type="text" [(ngModel)]="animatorImage" name="animatorImage">
+    <input type="number" [(ngModel)]="animatorImage" name="animatorImage">
   </div>
   <button value="Create animator" class="yamsButton" type="submit">Create animator</button>
 </form>
