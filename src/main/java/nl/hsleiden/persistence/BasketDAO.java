@@ -50,8 +50,8 @@ public class BasketDAO {
 //        catch (SQLException e) {
 //            throw new RuntimeException(e);
 //        }
-        Basket basket1 = new Basket(1, 1, 1, 1);
-        Basket basket2 = new Basket(2, 1, 2, 2);
+        Basket basket1 = new Basket(1, 1, 3, 1);
+        Basket basket2 = new Basket(2, 1, 4, 2);
         List temporaryList = new ArrayList();
         temporaryList.add(basket1);
         temporaryList.add(basket2);
@@ -71,9 +71,9 @@ public class BasketDAO {
 //        }
 
         if(basketID == 1){
-            return new Basket(1, 1, 1, 1);
+            return new Basket(1, 1, 3, 1);
         }
-        return new Basket(2, 1, 2, 2);
+        return new Basket(2, 1, 4, 2);
     }
 
     public List<Basket> getBasketsFromUser(int basketUserID) {
@@ -87,8 +87,8 @@ public class BasketDAO {
 //        catch (SQLException e) {
 //            throw new RuntimeException(e);
 //        }
-        Basket basket1 = new Basket(1, 1, 1, 1);
-        Basket basket2 = new Basket(2, 1, 2, 2);
+        Basket basket1 = new Basket(1, 1, 3, 1);
+        Basket basket2 = new Basket(2, 1, 4, 2);
         List temporaryList = new ArrayList();
         temporaryList.add(basket1);
         temporaryList.add(basket2);
@@ -107,7 +107,7 @@ public class BasketDAO {
 //        catch (SQLException e) {
 //            throw new RuntimeException(e);
 //        }
-        Basket basket1 = new Basket(1, 1, 1, 1);
+        Basket basket1 = new Basket(1, 1, 3, 1);
         List temporaryList = new ArrayList();
         temporaryList.add(basket1);
         return temporaryList;

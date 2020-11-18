@@ -50,9 +50,13 @@ public class AnimatorDAO {
 //        }
         Animator animator1 = new Animator(1, "TheOdd1sOut", "https://www.youtube.com/channel/UCo8bcnLyZH8tBIH9V1mLgqQ", "https://yt3.ggpht.com/a-/AAuE7mAdLPVNtqjYHu9gffkZSRsNDtdPW6T228iO9Q=s288-mo-c-c0xffffffff-rj-k-no");
         Animator animator2 = new Animator(2, "Jaiden Animations", "https://www.youtube.com/channel/UCGwu0nbY2wSkW8N-cghnLpA", "https://yt3.ggpht.com/a-/AAuE7mBIrCpIdm5MYtFos91XRTNePDE_Kh4hWi_ruA=s288-mo-c-c0xffffffff-rj-k-no");
+        Animator animator3 = new Animator(3, "Chipflake", "https://www.youtube.com/channel/UCRE6itj4Jte4manQEu3Y7OA", "https://yt3.ggpht.com/a/AATXAJycLaT-wYa_4cdxLmFBu5dZbBWkozXBWhEiMdA6Zg=s88-c-k-c0x00ffffff-no-rj");
+        Animator animator4 = new Animator(4, "AmyRightMeow", "https://www.youtube.com/channel/UClN24S5-fc7LD0JJW0FdGWw", "https://yt3.ggpht.com/ytc/AAUvwng3uY2n2SObFg_gAnx8QKsLZO7iq_rlcBddpjbkqQ=s88-c-k-c0x00ffffff-no-rj");
         List temporaryList = new ArrayList();
         temporaryList.add(animator1);
         temporaryList.add(animator2);
+        temporaryList.add(animator3);
+        temporaryList.add(animator4);
         return temporaryList;
     }
 
@@ -71,7 +75,13 @@ public class AnimatorDAO {
         if(animatorID == 1){
             return new Animator(1, "TheOdd1sOut", "https://www.youtube.com/channel/UCo8bcnLyZH8tBIH9V1mLgqQ", "https://yt3.ggpht.com/a-/AAuE7mAdLPVNtqjYHu9gffkZSRsNDtdPW6T228iO9Q=s288-mo-c-c0xffffffff-rj-k-no");
         }
-        return new Animator(2, "Jaiden Animations", "https://www.youtube.com/channel/UCGwu0nbY2wSkW8N-cghnLpA", "https://yt3.ggpht.com/a-/AAuE7mBIrCpIdm5MYtFos91XRTNePDE_Kh4hWi_ruA=s288-mo-c-c0xffffffff-rj-k-no");
+        if(animatorID == 2){
+            return new Animator(2, "Jaiden Animations", "https://www.youtube.com/channel/UCGwu0nbY2wSkW8N-cghnLpA", "https://yt3.ggpht.com/a-/AAuE7mBIrCpIdm5MYtFos91XRTNePDE_Kh4hWi_ruA=s288-mo-c-c0xffffffff-rj-k-no");
+        }
+        if(animatorID == 3){
+            return new Animator(3, "Chipflake", "https://www.youtube.com/channel/UCRE6itj4Jte4manQEu3Y7OA", "https://yt3.ggpht.com/a/AATXAJycLaT-wYa_4cdxLmFBu5dZbBWkozXBWhEiMdA6Zg=s88-c-k-c0x00ffffff-no-rj");
+        }
+        return new Animator(4, "AmyRightMeow", "https://www.youtube.com/channel/UClN24S5-fc7LD0JJW0FdGWw", "https://yt3.ggpht.com/ytc/AAUvwng3uY2n2SObFg_gAnx8QKsLZO7iq_rlcBddpjbkqQ=s88-c-k-c0x00ffffff-no-rj");
     }
 
     public void createAnimator(String animatorName, String animatorLink, String animatorImage) {

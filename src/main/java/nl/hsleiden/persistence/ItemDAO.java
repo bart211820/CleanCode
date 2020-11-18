@@ -54,9 +54,13 @@ public class ItemDAO {
 //        }
         Item item1 = new Item(1, "The Odd 1s Out Book", "Description", 20.0, "https://cdn.shopify.com/s/files/1/0033/1762/8983/products/Book_720x.jpg?v=1529191180", "Boek", 1);
         Item item2 = new Item(2, "Ari Plush", "Description2", 14.0, "https://cdn.shopify.com/s/files/1/0034/0590/6035/products/Plush1_590x.jpg?v=1535989539", "Plush", 2);
+        Item item3 = new Item(3, "Chipflake hat", "Description3", 21.0, "https://vangogh.teespring.com/static.jpg?height=560&image_url=https%3A%2F%2Fteespring-pub-custom.s3.amazonaws.com%2Fa36_100042978_product_765_103374_front.png&padded=false&signature=9tg8G05flvlP%2FshulnzoPq9898JKoyCF1ajZSAOpK%2FQ%3D&version=2020-10-15-04-20-49&width=480", "Hoed", 3);
+        Item item4 = new Item(4, "Aphantasia shirt", "Description4", 25.0, "https://images.teemill.com/TcQx3JbAMsEER9Jcls8qvpHg6okGt271pf2x0CeJcaU13L4j.png.png?w=1080&h=auto", "Shirt", 4);
         List temporaryList = new ArrayList();
         temporaryList.add(item1);
         temporaryList.add(item2);
+        temporaryList.add(item3);
+        temporaryList.add(item4);
         return temporaryList;
     }
 
@@ -75,7 +79,13 @@ public class ItemDAO {
         if(itemID == 1){
             return new Item(1, "The Odd 1s Out Book", "Description", 20.0, "https://cdn.shopify.com/s/files/1/0033/1762/8983/products/Book_720x.jpg?v=1529191180", "Boek", 1);
         }
-        return new Item(2, "Ari Plush", "Description2", 14.0, "https://cdn.shopify.com/s/files/1/0034/0590/6035/products/Plush1_590x.jpg?v=1535989539", "Plush", 2);
+        if(itemID == 2){
+            return new Item(2, "Ari Plush", "Description2", 14.0, "https://cdn.shopify.com/s/files/1/0034/0590/6035/products/Plush1_590x.jpg?v=1535989539", "Plush", 2);
+        }
+        if(itemID == 3){
+            return new Item(3, "Chipflake hat", "Description3", 21.0, "https://vangogh.teespring.com/static.jpg?height=560&image_url=https%3A%2F%2Fteespring-pub-custom.s3.amazonaws.com%2Fa36_100042978_product_765_103374_front.png&padded=false&signature=9tg8G05flvlP%2FshulnzoPq9898JKoyCF1ajZSAOpK%2FQ%3D&version=2020-10-15-04-20-49&width=480", "Hoed", 3);
+        }
+        return new Item(4, "Aphantasia shirt", "Description4", 25.0, "https://images.teemill.com/TcQx3JbAMsEER9Jcls8qvpHg6okGt271pf2x0CeJcaU13L4j.png.png?w=1080&h=auto", "Shirt", 4);
     }
 
     public void createItem(String itemName, String itemDescription, double itemPrice, String itemImage, String itemType, int itemAnimatorID) {
