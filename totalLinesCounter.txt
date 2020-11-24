@@ -1,3 +1,52 @@
+Frontend total: 1491
+CleanCode/webshop/src/app/admin: 233
+lines per bestand:
+1
+5
+28
+8
+34
+28
+42
+60
+27
+
+CleanCode/webshop/src/app/shared: 245
+lines per bestand:
+80
+65
+
+CleanCode/webshop/src/app/modelsAndServices: 639
+lines per bestand:
+63
+40
+81
+44
+63
+65
+77
+47
+98
+61
+
+CleanCode/webshop/src/app/webshop: 374
+lines per bestand:
+21
+65
+46
+44
+71
+25
+20
+5
+18
+25
+20
+14
+
+
+
+
 API total: 2183
 model: 357
 51
@@ -38,50 +87,3 @@ root: 342
 83
 56
 19
-
-
-
-
-
-
-Frontend total: 1491
-admin: 233
-1
-5
-28
-8
-34
-28
-42
-60
-27
-
-shared: 245
-80
-65
-
-modelsAndServices: 639
-63
-40
-81
-44
-63
-65
-77
-47
-98
-61
-
-webshop: 374
-21
-65
-46
-44
-71
-25
-20
-5
-18
-25
-20
-14
