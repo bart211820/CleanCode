@@ -34,9 +34,9 @@ public class UserService extends BaseService<User>
     
     public void add(User user)
     {
-//        user.setRoles(new String[] { "GUEST" });
+        user.setRoles(new String[] { "GUEST" });
 
-        user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
+        //user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
 
         dao.add(user);
     }
@@ -54,10 +54,10 @@ public class UserService extends BaseService<User>
         }
 
         // Kijken of wachtwoord aangepast moet worden
-        if (!user.getPassword().equals(oldUser.getPassword())) {
-            // Als ze niet gelijk zijn, is het dus een nieuw wachtwoord, gebruik eerst BCrypt
-            user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
-        }
+//        if (!user.getPassword().equals(oldUser.getPassword())) {
+//            // Als ze niet gelijk zijn, is het dus een nieuw wachtwoord, gebruik eerst BCrypt
+//            user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
+//        }
         
         dao.updateUser(user.getFullName(), user.getPostcode(), user.getStreetnumber(), user.getEmailAddress(), user.getPassword(), user.getUserID());
     }

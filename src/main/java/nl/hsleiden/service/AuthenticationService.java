@@ -30,8 +30,10 @@ public class AuthenticationService implements Authenticator<BasicCredentials, Us
     public Optional<User> authenticate(BasicCredentials credentials) throws AuthenticationException
     {
         User user = userDAO.getByEmailAddress(credentials.getUsername());
+        System.out.println(user.getPassword());
 
-        if (user != null && BCrypt.checkpw(credentials.getPassword(), user.getPassword())) {
+        if (user != null && user.getPassword().equals(credentials.getPassword())) {
+            System.out.println("ff");
             return Optional.of(user);
         }
         

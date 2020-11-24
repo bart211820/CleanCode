@@ -44,6 +44,7 @@ export class ApiService {
 
   public get<T>(path: string, queryParameters?: object): Observable<T> {
     const uri = this.createURI(path, queryParameters);
+    console.log(uri);
     const headers = this.createRequestHeaders();
 
     return this.http.get<T>(uri, { headers: headers });
