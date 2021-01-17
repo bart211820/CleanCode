@@ -25,7 +25,7 @@ public class UserDAO
     private List<Item> results;
 
     private final List<User> fakeUsers;
-    
+
     public UserDAO()
     {
         User user = new User();
@@ -58,6 +58,7 @@ public class UserDAO
         fakeUsers = new ArrayList<>();
         fakeUsers.add(user);
         fakeUsers.add(user1);
+        fakeUsers.add(user2);
         fakeUsers.add(user2);
 
         this.database = Database.getInstance();
@@ -98,7 +99,7 @@ public class UserDAO
 //        }
         return fakeUsers;
     }
-    
+
     public User get(int id)
     {
         //        try {
@@ -120,7 +121,7 @@ public class UserDAO
             return null;
         }
     }
-    
+
     public User getByEmailAddress(String emailAddress)
     {
         //        try {
@@ -134,14 +135,14 @@ public class UserDAO
 //            throw new RuntimeException(e);
 //        }
         Optional<User> result = fakeUsers.stream()
-            .filter(user -> user.getEmailAddress().equals(emailAddress))
-            .findAny();
-        
+                .filter(user -> user.getEmailAddress().equals(emailAddress))
+                .findAny();
+
         return result.isPresent()
-            ? result.get()
-            : null;
+                ? result.get()
+                : null;
     }
-    
+
     public void add(User user)
     {
         fakeUsers.add(user);
@@ -149,22 +150,23 @@ public class UserDAO
 
     public void createUser(String userFullname, String userPostcode, String userStreetnumber, String userEmail, String userPassword) {
         try {
-            query = "INSERT INTO User (userFullname, userPostcode, userStreetnumber, userEmail, userPassword, userRole) VALUES (?, ?, ?, ?, ?, GUEST);";
+            query = "INSERT INTO User (userFullname, userPostcode, userStreetnumber, userEmail, userPassword, userRole) VALUES (" + userFullname + ", " + userPostcode + ", " + userStreetnumber + ", " + userEmail + ", " + userPassword + ", GUEST);";
+            System.out.println("\"Created\" new user with: " + query);
 
-            statement = database.prepareStatement(query);
-            statement.setString(1, userFullname);
-            statement.setString(2, userPostcode);
-            statement.setString(3, userStreetnumber);
-            statement.setString(4, userEmail);
-            statement.setString(5, userPassword);
-
-            database.update(statement);
+//            statement = database.prepareStatement(query);
+//            statement.setString(1, userFullname);
+//            statement.setString(2, userPostcode);
+//            statement.setString(3, userStreetnumber);
+//            statement.setString(4, userEmail);
+//            statement.setString(5, userPassword);
+//
+//            database.update(statement);
         }
-        catch (SQLException e) {
+        catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
-    
+
     public void update(int id, User user)
     {
         fakeUsers.set(id, user);
@@ -172,23 +174,24 @@ public class UserDAO
 
     public void updateUser(String userFullname, String userPostcode, String userStreetnumber, String userEmail, String userPassword, int userID) {
         try {
-            query = "UPDATE User userFullname = ?, userPostcode = ?, userStreetnumber = ?, userEmail = ?, userPassword = ? WHERE userID = ?";
+            query = "UPDATE User userFullname = " + userFullname + ", userPostcode = " + userPostcode + ", userStreetnumber = " + userStreetnumber + ", userEmail = " + userEmail + ", userPassword = " + userPassword + " WHERE userID = " + userID + ";";
+            System.out.println("\"Updated\" user with: " + query);
 
-            statement = database.prepareStatement(query);
-            statement.setString(1, userFullname);
-            statement.setString(2, userPostcode);
-            statement.setString(3, userStreetnumber);
-            statement.setString(4, userEmail);
-            statement.setString(5, userPassword);
-            statement.setInt(6, userID);
-
-            database.update(statement);
+//            statement = database.prepareStatement(query);
+//            statement.setString(1, userFullname);
+//            statement.setString(2, userPostcode);
+//            statement.setString(3, userStreetnumber);
+//            statement.setString(4, userEmail);
+//            statement.setString(5, userPassword);
+//            statement.setInt(6, userID);
+//
+//            database.update(statement);
         }
-        catch (SQLException e) {
+        catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
-    
+
     public void delete(int id)
     {
         fakeUsers.remove(id);
@@ -196,14 +199,15 @@ public class UserDAO
 
     public void deleteUser(int userID) {
         try {
-            query = "DELETE FROM user WHERE userID = ?;";
+            query = "DELETE FROM user WHERE userID = " + userID + ";";
+            System.out.println("\"Deleted\" user with: " + query);
 
-            statement = database.prepareStatement(query);
-            statement.setInt(1, userID);
-
-            database.update(statement);
+//            statement = database.prepareStatement(query);
+//            statement.setInt(1, userID);
+//
+//            database.update(statement);
         }
-        catch (SQLException e) {
+        catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

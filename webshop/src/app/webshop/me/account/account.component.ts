@@ -4,6 +4,7 @@ import {AuthorizationService} from "../../../shared/authorization.service";
 import {Router} from "@angular/router";
 import {UserService} from "../../../shared/modelsAndTheirServices/user.service";
 import {User} from "../../../shared/modelsAndTheirServices/user";
+import {Animator} from "../../../shared/modelsAndTheirServices/animator";
 
 @Component({
   selector: 'app-account',
@@ -18,39 +19,43 @@ import {User} from "../../../shared/modelsAndTheirServices/user";
 export class AccountComponent implements OnInit {
 
   @Input() userID;
-  fullName: String;
-  emailAddress: String;
-  password: String;
-  postcode: String;
-  streetnumber: String;
-  roles: String[];
+  private fullName: String;
+  private emailAddress: String;
+  private password: String;
+  private postcode: String;
+  private streetnumber: String;
+  private roles: String[];
 
-  oldPassword: String;
+  private oldPassword: String;
 
-  private user;
-  private userObject: User;
+  private userObservable;
+  private user: User;
 
   constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private userService: UserService) { }
 
   ngOnInit() {
-    this.user = this.userService.getOne(this.userID);
-    this.getUser();
+    this.getUserObservable();
+    this.setUserData();
   }
 
-  getUser(): void {
-    this.user.subscribe(data => {
-      this.userObject = new User(data);
+  getUserObservable() {
+    this.userObservable = this.userService.getOne(this.userID);
+  }
+
+  setUserData() {
+    this.userObservable.subscribe(data => {
+      this.user = new User(data);
       this.fillAttributesWithObjectData();
     });
   }
 
   fillAttributesWithObjectData(){
-    this.fullName = this.userObject.getFullName();
-    this.emailAddress = this.userObject.getEmailAddress();
-    this.postcode = this.userObject.getPostcode();
-    this.streetnumber = this.userObject.getStreetnumber();
-    this.roles = this.userObject.getRoles();
-    this.oldPassword = this.userObject.getPassword();
+    this.fullName = this.user.getFullName();
+    this.emailAddress = this.user.getEmailAddress();
+    this.postcode = this.user.getPostcode();
+    this.streetnumber = this.user.getStreetnumber();
+    this.roles = this.user.getRoles();
+    this.oldPassword = this.user.getPassword();
   }
 
   logOut() {
@@ -58,21 +63,27 @@ export class AccountComponent implements OnInit {
   }
 
   editAccount() {
-    const userData = {
+    let userData = this.constructUserDataObjectWithCurrentData();
+    userData = this.addNewPasswordIfANewOneIsSet(userData);
+    this.userService.update(new User(userData));
+  }
+
+  constructUserDataObjectWithCurrentData() {
+    return {
       userID: this.userID,
       fullName: this.fullName,
       postcode: this.postcode,
       streetnumber: this.streetnumber,
       emailAddress: this.emailAddress,
-      password: this.password,
-      roles: this.userObject.getRoles()
+      password: this.oldPassword,
+      roles: this.user.getRoles()
     };
+  }
 
-    if(userData.password === undefined || userData.password === '') {
-      userData.password = this.oldPassword;
+  addNewPasswordIfANewOneIsSet(userData){
+    if(this.password !== undefined && this.password !== '') {
+      userData.password = this.password;
     }
-
-    const user = new User(userData);
-    this.userService.update(user);
+    return userData;
   }
 }

@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {User} from "../../shared/modelsAndTheirServices/user";
 import {Router} from "@angular/router";
+import {AuthorizationService} from "../../shared/authorization.service";
 
 @Component({
   selector: 'app-me',
@@ -10,16 +11,21 @@ import {Router} from "@angular/router";
 })
 export class MeComponent implements OnInit {
 
-  userID: number;
+  private myUserID: number;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authService: AuthorizationService) { }
 
   ngOnInit() {
-    if(JSON.parse(window.localStorage.getItem('authorization')) == undefined ) {
+    this.navigateToShopIfNotLoggedIn();
+  }
+
+  navigateToShopIfNotLoggedIn() {
+    try{
+      const session = this.authService.getSession();
+      this.myUserID = session.authenticator.userID;
+    } catch (e) {
       this.router.navigate(['/shop']);
     }
-    const session = JSON.parse(window.localStorage.getItem('authorization'));
-    this.userID = session.authenticator.userID;
   }
 
 }
