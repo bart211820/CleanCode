@@ -38,7 +38,7 @@ export class UserService
     (
       data =>
       {
-        this.login(user, true);
+        this.login(user);
       },
       error =>
       {
@@ -47,15 +47,15 @@ export class UserService
     );
   }
 
-  public login(user: User, remember: boolean): void
+  public login(user: User): void
   {
     this.authService.setAuthorization(user.getEmailAddress(), user.getPassword());
 
     this.api.get<User>('users/me').subscribe (
       authenticator => {
-        this.authService.storeAuthorization(authenticator, remember);
+        this.authService.storeAuthorization(authenticator);
 
-        this.goToPageAfterLogin(authenticator);
+        this.goToPageAfterLogin();
       },
       error => {
         alert('Het inloggen is mislukt');
@@ -75,8 +75,9 @@ export class UserService
     this.router.navigate(['']);
   }
 
-  public goToPageAfterLogin(user){
-    if (user.roles.includes('ADMIN')) {
+  public goToPageAfterLogin(){
+    const session = this.authService.getSession();
+    if (session.authenticator.roles.includes('ADMIN')) {
       this.router.navigate(['/admin']);
     } else {
       this.router.navigate(['/me']);

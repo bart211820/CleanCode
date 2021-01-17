@@ -24,7 +24,7 @@ export class AuthorizationService {
     this.password = password;
   }
 
-  public storeAuthorization(authenticator: object, local: boolean) {
+  public storeAuthorization(authenticator: object) {
     this.authenticator = authenticator;
 
     const authorization = {
@@ -34,9 +34,8 @@ export class AuthorizationService {
     };
 
     const authorizationString = JSON.stringify(authorization);
-    const storage = local ? localStorage : sessionStorage;
 
-    storage.setItem('authorization', authorizationString);
+    localStorage.setItem('authorization', authorizationString);
 
     this.authorized$.next(true);
   }
@@ -88,6 +87,15 @@ export class AuthorizationService {
       throw new Error("NotSignedIn");
     } else {
       return session;
+    }
+  }
+
+  public checkIfLoggedIn() {
+    try{
+      this.getSession();
+      return true;
+    } catch (e) {
+      return false;
     }
   }
 }

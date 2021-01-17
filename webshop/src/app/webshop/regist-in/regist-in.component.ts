@@ -18,28 +18,22 @@ import {Router} from "@angular/router";
 })
 export class RegistInComponent implements OnInit {
 
-  registering = false;
+  private showRegisterScreen = false;
 
   constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private userService: UserService) { }
 
   ngOnInit() {
-    if(JSON.parse(window.localStorage.getItem('authorization')) != undefined ) {
-      const session = JSON.parse(window.localStorage.getItem('authorization'));
-      const userData = {
-        userID: session.authenticator.userID,
-        fullName: session.authenticator.fullName,
-        postcode: session.authenticator.postcode,
-        streetnumber: session.authenticator.streetnumber,
-        emailAddress: session.authenticator.emailAddress,
-        password: session.authenticator.password,
-        roles: session.authenticator.roles
-      };
-      this.userService.goToPageAfterLogin(new User(userData));
+    this.navigateAwayFromPageIfAlreadyLogedIn();
+  }
+
+  navigateAwayFromPageIfAlreadyLogedIn() {
+    if(this.authService.checkIfLoggedIn()){
+      this.userService.goToPageAfterLogin();
     }
   }
 
-  switchLoginOrRegister(agreed: boolean) {
-    this.registering = agreed;
+  switchLoginOrRegister(registering: boolean) {
+    this.showRegisterScreen = registering;
   }
 
 }

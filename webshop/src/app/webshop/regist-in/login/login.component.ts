@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
       roles: undefined
     };
     const user = new User(userData);
-    this.userService.login(user, true);
+    this.userService.login(user);
   }
 
   switchToRegistering() {

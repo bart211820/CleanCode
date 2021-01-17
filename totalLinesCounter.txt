@@ -1,4 +1,4 @@
-Frontend total: 1491
+Frontend total: 1391
 CleanCode/webshop/src/app/admin: 233
 lines per bestand:
 1
@@ -11,7 +11,7 @@ lines per bestand:
 60
 27
 
-CleanCode/webshop/src/app/shared: 245
+CleanCode/webshop/src/app/shared: 145
 lines per bestand:
 80
 65
