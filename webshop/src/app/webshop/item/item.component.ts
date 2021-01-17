@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ApiService} from "../../shared/api.service";
 import {AuthorizationService} from "../../shared/authorization.service";
-import {ItemService} from "../../shared/modelsAndTheirServices/item.service";
-import {Item} from "../../shared/modelsAndTheirServices/item";
+import {MerchandiseService} from "../../shared/modelsAndTheirServices/merchandise.service";
+import {Merchandise} from "../../shared/modelsAndTheirServices/merchandise";
 import {AnimatorService} from "../../shared/modelsAndTheirServices/animator.service";
 import {Animator} from "../../shared/modelsAndTheirServices/animator";
 import {Basket} from "../../shared/modelsAndTheirServices/basket";
@@ -16,14 +16,14 @@ import {BasketService} from "../../shared/modelsAndTheirServices/basket.service"
   providers: [
     ApiService,
     AuthorizationService,
-    ItemService,
+    MerchandiseService,
     AnimatorService,
     BasketService
   ]
 })
 export class ItemComponent implements OnInit {
   private item;
-  private itemObject: Item;
+  private itemObject: Merchandise;
   private animator;
   private animatorObject: Animator;
   private basket;
@@ -31,7 +31,7 @@ export class ItemComponent implements OnInit {
   private itemID;
   private readyToDisplay = false;
 
-  constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private itemService: ItemService, private animatorService: AnimatorService, private basketService: BasketService, private route: ActivatedRoute) { }
+  constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private itemService: MerchandiseService, private animatorService: AnimatorService, private basketService: BasketService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.itemID = this.route.snapshot.params['id'];
@@ -41,7 +41,7 @@ export class ItemComponent implements OnInit {
 
   getItem(): void {
     this.item.subscribe(data => {
-      this.itemObject = new Item(data);
+      this.itemObject = new Merchandise(data);
       this.animator = this.animatorService.getOne(this.itemObject.getItemAnimatorId());
       this.getAnimator();
     });

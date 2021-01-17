@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiService} from "../../../shared/api.service";
 import {AuthorizationService} from "../../../shared/authorization.service";
-import {ItemService} from "../../../shared/modelsAndTheirServices/item.service";
+import {MerchandiseService} from "../../../shared/modelsAndTheirServices/merchandise.service";
 import {AnimatorService} from "../../../shared/modelsAndTheirServices/animator.service";
 import {Router} from "@angular/router";
 import {Animator} from "../../../shared/modelsAndTheirServices/animator";
-import {Item} from "../../../shared/modelsAndTheirServices/item";
+import {Merchandise} from "../../../shared/modelsAndTheirServices/merchandise";
 
 @Component({
   selector: 'app-add-item',
@@ -14,7 +14,7 @@ import {Item} from "../../../shared/modelsAndTheirServices/item";
   providers: [
     ApiService,
     AuthorizationService,
-    ItemService,
+    MerchandiseService,
     AnimatorService
   ]
 })
@@ -30,7 +30,7 @@ export class AddItemComponent implements OnInit {
   private animators;
   private animatorList = [];
 
-  constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private itemService: ItemService, private animatorService: AnimatorService) { }
+  constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private itemService: MerchandiseService, private animatorService: AnimatorService) { }
 
   ngOnInit() {
     this.animators = this.animatorService.getAll();
@@ -55,7 +55,7 @@ export class AddItemComponent implements OnInit {
       itemType: this.itemType,
       itemAnimatorID: this.itemAnimatorID
     };
-    this.itemService.create(new Item(itemData));
+    this.itemService.create(new Merchandise(itemData));
   }
 
 }

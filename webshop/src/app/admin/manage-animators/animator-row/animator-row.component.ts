@@ -3,7 +3,7 @@ import {ApiService} from "../../../shared/api.service";
 import {AuthorizationService} from "../../../shared/authorization.service";
 import {Router} from "@angular/router";
 import {AnimatorService} from "../../../shared/modelsAndTheirServices/animator.service";
-import {Item} from "../../../shared/modelsAndTheirServices/item";
+import {Merchandise} from "../../../shared/modelsAndTheirServices/merchandise";
 import {Animator} from "../../../shared/modelsAndTheirServices/animator";
 
 @Component({

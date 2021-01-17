@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {ApiService} from "../../shared/api.service";
 import {AuthorizationService} from "../../shared/authorization.service";
 import {Router} from "@angular/router";
-import {ItemService} from "../../shared/modelsAndTheirServices/item.service";
+import {MerchandiseService} from "../../shared/modelsAndTheirServices/merchandise.service";
 import {Order} from "../../shared/modelsAndTheirServices/order";
-import {Item} from "../../shared/modelsAndTheirServices/item";
+import {Merchandise} from "../../shared/modelsAndTheirServices/merchandise";
 import {OrderService} from "../../shared/modelsAndTheirServices/order.service";
 
 @Component({
@@ -14,7 +14,7 @@ import {OrderService} from "../../shared/modelsAndTheirServices/order.service";
   providers: [
     ApiService,
     AuthorizationService,
-    ItemService
+    MerchandiseService
   ]
 })
 export class ManageItemsComponent implements OnInit {
@@ -23,7 +23,7 @@ export class ManageItemsComponent implements OnInit {
   private itemList = [];
   private readyToDisplay = false;
 
-  constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private itemService: ItemService) { }
+  constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private itemService: MerchandiseService) { }
 
   ngOnInit() {
     this.getItemsFromApi();
@@ -38,7 +38,7 @@ export class ManageItemsComponent implements OnInit {
   getItems() {
     this.items.subscribe(data => {
       for(let itemData of data) {
-        this.itemList.push(new Item(itemData));
+        this.itemList.push(new Merchandise(itemData));
       }
       this.readyToDisplay = true;
     });

@@ -1,10 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ApiService} from "../../../shared/api.service";
 import {AuthorizationService} from "../../../shared/authorization.service";
-import {ItemService} from "../../../shared/modelsAndTheirServices/item.service";
+import {MerchandiseService} from "../../../shared/modelsAndTheirServices/merchandise.service";
 import {AnimatorService} from "../../../shared/modelsAndTheirServices/animator.service";
 import {Router} from "@angular/router";
-import {Item} from "../../../shared/modelsAndTheirServices/item";
+import {Merchandise} from "../../../shared/modelsAndTheirServices/merchandise";
 import {Animator} from "../../../shared/modelsAndTheirServices/animator";
 import {Basket} from "../../../shared/modelsAndTheirServices/basket";
 
@@ -15,7 +15,7 @@ import {Basket} from "../../../shared/modelsAndTheirServices/basket";
   providers: [
     ApiService,
     AuthorizationService,
-    ItemService,
+    MerchandiseService,
     AnimatorService
   ]
 })
@@ -33,7 +33,7 @@ export class ItemRowComponent implements OnInit {
   private animatorList = [];
   private readyToDisplay = false;
 
-  constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private itemService: ItemService, private animatorService: AnimatorService) { }
+  constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private itemService: MerchandiseService, private animatorService: AnimatorService) { }
 
   ngOnInit() {
     this.animatorList = [];
@@ -70,7 +70,7 @@ export class ItemRowComponent implements OnInit {
       itemType: this.itemType,
       itemAnimatorID: this.itemAnimatorID
     };
-    const updatedItem = new Item(itemData);
+    const updatedItem = new Merchandise(itemData);
     this.itemService.update(updatedItem);
   }
 

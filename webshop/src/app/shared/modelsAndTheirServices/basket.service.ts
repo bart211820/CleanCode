@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import {ApiService} from "../api.service";
 import {AuthorizationService} from "../authorization.service";
 import {Basket} from "./basket";
-import {Item} from "./item";
+import {Merchandise} from "./merchandise";
 
 @Injectable({
   providedIn: ApiService,

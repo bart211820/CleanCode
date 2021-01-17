@@ -44,7 +44,7 @@ public class ItemDAO {
 
     public List<Item> getAllItems() {
 //        try {
-//            query = "SELECT * FROM Item;";
+//            query = "SELECT * FROM Merchandise;";
 //            statement = database.prepareStatement(query);
 //
 //            return selectItems(statement);
@@ -66,7 +66,7 @@ public class ItemDAO {
 
     public Item getItem(int itemID){
 //        try {
-//            query = "SELECT * FROM Item WHERE itemID = ?;";
+//            query = "SELECT * FROM Merchandise WHERE itemID = ?;";
 //            statement.setInt(1, itemID);
 //            statement = database.prepareStatement(query);
 //
@@ -90,7 +90,7 @@ public class ItemDAO {
 
     public void createItem(String itemName, String itemDescription, double itemPrice, String itemImage, String itemType, int itemAnimatorID) {
         try {
-            query = "INSERT INTO Item (itemName, itemDescription, itemPrice, itemImage, itemType, itemAnimatorID) VALUES (?, ?, ?, ?, ?, ?);";
+            query = "INSERT INTO Merchandise (itemName, itemDescription, itemPrice, itemImage, itemType, itemAnimatorID) VALUES (?, ?, ?, ?, ?, ?);";
 
             statement = database.prepareStatement(query);
             statement.setString(1, itemName);
@@ -109,7 +109,7 @@ public class ItemDAO {
 
     public void updateItem(String itemName, String itemDescription, double itemPrice, String itemImage, String itemType, int itemAnimatorID, int itemID) {
         try {
-            query = "UPDATE Item itemName = ?, itemDescription = ?, itemPrice = ?, itemImage = ?, itemType = ?, itemAnimatorID = ? WHERE itemID = ?";
+            query = "UPDATE Merchandise itemName = ?, itemDescription = ?, itemPrice = ?, itemImage = ?, itemType = ?, itemAnimatorID = ? WHERE itemID = ?";
 
             statement = database.prepareStatement(query);
             statement.setString(1, itemName);

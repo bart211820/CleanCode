@@ -3,32 +3,32 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import {ApiService} from "../api.service";
 import {AuthorizationService} from "../authorization.service";
-import {Item} from "./item";
+import {Merchandise} from "./merchandise";
 import {Basket} from "./basket";
 import {Order} from "./order";
 
 @Injectable({
   providedIn: ApiService,
 })
-export class ItemService {
+export class MerchandiseService {
 
   constructor(private api: ApiService,
               private authService: AuthorizationService,
               private router: Router) { }
 
-  public getAll(): Observable<Item[]> {
-    return this.api.get<Item[]>('items');
+  public getAll(): Observable<Merchandise[]> {
+    return this.api.get<Merchandise[]>('items');
   }
 
-  public getOne(itemID: number): Observable<Item[]> {
-    return this.api.get<Item[]>('items/' + itemID);
+  public getOne(itemID: number): Observable<Merchandise[]> {
+    return this.api.get<Merchandise[]>('items/' + itemID);
   }
 
-  public create(item: Item): void {
+  public create(item: Merchandise): void {
     const data = item.getData();
     this.api.post<void>('items', data).subscribe (
       data => {
-        alert('Item aangemaakt.');
+        alert('Merchandise aangemaakt.');
         location.reload();
       },
       error => {
@@ -37,14 +37,14 @@ export class ItemService {
     );
   }
 
-  public update(item: Item): void {
+  public update(item: Merchandise): void {
     const data = item.getData();
     this.api.put<void>('items/' + item.getItemID(), data).subscribe (
       data => {
-        console.log('Item has been updated.');
+        console.log('Merchandise has been updated.');
       },
       error => {
-        console.log('Item has NOT been updated!!! D:');
+        console.log('Merchandise has NOT been updated!!! D:');
       }
     );
   }
@@ -52,7 +52,7 @@ export class ItemService {
   public delete(itemID: number): void {
     this.api.delete<void>('items/' + itemID).subscribe (
       data => {
-        console.log('Item got deleted');
+        console.log('Merchandise got deleted');
       },
       error => {
         alert('Could not delete item!');
@@ -60,7 +60,7 @@ export class ItemService {
     );
   }
 
-  public register(item: Item): void {
+  public register(item: Merchandise): void {
     const data = item.getData();
     this.api.post<void>('items', data).subscribe (
       data => {

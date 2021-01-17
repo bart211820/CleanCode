@@ -3,8 +3,8 @@ import {Basket} from "../../../../shared/modelsAndTheirServices/basket";
 import {ApiService} from "../../../../shared/api.service";
 import {AuthorizationService} from "../../../../shared/authorization.service";
 import {Router} from "@angular/router";
-import {ItemService} from "../../../../shared/modelsAndTheirServices/item.service";
-import {Item} from "../../../../shared/modelsAndTheirServices/item";
+import {MerchandiseService} from "../../../../shared/modelsAndTheirServices/merchandise.service";
+import {Merchandise} from "../../../../shared/modelsAndTheirServices/merchandise";
 import {NgForm} from "@angular/forms";
 import {BasketService} from "../../../../shared/modelsAndTheirServices/basket.service";
 
@@ -15,7 +15,7 @@ import {BasketService} from "../../../../shared/modelsAndTheirServices/basket.se
   providers: [
     ApiService,
     AuthorizationService,
-    ItemService,
+    MerchandiseService,
     BasketService
   ]
 })
@@ -24,11 +24,11 @@ export class BasketItemComponent implements OnInit {
   @Input() basket: Basket;
   @Output() totalPriceUpdate = new EventEmitter<boolean>();
   private item;
-  private itemObject: Item;
+  private itemObject: Merchandise;
   itemAmount: number;
   private readyToDisplay = false;
 
-  constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private itemService: ItemService, private basketService: BasketService) { }
+  constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private itemService: MerchandiseService, private basketService: BasketService) { }
 
   ngOnInit() {
     this.item = this.itemService.getOne(this.basket.getBasketItemID());
@@ -38,7 +38,7 @@ export class BasketItemComponent implements OnInit {
 
   getAll(): void {
     this.item.subscribe(data => {
-      this.itemObject = new Item(data);
+      this.itemObject = new Merchandise(data);
       this.readyToDisplay = true;
     });
   }

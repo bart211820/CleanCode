@@ -4,8 +4,8 @@ import {AuthorizationService} from "../../../shared/authorization.service";
 import {Router} from "@angular/router";
 import {BasketService} from "../../../shared/modelsAndTheirServices/basket.service";
 import {Basket} from "../../../shared/modelsAndTheirServices/basket";
-import {Item} from "../../../shared/modelsAndTheirServices/item";
-import {ItemService} from "../../../shared/modelsAndTheirServices/item.service";
+import {Merchandise} from "../../../shared/modelsAndTheirServices/merchandise";
+import {MerchandiseService} from "../../../shared/modelsAndTheirServices/merchandise.service";
 import {OrderService} from "../../../shared/modelsAndTheirServices/order.service";
 import {Order} from "../../../shared/modelsAndTheirServices/order";
 
@@ -17,7 +17,7 @@ import {Order} from "../../../shared/modelsAndTheirServices/order";
     ApiService,
     AuthorizationService,
     BasketService,
-    ItemService,
+    MerchandiseService,
     OrderService
   ]
 })
@@ -30,7 +30,7 @@ export class BasketListComponent implements OnInit {
   private totalPrice = 0;
   private readyToDisplay = false;
 
-  constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private basketService: BasketService, private itemService: ItemService, private orderService: OrderService) { }
+  constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private basketService: BasketService, private itemService: MerchandiseService, private orderService: OrderService) { }
 
   ngOnInit() {
     this.getAllBasketsFromAPI();
@@ -62,7 +62,7 @@ export class BasketListComponent implements OnInit {
 
   getItem(item): void {
     item.subscribe(data => {
-      this.itemList.push(new Item(data));
+      this.itemList.push(new Merchandise(data));
       this.calculateTotalPrice();
     });
   }
