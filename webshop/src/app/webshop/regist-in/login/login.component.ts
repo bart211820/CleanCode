@@ -18,8 +18,8 @@ import {User} from "../../../shared/modelsAndTheirServices/user";
 })
 export class LoginComponent implements OnInit {
 
-  email: String;
-  password: String;
+  private email: String;
+  private password: String;
   @Output() newScreenShowing = new EventEmitter<boolean>();
 
   constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private userService: UserService) { }
@@ -30,7 +30,12 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    const userData = {
+    const userData = this.constructUserDataWithCurrentEmailAndPassword();
+    this.userService.login(new User(userData));
+  }
+
+  constructUserDataWithCurrentEmailAndPassword() {
+    return {
       userID: undefined,
       fullName: undefined,
       postcode: undefined,
@@ -39,8 +44,6 @@ export class LoginComponent implements OnInit {
       password: this.password,
       roles: undefined
     };
-    const user = new User(userData);
-    this.userService.login(user);
   }
 
   switchToRegistering() {

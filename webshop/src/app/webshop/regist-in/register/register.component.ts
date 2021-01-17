@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {ApiService} from "../../../shared/api.service";
 import {AuthorizationService} from "../../../shared/authorization.service";
 import {Router} from "@angular/router";
@@ -15,22 +15,24 @@ import {User} from "../../../shared/modelsAndTheirServices/user";
     UserService
   ]
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
 
-  fullName: String;
-  email: String;
-  password: String;
-  postcode: String;
-  streetnumber: String;
+  private fullName: String;
+  private email: String;
+  private password: String;
+  private postcode: String;
+  private streetnumber: String;
   @Output() newScreenShowing = new EventEmitter<boolean>();
 
   constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private userService: UserService) { }
 
-  ngOnInit() {
+  register() {
+    const userData = this.constructUserDataWithCurrentEmailAndPassword()
+    this.userService.register(new User(userData));
   }
 
-  register() {
-    const userData = {
+  constructUserDataWithCurrentEmailAndPassword() {
+    return {
       userID: undefined,
       fullName: this.fullName,
       postcode: this.postcode,
@@ -39,8 +41,6 @@ export class RegisterComponent implements OnInit {
       password: this.password,
       roles: ["GUEST"]
     };
-    const user = new User(userData);
-    this.userService.register(user);
   }
 
   switchToLogin() {
