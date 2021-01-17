@@ -81,4 +81,13 @@ export class AuthorizationService {
   public setAuthenticator(authenticator: Object): void {
     this.authenticator = authenticator;
   }
+
+  public getSession() {
+    const session = JSON.parse(window.localStorage.getItem('authorization'));
+    if(session === null){
+      throw new Error("NotSignedIn");
+    } else {
+      return session;
+    }
+  }
 }

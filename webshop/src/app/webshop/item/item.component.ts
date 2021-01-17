@@ -37,7 +37,7 @@ export class ItemComponent implements OnInit {
     this.getMerchandiseFromObservable();
   }
 
-  setMerchandiseIDBasedOnRoute(){
+  setMerchandiseIDBasedOnRoute() {
     this.merchandiseID = this.route.snapshot.params['id'];
   }
 
@@ -45,7 +45,7 @@ export class ItemComponent implements OnInit {
     this.merchandiseObservable = this.merchandiseService.getOne(this.merchandiseID);
   }
 
-  getMerchandiseFromObservable(): void {
+  getMerchandiseFromObservable() {
     this.merchandiseObservable.subscribe(data => {
       this.merchandise = new Merchandise(data);
       this.getAnimatorObservable(this.merchandise.getMerchandiseAnimatorId());
@@ -57,36 +57,31 @@ export class ItemComponent implements OnInit {
     this.animatorObservable = this.animatorService.getOne(animatorID);
   }
 
-  getAnimatorFromObservable(): void {
+  getAnimatorFromObservable() {
     this.animatorObservable.subscribe(data => {
       this.animator = new Animator(data);
       this.setPageReadyToDisplay();
     });
   }
 
-  setPageReadyToDisplay(){
+  setPageReadyToDisplay() {
     this.pageIsReadyToDisplay = true;
   }
 
-  addToCard(){
+  addToCard() {
     try {
       this.tryAddToCard();
     } catch (e) {
-      this.router.navigate(['/login']);
+      if(e.message === "NotSignedIn"){
+        this.router.navigate(['/login']);
+      } else {
+        console.error(e);
+      }
     }
   }
 
-  tryAddToCard(){
-    const session = this.getSession();
+  tryAddToCard() {
+    const session = this.authService.getSession();
     this.basketService.addMerchandise(session.authenticator.userID, this.merchandiseID);
-  }
-
-  getSession() {
-    const session = JSON.parse(window.localStorage.getItem('authorization'));
-    if(session === undefined){
-      throw new Error("NotSignedIn");
-    } else {
-      return session;
-    }
   }
 }
