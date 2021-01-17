@@ -1,7 +1,7 @@
 <footer>
   <h3>Featured Animators:</h3>
   <div id="animatorList">
-    <div class="footerAnimator" *ngFor="let animator of animatorsList">
+    <div class="footerAnimator" *ngFor="let animator of animators">
       <a [href]="animator.getAnimatorLink()" target="_blank">{{ animator.getAnimatorName() }}</a></div>
   </div>
 </footer>

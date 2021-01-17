@@ -42,6 +42,4 @@ export class ShopComponent implements OnInit {
     this.merchandises.push(merchandise);
   }
 
-
-
 }

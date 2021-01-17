@@ -4,6 +4,7 @@ import {AuthorizationService} from "../../shared/authorization.service";
 import {AnimatorService} from "../../shared/modelsAndTheirServices/animator.service";
 import {Router} from "@angular/router";
 import {Animator} from "../../shared/modelsAndTheirServices/animator";
+import {Merchandise} from "../../shared/modelsAndTheirServices/merchandise";
 
 @Component({
   selector: 'app-footer',
@@ -16,22 +17,29 @@ import {Animator} from "../../shared/modelsAndTheirServices/animator";
   ]
 })
 export class FooterComponent implements OnInit {
-  private animators;
-  private animatorsList = [];
+  private animatorObservable;
+  private animators = [];
 
   constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private animatorService: AnimatorService) { }
 
   ngOnInit() {
-    this.animators = this.animatorService.getAll();
-    this.getAll();
+    this.getAnimatorObservable();
+    this.fillAnimators();
   }
 
-  getAll(): void {
-    this.animators.subscribe(data => {
-      for(let animatorData of data) {
-        this.animatorsList.push(new Animator(animatorData));
+  getAnimatorObservable() {
+    this.animatorObservable = this.animatorService.getAll();
+  }
+
+  fillAnimators() {
+    this.animatorObservable.subscribe(data => {
+      for(let animatorsData of data) {
+        this.addAnimatorToAnimators(new Animator(animatorsData));
       }
     });
   }
 
+  addAnimatorToAnimators(animator){
+    this.animators.push(animator);
+  }
 }
