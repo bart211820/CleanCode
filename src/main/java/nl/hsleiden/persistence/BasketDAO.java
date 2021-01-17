@@ -115,61 +115,65 @@ public class BasketDAO {
 
     public void createBasket(int basketUserID, int basketItemID, int basketItemAmount) {
         try {
-            query = "INSERT INTO Basket (basketUserID, basketItemID, basketItemAmount) VALUES (?, ?, ?);";
+            query = "INSERT INTO Basket (basketUserID, basketItemID, basketItemAmount) VALUES (" + basketUserID + ", " + basketItemID + ", " + basketItemAmount + ");";
 
-            statement = database.prepareStatement(query);
-            statement.setInt(1, basketUserID);
-            statement.setInt(2, basketItemID);
-            statement.setInt(3, basketItemAmount);
+//            statement = database.prepareStatement(query);
+//            statement.setInt(1, basketUserID);
+//            statement.setInt(2, basketItemID);
+//            statement.setInt(3, basketItemAmount);
 
-            database.update(statement);
+            System.out.println("\"Created\" basket with: " + query);
+            // database.update(statement);
         }
-        catch (SQLException e) {
+        catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     public void updateBasket(int basketUserID, int basketItemID, int basketAmount, int basketID) {
         try {
-            query = "UPDATE Basket basketUserID = ?, basketItemID = ?, basketAmount = ? WHERE basketID = ?";
+            query = "UPDATE Basket basketUserID = " + basketUserID + ", basketItemID = " + basketItemID + ", basketAmount = " + basketAmount + " WHERE basketID = " + basketID + "";
 
-            statement = database.prepareStatement(query);
-            statement.setInt(1, basketUserID);
-            statement.setInt(2, basketItemID);
-            statement.setInt(3, basketAmount);
-            statement.setInt(4, basketID);
+//            statement = database.prepareStatement(query);
+//            statement.setInt(1, basketUserID);
+//            statement.setInt(2, basketItemID);
+//            statement.setInt(3, basketAmount);
+//            statement.setInt(4, basketID);
 
-            database.update(statement);
+            System.out.println("\"Updated\" basket with: " + query);
+//            database.update(statement);
         }
-        catch (SQLException e) {
+        catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     public void deleteBasket(int basketID) {
         try {
-            query = "DELETE FROM basket WHERE basketID = ?;";
+            query = "DELETE FROM basket WHERE basketID = " + basketID + ";";
 
-            statement = database.prepareStatement(query);
-            statement.setInt(1, basketID);
+//            statement = database.prepareStatement(query);
+//            statement.setInt(1, basketID);
 
-            database.update(statement);
+            System.out.println("\"Deleted\" basket with: " + query);
+            //database.update(statement);
         }
-        catch (SQLException e) {
+        catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     public void deleteBasketFromUser(int userID) {
         try {
-            query = "DELETE FROM basket WHERE basketUserID = ?;";
+            query = "DELETE FROM basket WHERE basketUserID = " + userID + ";";
 
-            statement = database.prepareStatement(query);
-            statement.setInt(1, userID);
+//            statement = database.prepareStatement(query);
+//            statement.setInt(1, userID);
 
-            database.update(statement);
+            System.out.println("\"Deleted\" basket with: " + query);
+            //database.update(statement);
         }
-        catch (SQLException e) {
+        catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

@@ -89,4 +89,37 @@ export class BasketService {
       }
     );
   }
+
+
+
+  public addMerchandise(userID: number, merchandiseID: number): void{
+    const currentBasket = this.getFromUserWithItem(userID, merchandiseID);
+
+    currentBasket.subscribe(data => {
+      if(data.length == 0){
+        this.makeNewBasketAndMakeRequest(userID, merchandiseID);
+      }
+      else {
+        this.updateCurrentBasketAndMakeRequest(data);
+      }
+    });
+  }
+
+  private makeNewBasketAndMakeRequest(userID: number, merchandiseID: number){
+    const basketData = {
+      basketID: undefined,
+      basketUserID: userID,
+      basketItemID: merchandiseID,
+      basketItemAmount: 1
+    };
+    this.create(new Basket(basketData));
+  }
+
+  private updateCurrentBasketAndMakeRequest(currentBasketData){
+    const basket = new Basket(currentBasketData[0]);
+    basket.addOneMoreToAmount();
+    this.update(basket);
+  }
+
+
 }

@@ -1,20 +1,20 @@
 <app-header></app-header>
-<div id="itemContentContainer" *ngIf="readyToDisplay">
+<div id="itemContentContainer" *ngIf="pageIsReadyToDisplay">
   <div id="itemInfoLeft">
-    <h2>{{ itemObject.getItemName() }} ({{ itemObject.getItemType() }})</h2>
+    <h2>{{ merchandise.getMerchandiseName() }} ({{ merchandise.getMerchandiseType() }})</h2>
     <div id="itemShadowGiver"></div>
-    <img src="{{ itemObject.getItemImage() }}" alt="{{ itemObject.getItemName() }}">
+    <img src="{{ merchandise.getMerchandiseImage() }}" alt="{{ merchandise.getMerchandiseName() }}">
   </div>
   <div id="itemInfoRight">
     <div id="animatorBar">
-      <img src="{{ animatorObject.getAnimatorImage() }}" alt="animatorObject.getAnimatorName()">
+      <img src="{{ animator.getAnimatorImage() }}" alt="animator.getAnimatorName()">
       <div id="animatorBarRight">
-        <h3>{{ animatorObject.getAnimatorName() }}</h3>
-        <a href="{{ animatorObject.getAnimatorLink() }}" target="_blank">Click to watch on Youtube</a>
+        <h3>{{ animator.getAnimatorName() }}</h3>
+        <a href="{{ animator.getAnimatorLink() }}" target="_blank">Click to watch on Youtube</a>
       </div>
     </div>
-    <p>{{ itemObject.getItemDescription() }}</p>
-    <div id="itemPrice"><h6>&euro; {{ itemObject.getItemPrice() }}</h6></div>
-    <div class="yamsButton" (click)="tryAddToCard()">Add to cart</div>
+    <p>{{ merchandise.getMerchandiseDescription() }}</p>
+    <div id="itemPrice"><h6>&euro; {{ merchandise.getMerchandisePrice() }}</h6></div>
+    <div class="yamsButton" (click)="addToCard()">Add to cart</div>
   </div>
 </div>

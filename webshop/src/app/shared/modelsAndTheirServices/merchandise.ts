@@ -1,65 +1,61 @@
 export class Merchandise {
 
-  private itemID;
-  private itemName;
-  private itemDescription;
-  private itemPrice;
-  private itemImage;
-  private itemType;
-  private itemAnimatorID;
-
-  // constructor(private itemID?: Number, private itemName?: String, private itemDescription?: String, private itemPrice?: Number, private itemImage?: String, private itemType?: String, private itemAnimatorID?: Number) {
-  //
-  // }
+  private merchandiseID;
+  private merchandiseName;
+  private merchandiseDescription;
+  private merchandisePrice;
+  private merchandiseImage;
+  private merchandiseType;
+  private merchandiseAnimatorID;
 
   constructor(private data?) {
-    this.itemID = data.itemID;
-    this.itemName = data.itemName;
-    this.itemDescription = data.itemDescription;
-    this.itemPrice = data.itemPrice;
-    this.itemImage = data.itemImage;
-    this.itemType = data.itemType;
-    this.itemAnimatorID = data.itemAnimatorID;
+    this.merchandiseID = data.itemID;
+    this.merchandiseName = data.itemName;
+    this.merchandiseDescription = data.itemDescription;
+    this.merchandisePrice = data.itemPrice;
+    this.merchandiseImage = data.itemImage;
+    this.merchandiseType = data.itemType;
+    this.merchandiseAnimatorID = data.itemAnimatorID;
   }
 
   public getData() {
     const data = {
-      itemID: this.itemID,
-      itemName: this.itemName,
-      itemDescription: this.itemDescription,
-      itemPrice: this.itemPrice,
-      itemImage: this.itemImage,
-      itemType: this.itemType,
-      itemAnimatorID: this.itemAnimatorID
+      itemID: this.merchandiseID,
+      itemName: this.merchandiseName,
+      itemDescription: this.merchandiseDescription,
+      itemPrice: this.merchandisePrice,
+      itemImage: this.merchandiseImage,
+      itemType: this.merchandiseType,
+      itemAnimatorID: this.merchandiseAnimatorID
     };
     return data;
   }
 
-  public getItemID() {
-    return this.itemID;
+  public getMerchandiseID() {
+    return this.merchandiseID;
   }
 
-  public getItemName() {
-    return this.itemName;
+  public getMerchandiseName() {
+    return this.merchandiseName;
   }
 
-  public getItemDescription() {
-    return this.itemDescription;
+  public getMerchandiseDescription() {
+    return this.merchandiseDescription;
   }
 
-  public getItemPrice() {
-    return this.itemPrice;
+  public getMerchandisePrice() {
+    return this.merchandisePrice;
   }
 
-  public getItemImage() {
-    return this.itemImage;
+  public getMerchandiseImage() {
+    return this.merchandiseImage;
   }
 
-  public getItemType() {
-    return this.itemType;
+  public getMerchandiseType() {
+    return this.merchandiseType;
   }
 
-  public getItemAnimatorId() {
-    return this.itemAnimatorID;
+  public getMerchandiseAnimatorId() {
+    return this.merchandiseAnimatorID;
   }
 }

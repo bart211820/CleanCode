@@ -1,5 +1,5 @@
-<div class="shopItem" [routerLink]="[merchandise.getItemAnimatorId()]">
-  <img src="{{ merchandise.getItemImage() }}" alt="{{ merchandise.getItemName() }}">
-  <h3>{{ merchandise.getItemName() }}</h3>
-  <div class="shopPrice">&euro;{{ merchandise.getItemPrice() }}</div>
+<div class="shopItem" [routerLink]="[merchandise.getMerchandiseAnimatorId()]">
+  <img src="{{ merchandise.getMerchandiseImage() }}" alt="{{ merchandise.getMerchandiseName() }}">
+  <h3>{{ merchandise.getMerchandiseName() }}</h3>
+  <div class="shopPrice">&euro;{{ merchandise.getMerchandisePrice() }}</div>
 </div>

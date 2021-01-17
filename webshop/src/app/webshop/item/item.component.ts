@@ -22,72 +22,71 @@ import {BasketService} from "../../shared/modelsAndTheirServices/basket.service"
   ]
 })
 export class ItemComponent implements OnInit {
-  private item;
-  private itemObject: Merchandise;
-  private animator;
-  private animatorObject: Animator;
-  private basket;
-  private basketObject: Basket;
-  private itemID;
-  private readyToDisplay = false;
+  private merchandiseObservable;
+  private merchandise: Merchandise;
+  private animatorObservable;
+  private animator: Animator;
+  private merchandiseID;
+  private pageIsReadyToDisplay = false;
 
-  constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private itemService: MerchandiseService, private animatorService: AnimatorService, private basketService: BasketService, private route: ActivatedRoute) { }
+  constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private merchandiseService: MerchandiseService, private animatorService: AnimatorService, private basketService: BasketService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.itemID = this.route.snapshot.params['id'];
-    this.item = this.itemService.getOne(this.itemID);
-    this.getItem();
+    this.setMerchandiseIDBasedOnRoute();
+    this.getMerchandiseObservable();
+    this.getMerchandiseFromObservable();
   }
 
-  getItem(): void {
-    this.item.subscribe(data => {
-      this.itemObject = new Merchandise(data);
-      this.animator = this.animatorService.getOne(this.itemObject.getItemAnimatorId());
-      this.getAnimator();
+  setMerchandiseIDBasedOnRoute(){
+    this.merchandiseID = this.route.snapshot.params['id'];
+  }
+
+  getMerchandiseObservable() {
+    this.merchandiseObservable = this.merchandiseService.getOne(this.merchandiseID);
+  }
+
+  getMerchandiseFromObservable(): void {
+    this.merchandiseObservable.subscribe(data => {
+      this.merchandise = new Merchandise(data);
+      this.getAnimatorObservable(this.merchandise.getMerchandiseAnimatorId());
+      this.getAnimatorFromObservable();
     });
   }
 
-  getAnimator(): void {
-    this.animator.subscribe(data => {
-      this.animatorObject = new Animator(data);
-      this.readyToDisplay = true;
+  getAnimatorObservable(animatorID) {
+    this.animatorObservable = this.animatorService.getOne(animatorID);
+  }
+
+  getAnimatorFromObservable(): void {
+    this.animatorObservable.subscribe(data => {
+      this.animator = new Animator(data);
+      this.setPageReadyToDisplay();
     });
   }
 
-  tryAddToCard() {
-    const session = JSON.parse(window.localStorage.getItem('authorization'));
-    if(session == undefined){
+  setPageReadyToDisplay(){
+    this.pageIsReadyToDisplay = true;
+  }
+
+  addToCard(){
+    try {
+      this.tryAddToCard();
+    } catch (e) {
       this.router.navigate(['/login']);
     }
-    else {
-      this.getMyBasketFromAPI(session.authenticator.userID);
+  }
+
+  tryAddToCard(){
+    const session = this.getSession();
+    this.basketService.addMerchandise(session.authenticator.userID, this.merchandiseID);
+  }
+
+  getSession() {
+    const session = JSON.parse(window.localStorage.getItem('authorization'));
+    if(session === undefined){
+      throw new Error("NotSignedIn");
+    } else {
+      return session;
     }
   }
-
-  getMyBasketFromAPI(userID: number) {
-    this.basket = this.basketService.getFromUserWithItem(userID, this.itemID);
-    this.addItemToCard(userID);
-  }
-
-  addItemToCard(userID: number) {
-    this.basket.subscribe(data => {
-      if(data.length == 0){
-        const basketData = {
-          basketID: undefined,
-          basketUserID: userID,
-          basketItemID: this.itemID,
-          basketItemAmount: 1
-        };
-        this.basketObject = new Basket(basketData);
-        this.basketService.create(this.basketObject);
-      }
-      else {
-        this.basketObject = new Basket(data[0]);
-        this.basketObject.addAnotherOne();
-        this.basketService.update(this.basketObject);
-      }
-    });
-  }
-
-
 }

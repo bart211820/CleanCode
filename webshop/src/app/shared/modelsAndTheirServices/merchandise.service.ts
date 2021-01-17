@@ -4,8 +4,6 @@ import { Observable } from 'rxjs';
 import {ApiService} from "../api.service";
 import {AuthorizationService} from "../authorization.service";
 import {Merchandise} from "./merchandise";
-import {Basket} from "./basket";
-import {Order} from "./order";
 
 @Injectable({
   providedIn: ApiService,
@@ -20,26 +18,26 @@ export class MerchandiseService {
     return this.api.get<Merchandise[]>('items');
   }
 
-  public getOne(itemID: number): Observable<Merchandise[]> {
-    return this.api.get<Merchandise[]>('items/' + itemID);
+  public getOne(merchandiseID: number): Observable<Merchandise[]> {
+    return this.api.get<Merchandise[]>('items/' + merchandiseID);
   }
 
-  public create(item: Merchandise): void {
-    const data = item.getData();
+  public create(merchandise: Merchandise): void {
+    const data = merchandise.getData();
     this.api.post<void>('items', data).subscribe (
       data => {
         alert('Merchandise aangemaakt.');
         location.reload();
       },
       error => {
-        alert('Could not make a new item.');
+        alert('Could not make a new merchandise.');
       }
     );
   }
 
-  public update(item: Merchandise): void {
-    const data = item.getData();
-    this.api.put<void>('items/' + item.getItemID(), data).subscribe (
+  public update(merchandise: Merchandise): void {
+    const data = merchandise.getData();
+    this.api.put<void>('items/' + merchandise.getMerchandiseID(), data).subscribe (
       data => {
         console.log('Merchandise has been updated.');
       },
@@ -49,13 +47,13 @@ export class MerchandiseService {
     );
   }
 
-  public delete(itemID: number): void {
-    this.api.delete<void>('items/' + itemID).subscribe (
+  public delete(merchandiseID: number): void {
+    this.api.delete<void>('items/' + merchandiseID).subscribe (
       data => {
         console.log('Merchandise got deleted');
       },
       error => {
-        alert('Could not delete item!');
+        alert('Could not delete merchandise!');
       }
     );
   }

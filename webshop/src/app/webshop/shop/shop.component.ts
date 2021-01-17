@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {ApiService} from "../../shared/api.service";
 import {Router} from "@angular/router";
 import {AuthorizationService} from "../../shared/authorization.service";
-import {Observable} from "rxjs";
 import {Merchandise} from "../../shared/modelsAndTheirServices/merchandise";
 import {MerchandiseService} from "../../shared/modelsAndTheirServices/merchandise.service";
 
@@ -23,16 +22,24 @@ export class ShopComponent implements OnInit {
   constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private merchandiseService: MerchandiseService) { }
 
   ngOnInit() {
-    this.merchandiseObservable = this.merchandiseService.getAll();
-    this.getAll();
+    this.getMerchandiseObservable();
+    this.fillMerchandises();
   }
 
-  getAll(): void {
+  getMerchandiseObservable() {
+    this.merchandiseObservable = this.merchandiseService.getAll();
+  }
+
+  fillMerchandises() {
     this.merchandiseObservable.subscribe(data => {
-      for(let itemData of data) {
-        this.merchandises.push(new Merchandise(itemData));
+      for(let merchandiseData of data) {
+        this.addMerchandiseToMerchandises(new Merchandise(merchandiseData));
       }
     });
+  }
+
+  addMerchandiseToMerchandises(merchandise){
+    this.merchandises.push(merchandise);
   }
 
 
