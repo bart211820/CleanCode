@@ -8,6 +8,7 @@ import {Merchandise} from "../../../shared/modelsAndTheirServices/merchandise";
 import {MerchandiseService} from "../../../shared/modelsAndTheirServices/merchandise.service";
 import {OrderService} from "../../../shared/modelsAndTheirServices/order.service";
 import {Order} from "../../../shared/modelsAndTheirServices/order";
+import {Animator} from "../../../shared/modelsAndTheirServices/animator";
 
 @Component({
   selector: 'app-basket-list',
@@ -24,77 +25,123 @@ import {Order} from "../../../shared/modelsAndTheirServices/order";
 export class BasketListComponent implements OnInit {
 
   @Input() userID;
-  private baskets;
-  private basketList = [];
-  private itemList = [];
+  private basketsObservable;
+  private baskets = [];
+  private merchandises = [];
   private totalPrice = 0;
-  private readyToDisplay = false;
+  private componentIsReadyToDisplay = false;
 
-  constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private basketService: BasketService, private itemService: MerchandiseService, private orderService: OrderService) { }
+  constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private basketService: BasketService, private merchandiseService: MerchandiseService, private orderService: OrderService) { }
 
   ngOnInit() {
-    this.getAllBasketsFromAPI();
+    this.loadBasketData();
   }
 
-  getAllBasketsFromAPI() {
-    this.basketList = [];
-    this.itemList = [];
-    this.baskets = this.basketService.getFromUser(this.userID);
-    this.getAllBaskets();
+  loadBasketData() {
+    this.clearBasketsAndMerchandises();
+    this.getBasketsObservable();
+    this.fillBaskets();
   }
 
-  getAllBaskets(): void {
-    this.baskets.subscribe(data => {
+  clearBasketsAndMerchandises() {
+    this.clearBaskets();
+    this.clearMerchandises();
+  }
+
+  clearBaskets() {
+    this.baskets = [];
+  }
+
+  clearMerchandises() {
+    this.merchandises = [];
+  }
+
+  getBasketsObservable() {
+    this.basketsObservable = this.basketService.getFromUser(this.userID);
+  }
+
+  fillBaskets() {
+    this.basketsObservable.subscribe(data => {
       for(let basketData of data) {
-        this.basketList.push(new Basket(basketData));
+        this.addBasketToBaskets(new Basket(basketData));
       }
-      this.getItemsFromAPI();
-      this.readyToDisplay = true;
+      this.fillMerchandises();
     });
   }
 
-  getItemsFromAPI() {
-    for(let basket of this.basketList) {
-      const item = this.itemService.getOne(basket.getBasketID());
-      this.getItem(item);
+  addBasketToBaskets(basket) {
+    this.baskets.push(basket);
+  }
+
+  fillMerchandises() {
+    for(let basket of this.baskets) {
+      const merchandiseObservable = this.merchandiseService.getOne(basket.getBasketID());
+      this.addMerchandiseToMerchandises(merchandiseObservable);
     }
   }
 
-  getItem(item): void {
-    item.subscribe(data => {
-      this.itemList.push(new Merchandise(data));
+  addMerchandiseToMerchandises(merchandise) {
+    merchandise.subscribe(data => {
+      this.merchandises.push(new Merchandise(data));
       this.calculateTotalPrice();
     });
   }
 
   calculateTotalPrice() {
     this.totalPrice = 0;
-    for(var i = 0; i < this.basketList.length; i++) {
-      this.totalPrice += (this.itemList[i].itemPrice * this.basketList[i].basketItemAmount);
+    for(var i = 0; i < this.baskets.length; i++) {
+      this.totalPrice += (this.merchandises[i].merchandisePrice * this.baskets[i].basketItemAmount);
     }
+    this.setComponentReadyToDisplay();
   }
 
-  recalculateTotalPrice(agreed: boolean) {
-    this.getAllBasketsFromAPI();
+  setComponentReadyToDisplay() {
+    this.componentIsReadyToDisplay = true;
+  }
+
+  handleBasketUpdate() {
+    this.loadBasketData();
   }
 
   orderEverything() {
-    var date = new Date();
-    date.setDate(date.getDate() + 3);
-
-    for(let basketToOrder of this.basketList){
-      let orderData = {
-        orderID: undefined,
-        orderUserID: basketToOrder.basketUserID,
-        orderItemID: basketToOrder.basketItemID,
-        orderItemAmount: basketToOrder.basketItemAmount,
-        orderDelivery: date
-      }
-      let newOrder = new Order(orderData);
-      this.orderService.create(newOrder);
+    let deliveryDate = this.getDateOfDayIn3DaysFromNow();
+    for(let basketToOrder of this.baskets) {
+      this.makeOrderFromBasket(basketToOrder, deliveryDate);
     }
-
-    this.basketService.deleteFromUser(this.userID);
+    this.deleteBasketsFromUser();
   }
 
+  getDateOfDayIn3DaysFromNow() {
+    let today = this.getDateOfToday();
+    const threeDaysFromNow = this.add3DaysToDate(today);
+    return new Date(threeDaysFromNow);
+  }
+
+  getDateOfToday() {
+    return new Date();
+  }
+
+  add3DaysToDate(date) {
+    return date.setDate(date.getDate() + 3);
+  }
+
+  makeOrderFromBasket(basket, deliveryDate) {
+    const orderData = this.makeOrderDataObjectFromBasket(basket, deliveryDate);
+    const order = new Order(orderData);
+    this.orderService.create(order);
+  }
+
+  makeOrderDataObjectFromBasket(basket, deliveryDate) {
+    return {
+      orderID: undefined,
+      orderUserID: basket.basketUserID,
+      orderItemID: basket.basketItemID,
+      orderItemAmount: basket.basketItemAmount,
+      orderDelivery: deliveryDate
+    };
+  }
+
+  deleteBasketsFromUser() {
+    this.basketService.deleteFromUser(this.userID);
+  }
 }

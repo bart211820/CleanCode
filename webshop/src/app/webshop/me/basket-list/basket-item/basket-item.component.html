@@ -1,16 +1,16 @@
-<div class="itemContainer" *ngIf="readyToDisplay">
+<div class="itemContainer" *ngIf="componentIsReadyToDisplay">
   <div class="itemImageContainer">
-    <img src="{{ itemObject.getItemImage() }}" alt="{{ itemObject.getItemName() }}">
+    <img src="{{ merchandise.getMerchandiseImage() }}" alt="{{ merchandise.getMerchandiseName() }}">
   </div>
   <div class="itemNameContainer">
-    {{ itemObject.getItemName() }}
+    {{ merchandise.getMerchandiseName() }}
   </div>
   <div class="itemPriceContainer">
-    &euro; {{ itemObject.getItemPrice() }} (per Unit)
+    &euro; {{ merchandise.getMerchandisePrice() }} (per Unit)
   </div>
   <div class="itemAmountContainer">
-    <form (ngSubmit)="updateAmount(f)" #f="ngForm">
-      <input name="itemAmount" type="number" [(ngModel)]="itemAmount">
+    <form (ngSubmit)="updateMerchandiseAmount(f)" #f="ngForm">
+      <input name="itemAmount" type="number" [(ngModel)]="merchandiseAmount">
       <button value="Update" class="yamsButton" type="submit">Update</button>
     </form>
   </div>

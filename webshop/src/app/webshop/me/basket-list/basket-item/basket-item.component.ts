@@ -7,6 +7,7 @@ import {MerchandiseService} from "../../../../shared/modelsAndTheirServices/merc
 import {Merchandise} from "../../../../shared/modelsAndTheirServices/merchandise";
 import {NgForm} from "@angular/forms";
 import {BasketService} from "../../../../shared/modelsAndTheirServices/basket.service";
+import {Animator} from "../../../../shared/modelsAndTheirServices/animator";
 
 @Component({
   selector: 'app-basket-item',
@@ -22,45 +23,60 @@ import {BasketService} from "../../../../shared/modelsAndTheirServices/basket.se
 export class BasketItemComponent implements OnInit {
 
   @Input() basket: Basket;
-  @Output() totalPriceUpdate = new EventEmitter<boolean>();
-  private item;
-  private itemObject: Merchandise;
-  itemAmount: number;
-  private readyToDisplay = false;
+  @Output() basketUpdate = new EventEmitter<boolean>();
+  private merchandiseObservable;
+  private merchandise: Merchandise;
+  private merchandiseAmount: number;
+  private componentIsReadyToDisplay = false;
 
-  constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private itemService: MerchandiseService, private basketService: BasketService) { }
+  constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private merchandiseService: MerchandiseService, private basketService: BasketService) { }
 
   ngOnInit() {
-    this.item = this.itemService.getOne(this.basket.getBasketItemID());
-    this.getAll();
-    this.itemAmount = this.basket.getBasketItemAmount();
+    this.getMerchandiseObservable();
+    this.setMerchandise();
+    this.setMerchandiseAmount(this.basket.getBasketItemAmount());
   }
 
-  getAll(): void {
-    this.item.subscribe(data => {
-      this.itemObject = new Merchandise(data);
-      this.readyToDisplay = true;
+  getMerchandiseObservable(){
+    this.merchandiseObservable = this.merchandiseService.getOne(this.basket.getBasketItemID());
+  }
+
+  setMerchandise() {
+    this.merchandiseObservable.subscribe(data => {
+      this.merchandise = new Merchandise(data);
+      this.setComponentReadyToDisplay();
     });
   }
 
-  updateAmount() {
-    const basketData = {
+  setComponentReadyToDisplay() {
+    this.componentIsReadyToDisplay = true;
+  }
+
+  setMerchandiseAmount(merchandiseAmount) {
+    this.merchandiseAmount = merchandiseAmount;
+  }
+
+  updateMerchandiseAmount() {
+    const newBasket = new Basket(this.makeBasketDataObjectFromBasket());
+    this.basketService.update(newBasket);
+    this.emitBasketUpdate();
+  }
+
+  makeBasketDataObjectFromBasket(){
+    return {
       basketID: this.basket.getBasketID(),
       basketUserID: this.basket.getBasketUserID(),
       basketItemID: this.basket.getBasketItemID(),
-      basketItemAmount: this.basket.getBasketItemAmount()
+      basketItemAmount: this.merchandiseAmount
     };
-    const newBasket = new Basket(basketData);
-    this.basketService.update(newBasket);
-    this.updateTotalPrice();
   }
 
   removeBasket() {
     this.basketService.delete(this.basket.getBasketID());
-    this.updateTotalPrice();
+    this.emitBasketUpdate();
   }
 
-  updateTotalPrice() {
-    this.totalPriceUpdate.emit(true);
+  emitBasketUpdate() {
+    this.basketUpdate.emit(true);
   }
 }
