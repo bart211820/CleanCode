@@ -117,7 +117,7 @@ export class BasketService {
 
   private updateCurrentBasketAndMakeRequest(currentBasketData){
     const basket = new Basket(currentBasketData[0]);
-    basket.addOneMoreToAmount();
+    basket.addOneToAmount();
     this.update(basket);
   }
 

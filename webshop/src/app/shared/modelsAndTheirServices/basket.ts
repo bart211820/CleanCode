@@ -38,7 +38,7 @@ export class Basket {
     return this.basketItemAmount;
   }
 
-  public addOneMoreToAmount() {
+  public addOneToAmount() {
     this.basketItemAmount++;
   }
 }
