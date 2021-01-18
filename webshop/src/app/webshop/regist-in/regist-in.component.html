@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div id="registInBackground">
   <div id="registInContainer">
-    <app-login *ngIf="!showRegisterScreen" (newScreenShowing)="switchLoginOrRegister($event)"></app-login>
-    <app-register *ngIf="showRegisterScreen" (newScreenShowing)="switchLoginOrRegister($event)"></app-register>
+    <app-login *ngIf="!showRegisterScreen" (emitSwitchToRegisterScreen)="setShowRegisterScreen($event)"></app-login>
+    <app-register *ngIf="showRegisterScreen" (emitSwitchToLoginScreen)="setShowRegisterScreen($event)"></app-register>
   </div>
 </div>

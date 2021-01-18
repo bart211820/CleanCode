@@ -4,7 +4,6 @@ import {ApiService} from "../../../../shared/api.service";
 import {AuthorizationService} from "../../../../shared/authorization.service";
 import {Router} from "@angular/router";
 import {MerchandiseService} from "../../../../shared/modelsAndTheirServices/merchandise.service";
-import {Order} from "../../../../shared/modelsAndTheirServices/order";
 
 @Component({
   selector: 'app-order-item',

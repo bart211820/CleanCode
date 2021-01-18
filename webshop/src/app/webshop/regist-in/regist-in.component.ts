@@ -2,7 +2,6 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {UserService} from "../../shared/modelsAndTheirServices/user.service";
 import {ApiService} from "../../shared/api.service";
 import {AuthorizationService} from "../../shared/authorization.service";
-import {User} from "../../shared/modelsAndTheirServices/user";
 import {Router} from "@angular/router";
 
 @Component({
@@ -32,7 +31,7 @@ export class RegistInComponent implements OnInit {
     }
   }
 
-  switchLoginOrRegister(registering: boolean) {
+  setShowRegisterScreen(registering: boolean) {
     this.showRegisterScreen = registering;
   }
 

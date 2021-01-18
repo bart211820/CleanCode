@@ -22,7 +22,7 @@ export class RegisterComponent {
   private password: String;
   private postcode: String;
   private streetnumber: String;
-  @Output() newScreenShowing = new EventEmitter<boolean>();
+  @Output() emitSwitchToLoginScreen = new EventEmitter<boolean>();
 
   constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private userService: UserService) { }
 
@@ -44,7 +44,7 @@ export class RegisterComponent {
   }
 
   switchToLogin() {
-    this.newScreenShowing.emit(false);
+    this.emitSwitchToLoginScreen.emit(false);
   }
 
 }

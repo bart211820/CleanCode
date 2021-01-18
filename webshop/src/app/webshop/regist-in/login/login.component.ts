@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   private email: String;
   private password: String;
-  @Output() newScreenShowing = new EventEmitter<boolean>();
+  @Output() emitSwitchToRegisterScreen = new EventEmitter<boolean>();
 
   constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private userService: UserService) { }
 
@@ -47,6 +47,6 @@ export class LoginComponent implements OnInit {
   }
 
   switchToRegistering() {
-    this.newScreenShowing.emit(true);
+    this.emitSwitchToRegisterScreen.emit(true);
   }
 }
