@@ -1,4 +1,4 @@
 <h2>Your orders:</h2>
-<div class="itemsHolder" *ngIf="readyToDisplay">
-  <app-order-item *ngFor="let thisOrder of orderList" [order]="thisOrder"></app-order-item>
+<div class="itemsHolder" *ngIf="componentIsReadyToDisplay">
+  <app-order-item *ngFor="let thisOrder of orders" [order]="thisOrder"></app-order-item>
 </div>

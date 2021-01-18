@@ -8,7 +8,6 @@ import {Merchandise} from "../../../shared/modelsAndTheirServices/merchandise";
 import {MerchandiseService} from "../../../shared/modelsAndTheirServices/merchandise.service";
 import {OrderService} from "../../../shared/modelsAndTheirServices/order.service";
 import {Order} from "../../../shared/modelsAndTheirServices/order";
-import {Animator} from "../../../shared/modelsAndTheirServices/animator";
 
 @Component({
   selector: 'app-basket-list',

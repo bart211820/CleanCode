@@ -1,12 +1,12 @@
-<div class="itemContainer" *ngIf="readyToDisplay">
+<div class="itemContainer" *ngIf="componentIsReadyToDisplay">
   <div class="itemImageContainer">
-    <img src="{{ itemObject.getMerchandiseImage() }}" alt="{{ itemObject.getMerchandiseName() }}">
+    <img src="{{ merchandise.getMerchandiseImage() }}" alt="{{ merchandise.getMerchandiseName() }}">
   </div>
   <div class="itemNameContainer">
-    {{ itemObject.getMerchandiseName() }}
+    {{ merchandise.getMerchandiseName() }}
   </div>
   <div class="itemPriceContainer">
-    &euro; {{ itemObject.getMerchandisePrice() }} (per Unit)
+    &euro; {{ merchandise.getMerchandisePrice() }} (per Unit)
   </div>
   <div class="itemAmountContainer">
     x{{ order.getOrderItemAmount() }}

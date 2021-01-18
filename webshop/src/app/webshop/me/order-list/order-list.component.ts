@@ -18,25 +18,40 @@ import {Order} from "../../../shared/modelsAndTheirServices/order";
 export class OrderListComponent implements OnInit {
 
   @Input() userID;
-  private orders;
-  private orderList = [];
-  private readyToDisplay = false;
+  private ordersObservable;
+  private orders = [];
+  private componentIsReadyToDisplay = false;
 
   constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private orderService: OrderService) { }
 
   ngOnInit() {
-    this.orderList = [];
-    this.orders = this.orderService.getFromUser(this.userID);
-    this.getAllOrders();
+    this.clearOrders();
+    this.getOrderObservable();
+    this.fillOrders();
   }
 
-  getAllOrders(): void {
-    this.orders.subscribe(data => {
+  clearOrders() {
+    this.orders = [];
+  }
+
+  getOrderObservable() {
+    this.ordersObservable = this.orderService.getFromUser(this.userID);
+  }
+
+  fillOrders() {
+    this.ordersObservable.subscribe(data => {
       for(let orderData of data) {
-        this.orderList.push(new Order(orderData));
+        this.addOrderToOrders(new Order(orderData));
       }
-      this.readyToDisplay = true;
+      this.setComponentReadyToDisplay();
     });
   }
 
+  addOrderToOrders(order) {
+    this.orders.push(order);
+  }
+
+  setComponentReadyToDisplay() {
+    this.componentIsReadyToDisplay = true;
+  }
 }

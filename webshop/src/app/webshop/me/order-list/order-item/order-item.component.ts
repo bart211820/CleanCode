@@ -4,6 +4,7 @@ import {ApiService} from "../../../../shared/api.service";
 import {AuthorizationService} from "../../../../shared/authorization.service";
 import {Router} from "@angular/router";
 import {MerchandiseService} from "../../../../shared/modelsAndTheirServices/merchandise.service";
+import {Order} from "../../../../shared/modelsAndTheirServices/order";
 
 @Component({
   selector: 'app-order-item',
@@ -18,22 +19,30 @@ import {MerchandiseService} from "../../../../shared/modelsAndTheirServices/merc
 export class OrderItemComponent implements OnInit {
 
   @Input() order;
-  private item;
-  private itemObject: Merchandise;
-  private readyToDisplay = false;
+  private merchandiseObservable;
+  private merchandise: Merchandise;
+  private componentIsReadyToDisplay = false;
 
-  constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private itemService: MerchandiseService) { }
+  constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private merchandiseService: MerchandiseService) { }
 
   ngOnInit() {
-    this.item = this.itemService.getOne(this.order.getOrderItemID());
-    this.getAll();
+    this.getMerchandiseObservable();
+    this.setMerchandise();
   }
 
-  getAll(): void {
-    this.item.subscribe(data => {
-      this.itemObject = new Merchandise(data);
-      this.readyToDisplay = true;
+  getMerchandiseObservable() {
+    this.merchandiseObservable = this.merchandiseService.getOne(this.order.getOrderItemID());
+  }
+
+  setMerchandise() {
+    this.merchandiseObservable.subscribe(data => {
+      this.merchandise = new Merchandise(data);
+      this.setComponentReadyToDisplay();
     });
+  }
+
+  setComponentReadyToDisplay() {
+    this.componentIsReadyToDisplay = true;
   }
 
 }
