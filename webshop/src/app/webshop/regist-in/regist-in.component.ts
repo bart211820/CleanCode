@@ -17,7 +17,7 @@ import {Router} from "@angular/router";
 })
 export class RegistInComponent implements OnInit {
 
-  private showRegisterScreen = false;
+  private showingRegisterScreen = false;
 
   constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private userService: UserService) { }
 
@@ -31,8 +31,8 @@ export class RegistInComponent implements OnInit {
     }
   }
 
-  setShowRegisterScreen(registering: boolean) {
-    this.showRegisterScreen = registering;
+  setShowingRegisterScreen(registering: boolean) {
+    this.showingRegisterScreen = registering;
   }
 
 }
