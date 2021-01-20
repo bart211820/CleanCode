@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, } from '@angular/core';
 import {UserService} from "../../shared/modelsAndTheirServices/user.service";
 import {ApiService} from "../../shared/api.service";
 import {AuthorizationService} from "../../shared/authorization.service";
@@ -13,13 +13,9 @@ import {AuthorizationService} from "../../shared/authorization.service";
     UserService
   ]
 })
-export class AdminHeaderComponent implements OnInit {
+export class AdminHeaderComponent {
 
   constructor(private userService: UserService) { }
-
-  ngOnInit() {
-
-  }
 
   logOut(){
     this.userService.logout();

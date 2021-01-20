@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {ApiService} from "../../shared/api.service";
 import {AuthorizationService} from "../../shared/authorization.service";
 import {Router} from "@angular/router";
@@ -15,21 +15,23 @@ import {User} from "../../shared/modelsAndTheirServices/user";
     UserService
   ]
 })
-export class MakeAdminComponent implements OnInit {
+export class MakeAdminComponent {
 
-  fullName: String;
-  postcode: String;
-  streetnumber: String;
-  email: String;
-  password: String;
+  private fullName: String;
+  private postcode: String;
+  private streetnumber: String;
+  private email: String;
+  private password: String;
 
   constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private userService: UserService) { }
 
-  ngOnInit() {
+  makeAdminAccount() {
+    const user = new User(this.makeAdminUserDataObject());
+    this.userService.register(user);
   }
 
-  makeAccount() {
-    const userData = {
+  makeAdminUserDataObject() {
+    return {
       userID: undefined,
       fullName: this.fullName,
       postcode: this.postcode,
@@ -38,8 +40,6 @@ export class MakeAdminComponent implements OnInit {
       password: this.password,
       roles: ["GUEST", "ADMIN"]
     };
-    const user = new User(userData);
-    this.userService.register(user);
   }
 
 }

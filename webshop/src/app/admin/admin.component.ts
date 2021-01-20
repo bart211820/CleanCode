@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 
 @Component({
   selector: 'app-admin',
@@ -6,11 +6,8 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
   styleUrls: ['./admin.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class AdminComponent implements OnInit {
+export class AdminComponent {
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
 }
