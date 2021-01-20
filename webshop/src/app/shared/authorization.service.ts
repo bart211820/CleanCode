@@ -24,22 +24,6 @@ export class AuthorizationService {
     this.password = password;
   }
 
-  public storeAuthorization(authenticator: object) {
-    this.authenticator = authenticator;
-
-    const authorization = {
-      login: this.login,
-      password: this.password,
-      authenticator: this.authenticator
-    };
-
-    const authorizationString = JSON.stringify(authorization);
-
-    localStorage.setItem('authorization', authorizationString);
-
-    this.authorized$.next(true);
-  }
-
   private restoreAuthorization(): void {
     let authorizationString = sessionStorage.getItem('authorization');
 
@@ -98,4 +82,44 @@ export class AuthorizationService {
       return false;
     }
   }
+
+
+
+  // De functie "storeAuthorization" is gebruikt voor het "Refactoring van Fowler" onderdeel van het verslag
+  // en is daarom niet gerefactored in de codebase. Onder de functie staat een voorbeeld van hoe de functie
+  // eruit had gezien als deze wel gerefactord was.
+
+  public storeAuthorization(authenticator: object) {
+    this.authenticator = authenticator;
+
+    const authorization = {
+      login: this.login,
+      password: this.password,
+      authenticator: this.authenticator
+    };
+
+    const authorizationString = JSON.stringify(authorization);
+
+    localStorage.setItem('authorization', authorizationString);
+
+    this.authorized$.next(true);
+  }
+
+  // public storeAuthorization(authenticator: object) {
+  //   this.authenticator = authenticator;
+  //
+  //   const authorizationString = this.constructAuthorizationString();
+  //   localStorage.setItem('authorization', authorizationString);
+  //
+  //   this.authorized$.next(true);
+  // }
+  //
+  // public constructAuthorizationString() {
+  //   const authorization = {
+  //     login: this.login,
+  //     password: this.password,
+  //     authenticator: this.authenticator
+  //   };
+  //   return JSON.stringify(authorization);
+  // }
 }
