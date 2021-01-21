@@ -90,53 +90,53 @@ public class ItemDAO {
 
     public void createItem(String itemName, String itemDescription, double itemPrice, String itemImage, String itemType, int itemAnimatorID) {
         try {
-            query = "INSERT INTO Merchandise (itemName, itemDescription, itemPrice, itemImage, itemType, itemAnimatorID) VALUES (?, ?, ?, ?, ?, ?);";
-
-            statement = database.prepareStatement(query);
-            statement.setString(1, itemName);
-            statement.setString(2, itemDescription);
-            statement.setDouble(3, itemPrice);
-            statement.setString(4, itemImage);
-            statement.setString(5, itemType);
-            statement.setInt(5, itemAnimatorID);
-
-            database.update(statement);
+            query = "INSERT INTO Merchandise (itemName, itemDescription, itemPrice, itemImage, itemType, itemAnimatorID) VALUES (" + itemName + ", " + itemDescription + ", " + itemPrice + ", " + itemImage + ", " + itemType + ", " + itemAnimatorID + ");";
+            System.out.println("\"Created\" item with: " + query);
+//            statement = database.prepareStatement(query);
+//            statement.setString(1, itemName);
+//            statement.setString(2, itemDescription);
+//            statement.setDouble(3, itemPrice);
+//            statement.setString(4, itemImage);
+//            statement.setString(5, itemType);
+//            statement.setInt(5, itemAnimatorID);
+//
+//            database.update(statement);
         }
-        catch (SQLException e) {
+        catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     public void updateItem(String itemName, String itemDescription, double itemPrice, String itemImage, String itemType, int itemAnimatorID, int itemID) {
         try {
-            query = "UPDATE Merchandise itemName = ?, itemDescription = ?, itemPrice = ?, itemImage = ?, itemType = ?, itemAnimatorID = ? WHERE itemID = ?";
-
-            statement = database.prepareStatement(query);
-            statement.setString(1, itemName);
-            statement.setString(2, itemDescription);
-            statement.setDouble(3, itemPrice);
-            statement.setString(4, itemImage);
-            statement.setString(5, itemType);
-            statement.setInt(4, itemAnimatorID);
-            statement.setInt(5, itemID);
-
-            database.update(statement);
+            query = "UPDATE Merchandise itemName = " + itemName + ", itemDescription = " + itemDescription + ", itemPrice = " + itemPrice + ", itemImage = " + itemImage + ", itemType = " + itemType + ", itemAnimatorID = " + itemAnimatorID + " WHERE itemID = " + itemID;
+            System.out.println("\"Updated\" item with: " + query);
+//            statement = database.prepareStatement(query);
+//            statement.setString(1, itemName);
+//            statement.setString(2, itemDescription);
+//            statement.setDouble(3, itemPrice);
+//            statement.setString(4, itemImage);
+//            statement.setString(5, itemType);
+//            statement.setInt(4, itemAnimatorID);
+//            statement.setInt(5, itemID);
+//
+//            database.update(statement);
         }
-        catch (SQLException e) {
+        catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     public void deleteItem(int itemID) {
         try {
-            query = "DELETE FROM item WHERE itemID = ?;";
-
-            statement = database.prepareStatement(query);
-            statement.setInt(1, itemID);
+            query = "DELETE FROM item WHERE itemID = " + itemID + ";";
+            System.out.println("\"Deleted\" item with: " + query);
+//            statement = database.prepareStatement(query);
+//            statement.setInt(1, itemID);
 
             database.update(statement);
         }
-        catch (SQLException e) {
+        catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

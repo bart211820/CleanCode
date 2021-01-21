@@ -20,42 +20,54 @@ import {Merchandise} from "../../../shared/modelsAndTheirServices/merchandise";
 })
 export class AddItemComponent implements OnInit {
 
-  private itemName;
-  private itemDescription;
-  private itemPrice;
-  private itemImage;
-  private itemType;
-  private itemAnimatorID;
+  private merchandiseName;
+  private merchandiseDescription;
+  private merchandisePrice;
+  private merchandiseImage;
+  private merchandiseType;
+  private merchandiseAnimatorID;
 
-  private animators;
-  private animatorList = [];
+  private animatorObservable;
+  private animators = [];
 
-  constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private itemService: MerchandiseService, private animatorService: AnimatorService) { }
+  constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private merchandiseService: MerchandiseService, private animatorService: AnimatorService) { }
 
   ngOnInit() {
-    this.animators = this.animatorService.getAll();
-    this.getAnimators();
+    this.getAnimatorObservable();
+    this.fillAnimators();
   }
 
-  getAnimators() {
-    this.animators.subscribe(data => {
+  getAnimatorObservable() {
+    this.animatorObservable = this.animatorService.getAll();
+  }
+
+  fillAnimators() {
+    this.animatorObservable.subscribe(data => {
       for(let animatorData of data) {
-        this.animatorList.push(new Animator(animatorData));
+        this.addAnimatorToAnimators(new Animator(animatorData));
       }
     });
   }
 
+  addAnimatorToAnimators(animator){
+    this.animators.push(animator);
+  }
+
   makeItem() {
-    const itemData = {
+    const newMerchandise = new Merchandise(this.createMerchandiseDataObject());
+    this.merchandiseService.create(newMerchandise);
+  }
+
+  createMerchandiseDataObject() {
+    return {
       itemID: undefined,
-      itemName: this.itemName,
-      itemDescription: this.itemDescription,
-      itemPrice: this.itemPrice,
-      itemImage: this.itemImage,
-      itemType: this.itemType,
-      itemAnimatorID: this.itemAnimatorID
+      itemName: this.merchandiseName,
+      itemDescription: this.merchandiseDescription,
+      itemPrice: this.merchandisePrice,
+      itemImage: this.merchandiseImage,
+      itemType: this.merchandiseType,
+      itemAnimatorID: this.merchandiseAnimatorID
     };
-    this.itemService.create(new Merchandise(itemData));
   }
 
 }

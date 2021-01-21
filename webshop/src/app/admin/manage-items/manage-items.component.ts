@@ -6,6 +6,7 @@ import {MerchandiseService} from "../../shared/modelsAndTheirServices/merchandis
 import {Order} from "../../shared/modelsAndTheirServices/order";
 import {Merchandise} from "../../shared/modelsAndTheirServices/merchandise";
 import {OrderService} from "../../shared/modelsAndTheirServices/order.service";
+import {Animator} from "../../shared/modelsAndTheirServices/animator";
 
 @Component({
   selector: 'app-manage-items',
@@ -19,28 +20,44 @@ import {OrderService} from "../../shared/modelsAndTheirServices/order.service";
 })
 export class ManageItemsComponent implements OnInit {
 
-  private items;
-  private itemList = [];
-  private readyToDisplay = false;
+  private merchandiseObservable;
+  private merchandises = [];
+  private componentIsReadyToDisplay = false;
 
-  constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private itemService: MerchandiseService) { }
+  constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private merchandiseService: MerchandiseService) { }
 
   ngOnInit() {
-    this.getItemsFromApi();
+    this.getMerchandisesFromApi();
   }
 
-  getItemsFromApi() {
-    this.itemList = [];
-    this.items = this.itemService.getAll();
-    this.getItems();
+  getMerchandisesFromApi() {
+    this.clearMerchandises();
+    this.getMerchandiseObservable();
+    this.fillMerchandises();
   }
 
-  getItems() {
-    this.items.subscribe(data => {
-      for(let itemData of data) {
-        this.itemList.push(new Merchandise(itemData));
+  clearMerchandises() {
+    this.merchandises = [];
+  }
+
+  getMerchandiseObservable() {
+    this.merchandiseObservable = this.merchandiseService.getAll();
+  }
+
+  fillMerchandises() {
+    this.merchandiseObservable.subscribe(data => {
+      for(let merchandiseData of data) {
+        this.addMerchandiseToMerchandises(new Merchandise(merchandiseData));
       }
-      this.readyToDisplay = true;
+      this.setComponentReadyToDisplay();
     });
+  }
+
+  addMerchandiseToMerchandises(merchandise){
+    this.merchandises.push(merchandise);
+  }
+
+  setComponentReadyToDisplay() {
+    this.componentIsReadyToDisplay = true;
   }
 }

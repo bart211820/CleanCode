@@ -21,60 +21,79 @@ import {Basket} from "../../../shared/modelsAndTheirServices/basket";
 })
 export class ItemRowComponent implements OnInit {
 
-  @Input() item;
-  private itemName;
-  private itemDescription;
-  private itemPrice;
-  private itemImage;
-  private itemType;
-  private itemAnimatorID;
+  @Input() merchandise;
+  private merchandiseName;
+  private merchandiseDescription;
+  private merchandisePrice;
+  private merchandiseImage;
+  private merchandiseType;
+  private merchandiseAnimatorID;
 
-  private animators;
-  private animatorList = [];
-  private readyToDisplay = false;
+  private animatorObservable;
+  private animators = [];
+  private componentIsReadyToDisplay = false;
 
-  constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private itemService: MerchandiseService, private animatorService: AnimatorService) { }
+  constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private merchandiseService: MerchandiseService, private animatorService: AnimatorService) { }
 
   ngOnInit() {
-    this.animatorList = [];
-    this.fillAttributes();
-    this.animators = this.animatorService.getAll();
-    this.getAnimators();
+    this.fillTextBoxes();
+    this.clearAnimatorList();
+    this.getAnimatorObservable();
+    this.fillAnimators();
   }
 
-  fillAttributes() {
-    this.itemName = this.item.getItemName();
-    this.itemDescription = this.item.getItemDescription();
-    this.itemPrice = this.item.getItemPrice();
-    this.itemImage = this.item.getItemImage();
-    this.itemType = this.item.getItemType();
-    this.itemAnimatorID = this.item.getItemAnimatorId();
+  fillTextBoxes() {
+    this.merchandiseName = this.merchandise.getMerchandiseName();
+    this.merchandiseDescription = this.merchandise.getMerchandiseDescription();
+    this.merchandisePrice = this.merchandise.getMerchandisePrice();
+    this.merchandiseImage = this.merchandise.getMerchandiseImage();
+    this.merchandiseType = this.merchandise.getMerchandiseType();
+    this.merchandiseAnimatorID = this.merchandise.getMerchandiseAnimatorId();
   }
 
-  getAnimators() {
-    this.animators.subscribe(data => {
+  clearAnimatorList() {
+    this.animators = [];
+  }
+
+  getAnimatorObservable() {
+    this.animatorObservable = this.animatorService.getAll();
+  }
+
+  fillAnimators() {
+    this.animatorObservable.subscribe(data => {
       for(let animatorData of data) {
-        this.animatorList.push(new Animator(animatorData));
+        this.addAnimatorToAnimators(new Animator(animatorData));
       }
-      this.readyToDisplay = true;
+      this.setComponentReadyToDisplay();
     });
   }
 
+  addAnimatorToAnimators(animator){
+    this.animators.push(animator);
+  }
+
+  setComponentReadyToDisplay() {
+    this.componentIsReadyToDisplay = true;
+  }
+
   editItem() {
-    const itemData = {
-      itemID: this.item.getItemID(),
-      itemName: this.itemName,
-      itemDescription: this.itemDescription,
-      itemPrice: this.itemPrice,
-      itemImage: this.itemImage,
-      itemType: this.itemType,
-      itemAnimatorID: this.itemAnimatorID
+    const updatedMerchandise = new Merchandise(this.createMerchandiseDataObject());
+    this.merchandiseService.update(updatedMerchandise);
+  }
+
+  createMerchandiseDataObject() {
+    return {
+      itemID: this.merchandise.getMerchandiseID(),
+      itemName: this.merchandiseName,
+      itemDescription: this.merchandiseDescription,
+      itemPrice: this.merchandisePrice,
+      itemImage: this.merchandiseImage,
+      itemType: this.merchandiseType,
+      itemAnimatorID: this.merchandiseAnimatorID
     };
-    const updatedItem = new Merchandise(itemData);
-    this.itemService.update(updatedItem);
   }
 
   deleteItem() {
-    this.itemService.delete(this.item.getItemID());
+    this.merchandiseService.delete(this.merchandise.getMerchandiseID());
   }
 }

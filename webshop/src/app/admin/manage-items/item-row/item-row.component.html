@@ -1,12 +1,12 @@
 <div class="itemRow">
   <form (ngSubmit)="editItem(f)" #f="ngForm">
-    <input type="text" name="itemName" [(ngModel)]="itemName" class="nameBox">
-    <input type="text" name="itemDescription" [(ngModel)]="itemDescription" class="descriptionBox">
-    <input type="number" name="itemPrice" [(ngModel)]="itemPrice" class="priceBox">
-    <input type="text" name="itemImage" [(ngModel)]="itemImage" class="imageBox">
-    <input type="text" name="itemType" [(ngModel)]="itemType" class="typeBox">
-    <select name="itemAnimatorID" [(ngModel)]="itemAnimatorID">
-      <option *ngFor="let animator of animatorList" value="{{ animator.getAnimatorID() }}">{{ animator.getAnimatorName() }}</option>
+    <input type="text" name="itemName" [(ngModel)]="merchandiseName" class="nameBox">
+    <input type="text" name="itemDescription" [(ngModel)]="merchandiseDescription" class="descriptionBox">
+    <input type="number" name="itemPrice" [(ngModel)]="merchandisePrice" class="priceBox">
+    <input type="text" name="itemImage" [(ngModel)]="merchandiseImage" class="imageBox">
+    <input type="text" name="itemType" [(ngModel)]="merchandiseType" class="typeBox">
+    <select name="itemAnimatorID" [(ngModel)]="merchandiseAnimatorID">
+      <option *ngFor="let animator of animators" value="{{ animator.getAnimatorID() }}">{{ animator.getAnimatorName() }}</option>
     </select>
     <button value="Update" class="yamsButton" type="submit">Update</button>
   </form>

@@ -2,28 +2,28 @@
 <form (ngSubmit)="makeItem(f)" #f="ngForm" class="createForm">
   <div class="formRow">
     <label>Name:</label>
-    <input type="text" [(ngModel)]="itemName" name="itemName">
+    <input type="text" [(ngModel)]="merchandiseName" name="itemName">
   </div>
   <div class="formRow">
     <label>Description:</label>
-    <input type="text" [(ngModel)]="itemDescription" name="itemDescription">
+    <input type="text" [(ngModel)]="merchandiseDescription" name="itemDescription">
   </div>
   <div class="formRow">
     <label>Price:</label>
-    <input type="number" [(ngModel)]="itemPrice" name="itemPrice">
+    <input type="number" [(ngModel)]="merchandisePrice" name="itemPrice">
   </div>
   <div class="formRow">
     <label>Image:</label>
-    <input type="text" [(ngModel)]="itemImage" name="itemImage">
+    <input type="text" [(ngModel)]="merchandiseImage" name="itemImage">
   </div>
   <div class="formRow">
     <label>Type:</label>
-    <input type="text" [(ngModel)]="itemType" name="itemType">
+    <input type="text" [(ngModel)]="merchandiseType" name="itemType">
   </div>
   <div class="formRow">
     <label>Animator:</label>
-    <select name="itemAnimatorID" [(ngModel)]="itemAnimatorID">
-      <option *ngFor="let animator of animatorList" value="{{ animator.getAnimatorID() }}">{{ animator.getAnimatorName() }}</option>
+    <select name="itemAnimatorID" [(ngModel)]="merchandiseAnimatorID">
+      <option *ngFor="let animator of animators" value="{{ animator.getAnimatorID() }}">{{ animator.getAnimatorName() }}</option>
     </select>
   </div>
   <button value="Create item" class="yamsButton" type="submit">Create item</button>

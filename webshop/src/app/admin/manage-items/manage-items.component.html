@@ -1,5 +1,5 @@
 <h2>All items:</h2>
-<div class="itemsHolder" *ngIf="readyToDisplay">
-  <app-item-row *ngFor="let thisItem of itemList" [item]="thisItem"></app-item-row>
+<div class="itemsHolder" *ngIf="componentIsReadyToDisplay">
+  <app-item-row *ngFor="let thisMerchandise of merchandises" [merchandise]="thisMerchandise"></app-item-row>
 </div>
 <app-add-item></app-add-item>

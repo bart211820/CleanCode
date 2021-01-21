@@ -19,7 +19,7 @@ export class ManageAnimatorsComponent implements OnInit {
 
   private animatorObservable;
   private animators = [];
-  private pageIsReadyToDisplay = false;
+  private componentIsReadyToDisplay = false;
 
   constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private animatorService: AnimatorService) { }
 
@@ -43,10 +43,10 @@ export class ManageAnimatorsComponent implements OnInit {
 
   fillAnimators() {
     this.animatorObservable.subscribe(data => {
-      for(let animatorsData of data) {
-        this.addAnimatorToAnimators(new Animator(animatorsData));
+      for(let animatorData of data) {
+        this.addAnimatorToAnimators(new Animator(animatorData));
       }
-      this.setPageReadyToDisplay();
+      this.setComponentReadyToDisplay();
     });
   }
 
@@ -54,7 +54,7 @@ export class ManageAnimatorsComponent implements OnInit {
     this.animators.push(animator);
   }
 
-  setPageReadyToDisplay() {
-    this.pageIsReadyToDisplay = true;
+  setComponentReadyToDisplay() {
+    this.componentIsReadyToDisplay = true;
   }
 }
