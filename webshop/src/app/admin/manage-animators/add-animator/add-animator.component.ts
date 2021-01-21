@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {ApiService} from "../../../shared/api.service";
 import {AuthorizationService} from "../../../shared/authorization.service";
 import {AnimatorService} from "../../../shared/modelsAndTheirServices/animator.service";
@@ -15,7 +15,7 @@ import {Animator} from "../../../shared/modelsAndTheirServices/animator";
     AnimatorService
   ]
 })
-export class AddAnimatorComponent implements OnInit {
+export class AddAnimatorComponent {
 
   private animatorName;
   private animatorLink;
@@ -23,17 +23,18 @@ export class AddAnimatorComponent implements OnInit {
 
   constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private animatorService: AnimatorService) { }
 
-  ngOnInit() {
+  makeAnimator() {
+    const newAnimator = new Animator(this.createAnimatorDataObject());
+    this.animatorService.create(newAnimator);
   }
 
-  makeAnimator() {
-    const animatorData = {
+  createAnimatorDataObject() {
+    return {
       animatorID: undefined,
       animatorName: this.animatorName,
       animatorLink: this.animatorLink,
       animatorImage: this.animatorImage
     };
-    this.animatorService.create(new Animator(animatorData));
   }
 
 }

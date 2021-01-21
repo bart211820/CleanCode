@@ -17,29 +17,31 @@ export class AnimatorRowComponent implements OnInit {
   private animatorName;
   private animatorLink;
   private animatorImage;
-  private readyToDisplay = false;
 
   constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private animatorService: AnimatorService) { }
 
   ngOnInit() {
-    this.fillAttributes();
+    this.fillTextBoxes();
   }
 
-  fillAttributes() {
+  fillTextBoxes() {
     this.animatorName = this.animator.getAnimatorName();
     this.animatorLink = this.animator.getAnimatorLink();
     this.animatorImage = this.animator.getAnimatorImage();
   }
 
   editAnimator() {
-    const animatorData = {
+    const updatedAnimator = new Animator(this.createAnimatorDataObject());
+    this.animatorService.update(updatedAnimator);
+  }
+
+  createAnimatorDataObject() {
+    return {
       animatorID: this.animator.getAnimatorID(),
       animatorName: this.animatorName,
       animatorLink: this.animatorLink,
       animatorImage: this.animatorImage
     };
-    const updatedAnimator = new Animator(animatorData);
-    this.animatorService.update(updatedAnimator);
   }
 
   deleteAnimator() {

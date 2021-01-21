@@ -17,9 +17,9 @@ import {Animator} from "../../shared/modelsAndTheirServices/animator";
 })
 export class ManageAnimatorsComponent implements OnInit {
 
-  private animators;
-  private animatorList = [];
-  private readyToDisplay = false;
+  private animatorObservable;
+  private animators = [];
+  private pageIsReadyToDisplay = false;
 
   constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private animatorService: AnimatorService) { }
 
@@ -28,18 +28,33 @@ export class ManageAnimatorsComponent implements OnInit {
   }
 
   getAnimatorsFromApi() {
-    this.animatorList = [];
-    this.animators = this.animatorService.getAll();
-    this.getAnimators();
+    this.clearAnimators();
+    this.getAnimatorObservable();
+    this.fillAnimators();
   }
 
-  getAnimators() {
-    this.animators.subscribe(data => {
-      for(let animatorData of data) {
-        this.animatorList.push(new Animator(animatorData));
+  clearAnimators() {
+    this.animators = [];
+  }
+
+  getAnimatorObservable() {
+    this.animatorObservable = this.animatorService.getAll();
+  }
+
+  fillAnimators() {
+    this.animatorObservable.subscribe(data => {
+      for(let animatorsData of data) {
+        this.addAnimatorToAnimators(new Animator(animatorsData));
       }
-      this.readyToDisplay = true;
+      this.setPageReadyToDisplay();
     });
   }
 
+  addAnimatorToAnimators(animator){
+    this.animators.push(animator);
+  }
+
+  setPageReadyToDisplay() {
+    this.pageIsReadyToDisplay = true;
+  }
 }

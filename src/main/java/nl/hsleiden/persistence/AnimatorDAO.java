@@ -86,47 +86,48 @@ public class AnimatorDAO {
 
     public void createAnimator(String animatorName, String animatorLink, String animatorImage) {
         try {
-            query = "INSERT INTO Animator (animatorName, animatorLink, animatorImage) VALUES (?, ?, ?);";
+            query = "INSERT INTO Animator (animatorName, animatorLink, animatorImage) VALUES (" + animatorName + ", " + animatorLink + ", " + animatorImage + ");";
+            System.out.println("\"Created\" animator with: " + query);
 
-            statement = database.prepareStatement(query);
-            statement.setString(1, animatorName);
-            statement.setString(2, animatorLink);
-            statement.setString(3, animatorImage);
-
-            database.update(statement);
+//            statement = database.prepareStatement(query);
+//            statement.setString(1, animatorName);
+//            statement.setString(2, animatorLink);
+//            statement.setString(3, animatorImage);
+//
+//            database.update(statement);
         }
-        catch (SQLException e) {
+        catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     public void updateAnimator(String animatorName, String animatorLink, String animatorImage, int animatorID) {
         try {
-            query = "UPDATE Animator animatorName = ?, animatorLink = ?, animatorImage = ? WHERE animatorID = ?";
-
-            statement = database.prepareStatement(query);
-            statement.setString(1, animatorName);
-            statement.setString(2, animatorLink);
-            statement.setString(3, animatorImage);
-            statement.setInt(4, animatorID);
-
-            database.update(statement);
+            query = "UPDATE Animator animatorName = " + animatorName + ", animatorLink = " + animatorLink + ", animatorImage = " + animatorImage + " WHERE animatorID = " + animatorID;
+            System.out.println("\"Updated\" animator with: " + query);
+//            statement = database.prepareStatement(query);
+//            statement.setString(1, animatorName);
+//            statement.setString(2, animatorLink);
+//            statement.setString(3, animatorImage);
+//            statement.setInt(4, animatorID);
+//
+//            database.update(statement);
         }
-        catch (SQLException e) {
+        catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     public void deleteAnimator(int animatorID) {
         try {
-            query = "DELETE FROM animator WHERE animatorID = ?;";
-
-            statement = database.prepareStatement(query);
-            statement.setInt(1, animatorID);
-
-            database.update(statement);
+            query = "DELETE FROM animator WHERE animatorID = " + animatorID + ";";
+            System.out.println("\"Deleted\" animator with: " + query);
+//            statement = database.prepareStatement(query);
+//            statement.setInt(1, animatorID);
+//
+//            database.update(statement);
         }
-        catch (SQLException e) {
+        catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
