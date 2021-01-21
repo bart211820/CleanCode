@@ -5,8 +5,6 @@ import {Subject} from 'rxjs';
 export class AuthorizationService {
   private login: string = null;
   private password: string = null;
-  // public login = 'admin';
-  // public password = 'admin';
   private authenticator: object = null;
 
   public authorized$ = new Subject<boolean>();
@@ -34,9 +32,9 @@ export class AuthorizationService {
     if (authorizationString !== null) {
       const authorization = JSON.parse(authorizationString);
 
-      this.login = authorization['login'];
-      this.password = authorization['password'];
-      this.authenticator = authorization['authenticator'];
+      this.setLogin(authorization['login']);
+      this.setPassword(authorization['password']);
+      this.setAuthenticator(authorization['authenticator']);
 
       this.authorized$.next(true);
     }
@@ -47,7 +45,6 @@ export class AuthorizationService {
     this.password = null;
     this.authenticator = null;
 
-    sessionStorage.removeItem('authorization');
     localStorage.removeItem('authorization');
 
     this.authorized$.next(false);
@@ -55,6 +52,14 @@ export class AuthorizationService {
 
   public createAuthorizationString(): string {
     return 'Basic ' + btoa(this.login + ':' + this.password);
+  }
+
+  private setLogin(login) {
+    this.login = login;
+  }
+
+  private setPassword(password) {
+    this.password = password;
   }
 
   public getAuthenticator(): Object {
