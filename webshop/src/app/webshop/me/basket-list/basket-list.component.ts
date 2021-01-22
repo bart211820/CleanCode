@@ -103,7 +103,7 @@ export class BasketListComponent implements OnInit {
   }
 
   orderEverythingInMyBasket() {
-    let deliveryDate = this.getDateOfDayIn3DaysFromNow();
+    let deliveryDate = this.getDateOfDayIn3DaysFromNow(); // Delivery date is always 3 days after today
     for(let basketToOrder of this.baskets) {
       this.makeOrderFromBasket(basketToOrder, deliveryDate);
     }

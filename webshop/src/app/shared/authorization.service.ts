@@ -51,6 +51,7 @@ export class AuthorizationService {
   }
 
   public createAuthorizationString(): string {
+    // btoa encodes a string in base-64
     return 'Basic ' + btoa(this.login + ':' + this.password);
   }
 

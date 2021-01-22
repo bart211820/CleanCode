@@ -9,6 +9,8 @@ export class Merchandise {
   private merchandiseAnimatorID;
 
   constructor(private data?) {
+    // merchandise on backend is saved as "item" and therefor the received data will have item in the
+    // property names instead of merchandise
     this.merchandiseID = data.itemID;
     this.merchandiseName = data.itemName;
     this.merchandiseDescription = data.itemDescription;
@@ -19,6 +21,8 @@ export class Merchandise {
   }
 
   public getData() {
+    // merchandise on backend is saved as "item" and therefor the property names of merchandise here
+    // have to be saved as item instead of merchandise
     const data = {
       itemID: this.merchandiseID,
       itemName: this.merchandiseName,
