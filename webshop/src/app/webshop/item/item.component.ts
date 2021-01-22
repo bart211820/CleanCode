@@ -27,7 +27,7 @@ export class ItemComponent implements OnInit {
   private animatorObservable;
   private animator: Animator;
   private merchandiseID;
-  private pageIsReadyToDisplay = false;
+  private componentIsReadyToDisplay = false;
 
   constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private merchandiseService: MerchandiseService, private animatorService: AnimatorService, private basketService: BasketService, private route: ActivatedRoute) { }
 
@@ -60,12 +60,12 @@ export class ItemComponent implements OnInit {
   getAnimatorFromObservable() {
     this.animatorObservable.subscribe(data => {
       this.animator = new Animator(data);
-      this.setPageReadyToDisplay();
+      this.setComponentReadyToDisplay();
     });
   }
 
-  setPageReadyToDisplay() {
-    this.pageIsReadyToDisplay = true;
+  setComponentReadyToDisplay() {
+    this.componentIsReadyToDisplay = true;
   }
 
   addToCard() {
