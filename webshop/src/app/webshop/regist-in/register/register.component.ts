@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {ApiService} from "../../../shared/api.service";
-import {AuthorizationService} from "../../../shared/authorization.service";
-import {Router} from "@angular/router";
-import {UserService} from "../../../shared/modelsAndTheirServices/user.service";
-import {User} from "../../../shared/modelsAndTheirServices/user";
+import {ApiService} from '../../../shared/api.service';
+import {AuthorizationService} from '../../../shared/authorization.service';
+import {Router} from '@angular/router';
+import {UserService} from '../../../shared/modelsAndTheirServices/user.service';
+import {User} from '../../../shared/modelsAndTheirServices/user';
 
 @Component({
   selector: 'app-register',
@@ -27,7 +27,7 @@ export class RegisterComponent {
   constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private userService: UserService) { }
 
   register() {
-    const userData = this.constructUserDataWithCurrentEmailAndPassword()
+    const userData = this.constructUserDataWithCurrentEmailAndPassword();
     this.userService.register(new User(userData));
   }
 
@@ -39,7 +39,7 @@ export class RegisterComponent {
       streetnumber: this.streetnumber,
       emailAddress: this.email,
       password: this.password,
-      roles: ["GUEST"]
+      roles: ['GUEST']
     };
   }
 

@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {User} from "../../shared/modelsAndTheirServices/user";
-import {Router} from "@angular/router";
-import {AuthorizationService} from "../../shared/authorization.service";
+import {Router} from '@angular/router';
+import {AuthorizationService} from '../../shared/authorization.service';
 
 @Component({
   selector: 'app-me',
@@ -20,7 +19,7 @@ export class MeComponent implements OnInit {
   }
 
   navigateToShopIfNotLoggedIn() {
-    try{
+    try {
       const session = this.authService.getSession();
       this.myUserID = session.authenticator.userID;
     } catch (e) {

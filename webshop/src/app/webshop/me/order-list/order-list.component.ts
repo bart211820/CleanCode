@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ApiService} from "../../../shared/api.service";
-import {AuthorizationService} from "../../../shared/authorization.service";
-import {Router} from "@angular/router";
-import {OrderService} from "../../../shared/modelsAndTheirServices/order.service";
-import {Order} from "../../../shared/modelsAndTheirServices/order";
+import {ApiService} from '../../../shared/api.service';
+import {AuthorizationService} from '../../../shared/authorization.service';
+import {Router} from '@angular/router';
+import {OrderService} from '../../../shared/modelsAndTheirServices/order.service';
+import {Order} from '../../../shared/modelsAndTheirServices/order';
 
 @Component({
   selector: 'app-order-list',
@@ -40,7 +40,7 @@ export class OrderListComponent implements OnInit {
 
   fillOrders() {
     this.ordersObservable.subscribe(data => {
-      for(let orderData of data) {
+      for (const orderData of data) {
         this.addOrderToOrders(new Order(orderData));
       }
       this.setComponentReadyToDisplay();

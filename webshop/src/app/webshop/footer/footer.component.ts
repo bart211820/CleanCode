@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {ApiService} from "../../shared/api.service";
-import {AuthorizationService} from "../../shared/authorization.service";
-import {AnimatorService} from "../../shared/modelsAndTheirServices/animator.service";
-import {Router} from "@angular/router";
-import {Animator} from "../../shared/modelsAndTheirServices/animator";
-import {Merchandise} from "../../shared/modelsAndTheirServices/merchandise";
+import {ApiService} from '../../shared/api.service';
+import {AuthorizationService} from '../../shared/authorization.service';
+import {AnimatorService} from '../../shared/modelsAndTheirServices/animator.service';
+import {Router} from '@angular/router';
+import {Animator} from '../../shared/modelsAndTheirServices/animator';
 
 @Component({
   selector: 'app-footer',
@@ -33,13 +32,13 @@ export class FooterComponent implements OnInit {
 
   fillAnimators() {
     this.animatorObservable.subscribe(data => {
-      for(let animatorsData of data) {
+      for (const animatorsData of data) {
         this.addAnimatorToAnimators(new Animator(animatorsData));
       }
     });
   }
 
-  addAnimatorToAnimators(animator){
+  addAnimatorToAnimators(animator) {
     this.animators.push(animator);
   }
 }

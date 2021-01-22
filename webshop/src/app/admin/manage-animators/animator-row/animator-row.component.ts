@@ -1,10 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ApiService} from "../../../shared/api.service";
-import {AuthorizationService} from "../../../shared/authorization.service";
-import {Router} from "@angular/router";
-import {AnimatorService} from "../../../shared/modelsAndTheirServices/animator.service";
-import {Merchandise} from "../../../shared/modelsAndTheirServices/merchandise";
-import {Animator} from "../../../shared/modelsAndTheirServices/animator";
+import {ApiService} from '../../../shared/api.service';
+import {AuthorizationService} from '../../../shared/authorization.service';
+import {Router} from '@angular/router';
+import {AnimatorService} from '../../../shared/modelsAndTheirServices/animator.service';
+import {Merchandise} from '../../../shared/modelsAndTheirServices/merchandise';
+import {Animator} from '../../../shared/modelsAndTheirServices/animator';
 
 @Component({
   selector: 'app-animator-row',

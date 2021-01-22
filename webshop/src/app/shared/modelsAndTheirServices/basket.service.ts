@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import {ApiService} from "../api.service";
-import {AuthorizationService} from "../authorization.service";
-import {Basket} from "./basket";
-import {Merchandise} from "./merchandise";
+import {ApiService} from '../api.service';
+import {AuthorizationService} from '../authorization.service';
+import {Basket} from './basket';
 
 @Injectable({
   providedIn: ApiService,
@@ -92,20 +91,19 @@ export class BasketService {
 
 
 
-  public addMerchandise(userID: number, merchandiseID: number): void{
+  public addMerchandise(userID: number, merchandiseID: number): void {
     const currentBasket = this.getFromUserWithItem(userID, merchandiseID);
 
     currentBasket.subscribe(data => {
-      if(data.length == 0){
+      if (data.length == 0) {
         this.makeNewBasketAndMakeRequest(userID, merchandiseID);
-      }
-      else {
+      } else {
         this.updateCurrentBasketAndMakeRequest(data);
       }
     });
   }
 
-  private makeNewBasketAndMakeRequest(userID: number, merchandiseID: number){
+  private makeNewBasketAndMakeRequest(userID: number, merchandiseID: number) {
     const basketData = {
       basketID: undefined,
       basketUserID: userID,
@@ -115,7 +113,7 @@ export class BasketService {
     this.create(new Basket(basketData));
   }
 
-  private updateCurrentBasketAndMakeRequest(currentBasketData){
+  private updateCurrentBasketAndMakeRequest(currentBasketData) {
     const basket = new Basket(currentBasketData[0]);
     basket.addOneToAmount();
     this.update(basket);

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthorizationService} from "../../shared/authorization.service";
+import {AuthorizationService} from '../../shared/authorization.service';
 
 @Component({
   selector: 'app-admin-index',

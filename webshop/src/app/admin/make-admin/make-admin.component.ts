@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import {ApiService} from "../../shared/api.service";
-import {AuthorizationService} from "../../shared/authorization.service";
-import {Router} from "@angular/router";
-import {UserService} from "../../shared/modelsAndTheirServices/user.service";
-import {User} from "../../shared/modelsAndTheirServices/user";
+import {ApiService} from '../../shared/api.service';
+import {AuthorizationService} from '../../shared/authorization.service';
+import {Router} from '@angular/router';
+import {UserService} from '../../shared/modelsAndTheirServices/user.service';
+import {User} from '../../shared/modelsAndTheirServices/user';
 
 @Component({
   selector: 'app-make-admin',
@@ -38,7 +38,7 @@ export class MakeAdminComponent {
       streetnumber: this.streetnumber,
       emailAddress: this.email,
       password: this.password,
-      roles: ["GUEST", "ADMIN"]
+      roles: ['GUEST', 'ADMIN']
     };
   }
 

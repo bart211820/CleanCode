@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ShopComponent } from './webshop/shop/shop.component';
-import { ItemComponent } from "./webshop/item/item.component";
-import { RegistInComponent } from "./webshop/regist-in/regist-in.component";
-import { MeComponent } from "./webshop/me/me.component";
-import { AdminIndexComponent } from "./admin/admin-index/admin-index.component";
-import { AdminComponent } from "./admin/admin.component";
-import { ManageItemsComponent } from "./admin/manage-items/manage-items.component";
-import { ManageAnimatorsComponent } from "./admin/manage-animators/manage-animators.component";
-import { MakeAdminComponent } from "./admin/make-admin/make-admin.component";
-import { AuthGuard } from "./auth-guard";
+import { ItemComponent } from './webshop/item/item.component';
+import { RegistInComponent } from './webshop/regist-in/regist-in.component';
+import { MeComponent } from './webshop/me/me.component';
+import { AdminIndexComponent } from './admin/admin-index/admin-index.component';
+import { AdminComponent } from './admin/admin.component';
+import { ManageItemsComponent } from './admin/manage-items/manage-items.component';
+import { ManageAnimatorsComponent } from './admin/manage-animators/manage-animators.component';
+import { MakeAdminComponent } from './admin/make-admin/make-admin.component';
+import { AuthGuard } from './auth-guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'shop', pathMatch: 'full' },

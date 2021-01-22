@@ -1,10 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ApiService} from "../../../shared/api.service";
-import {AuthorizationService} from "../../../shared/authorization.service";
-import {Router} from "@angular/router";
-import {UserService} from "../../../shared/modelsAndTheirServices/user.service";
-import {User} from "../../../shared/modelsAndTheirServices/user";
-import {Animator} from "../../../shared/modelsAndTheirServices/animator";
+import {ApiService} from '../../../shared/api.service';
+import {AuthorizationService} from '../../../shared/authorization.service';
+import {Router} from '@angular/router';
+import {UserService} from '../../../shared/modelsAndTheirServices/user.service';
+import {User} from '../../../shared/modelsAndTheirServices/user';
 
 @Component({
   selector: 'app-account',
@@ -49,7 +48,7 @@ export class AccountComponent implements OnInit {
     });
   }
 
-  fillAttributesWithObjectData(){
+  fillAttributesWithObjectData() {
     this.fullName = this.user.getFullName();
     this.emailAddress = this.user.getEmailAddress();
     this.postcode = this.user.getPostcode();
@@ -80,8 +79,8 @@ export class AccountComponent implements OnInit {
     };
   }
 
-  addNewPasswordIfANewOneIsSet(userData){
-    if(this.password !== undefined && this.password !== '') {
+  addNewPasswordIfANewOneIsSet(userData) {
+    if (this.password !== undefined && this.password !== '') {
       userData.password = this.password;
     }
     return userData;

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {ApiService} from "../../shared/api.service";
-import {Router} from "@angular/router";
-import {AuthorizationService} from "../../shared/authorization.service";
-import {Merchandise} from "../../shared/modelsAndTheirServices/merchandise";
-import {MerchandiseService} from "../../shared/modelsAndTheirServices/merchandise.service";
+import {ApiService} from '../../shared/api.service';
+import {Router} from '@angular/router';
+import {AuthorizationService} from '../../shared/authorization.service';
+import {Merchandise} from '../../shared/modelsAndTheirServices/merchandise';
+import {MerchandiseService} from '../../shared/modelsAndTheirServices/merchandise.service';
 
 @Component({
   selector: 'app-shop',
@@ -32,13 +32,13 @@ export class ShopComponent implements OnInit {
 
   fillMerchandises() {
     this.merchandiseObservable.subscribe(data => {
-      for(let merchandiseData of data) {
+      for (const merchandiseData of data) {
         this.addMerchandiseToMerchandises(new Merchandise(merchandiseData));
       }
     });
   }
 
-  addMerchandiseToMerchandises(merchandise){
+  addMerchandiseToMerchandises(merchandise) {
     this.merchandises.push(merchandise);
   }
 

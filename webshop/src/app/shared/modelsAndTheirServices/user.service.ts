@@ -1,54 +1,43 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-
-import {ApiService} from "../api.service";
-import {AuthorizationService} from "../authorization.service";
-
+import {ApiService} from '../api.service';
+import {AuthorizationService} from '../authorization.service';
 import { User } from './user';
-import {Order} from "./order";
 
 @Injectable({
   providedIn: ApiService,
 })
-export class UserService
-{
+export class UserService {
   constructor(private api: ApiService,
               private authService: AuthorizationService,
-              private router: Router)
-  {
+              private router: Router) {
 
   }
 
-  public getAll(): Observable<User[]>
-  {
+  public getAll(): Observable<User[]> {
     return this.api.get<User[]>('users');
   }
 
-  public getOne(userID: number): Observable<User[]>
-  {
+  public getOne(userID: number): Observable<User[]> {
     return this.api.get<User[]>('users/' + userID);
   }
 
-  public register(user: User): void
-  {
-    let data = user.getData();
+  public register(user: User): void {
+    const data = user.getData();
 
     this.api.post<void>('users', data).subscribe
     (
-      data =>
-      {
+      data => {
         this.login(user);
       },
-      error =>
-      {
+      error => {
         alert('Het registreren is mislukt');
       }
     );
   }
 
-  public login(user: User): void
-  {
+  public login(user: User): void {
     this.authService.setAuthorization(user.getEmailAddress(), user.getPassword());
 
     this.api.get<User>('users/me').subscribe (
@@ -63,19 +52,17 @@ export class UserService
     );
   }
 
-  public logout()
-  {
+  public logout() {
     this.authService.deleteAuthorization();
 
     this.goHome();
   }
 
-  public goHome()
-  {
+  public goHome() {
     this.router.navigate(['']);
   }
 
-  public goToPageAfterLogin(){
+  public goToPageAfterLogin() {
     const session = this.authService.getSession();
     if (session.authenticator.roles.includes('ADMIN')) {
       this.router.navigate(['/admin']);

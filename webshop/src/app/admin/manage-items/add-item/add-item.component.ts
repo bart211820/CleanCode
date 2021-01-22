@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {ApiService} from "../../../shared/api.service";
-import {AuthorizationService} from "../../../shared/authorization.service";
-import {MerchandiseService} from "../../../shared/modelsAndTheirServices/merchandise.service";
-import {AnimatorService} from "../../../shared/modelsAndTheirServices/animator.service";
-import {Router} from "@angular/router";
-import {Animator} from "../../../shared/modelsAndTheirServices/animator";
-import {Merchandise} from "../../../shared/modelsAndTheirServices/merchandise";
+import {ApiService} from '../../../shared/api.service';
+import {AuthorizationService} from '../../../shared/authorization.service';
+import {MerchandiseService} from '../../../shared/modelsAndTheirServices/merchandise.service';
+import {AnimatorService} from '../../../shared/modelsAndTheirServices/animator.service';
+import {Router} from '@angular/router';
+import {Animator} from '../../../shared/modelsAndTheirServices/animator';
+import {Merchandise} from '../../../shared/modelsAndTheirServices/merchandise';
 
 @Component({
   selector: 'app-add-item',
@@ -43,13 +43,13 @@ export class AddItemComponent implements OnInit {
 
   fillAnimators() {
     this.animatorObservable.subscribe(data => {
-      for(let animatorData of data) {
+      for (const animatorData of data) {
         this.addAnimatorToAnimators(new Animator(animatorData));
       }
     });
   }
 
-  addAnimatorToAnimators(animator){
+  addAnimatorToAnimators(animator) {
     this.animators.push(animator);
   }
 

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import {ApiService} from "../../../shared/api.service";
-import {AuthorizationService} from "../../../shared/authorization.service";
-import {AnimatorService} from "../../../shared/modelsAndTheirServices/animator.service";
-import {Router} from "@angular/router";
-import {Animator} from "../../../shared/modelsAndTheirServices/animator";
+import {ApiService} from '../../../shared/api.service';
+import {AuthorizationService} from '../../../shared/authorization.service';
+import {AnimatorService} from '../../../shared/modelsAndTheirServices/animator.service';
+import {Router} from '@angular/router';
+import {Animator} from '../../../shared/modelsAndTheirServices/animator';
 
 @Component({
   selector: 'app-add-animator',

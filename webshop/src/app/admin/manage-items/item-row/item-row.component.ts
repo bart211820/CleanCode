@@ -1,12 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ApiService} from "../../../shared/api.service";
-import {AuthorizationService} from "../../../shared/authorization.service";
-import {MerchandiseService} from "../../../shared/modelsAndTheirServices/merchandise.service";
-import {AnimatorService} from "../../../shared/modelsAndTheirServices/animator.service";
-import {Router} from "@angular/router";
-import {Merchandise} from "../../../shared/modelsAndTheirServices/merchandise";
-import {Animator} from "../../../shared/modelsAndTheirServices/animator";
-import {Basket} from "../../../shared/modelsAndTheirServices/basket";
+import {ApiService} from '../../../shared/api.service';
+import {AuthorizationService} from '../../../shared/authorization.service';
+import {MerchandiseService} from '../../../shared/modelsAndTheirServices/merchandise.service';
+import {AnimatorService} from '../../../shared/modelsAndTheirServices/animator.service';
+import {Router} from '@angular/router';
+import {Merchandise} from '../../../shared/modelsAndTheirServices/merchandise';
+import {Animator} from '../../../shared/modelsAndTheirServices/animator';
 
 @Component({
   selector: 'app-item-row',
@@ -61,14 +60,14 @@ export class ItemRowComponent implements OnInit {
 
   fillAnimators() {
     this.animatorObservable.subscribe(data => {
-      for(let animatorData of data) {
+      for (const animatorData of data) {
         this.addAnimatorToAnimators(new Animator(animatorData));
       }
       this.setComponentReadyToDisplay();
     });
   }
 
-  addAnimatorToAnimators(animator){
+  addAnimatorToAnimators(animator) {
     this.animators.push(animator);
   }
 

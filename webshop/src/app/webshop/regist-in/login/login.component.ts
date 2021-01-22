@@ -1,10 +1,9 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import { FormsModule }   from '@angular/forms';
-import {ApiService} from "../../../shared/api.service";
-import {AuthorizationService} from "../../../shared/authorization.service";
-import {UserService} from "../../../shared/modelsAndTheirServices/user.service";
-import {Router} from "@angular/router";
-import {User} from "../../../shared/modelsAndTheirServices/user";
+import {ApiService} from '../../../shared/api.service';
+import {AuthorizationService} from '../../../shared/authorization.service';
+import {UserService} from '../../../shared/modelsAndTheirServices/user.service';
+import {Router} from '@angular/router';
+import {User} from '../../../shared/modelsAndTheirServices/user';
 
 @Component({
   selector: 'app-login',
@@ -25,8 +24,8 @@ export class LoginComponent implements OnInit {
   constructor(private api: ApiService, private authService: AuthorizationService, private router: Router, private userService: UserService) { }
 
   ngOnInit() {
-    this.email = "second@user.com";
-    this.password = "second";
+    this.email = 'second@user.com';
+    this.password = 'second';
   }
 
   login() {

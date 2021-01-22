@@ -1,13 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ApiService} from "../../../shared/api.service";
-import {AuthorizationService} from "../../../shared/authorization.service";
-import {Router} from "@angular/router";
-import {BasketService} from "../../../shared/modelsAndTheirServices/basket.service";
-import {Basket} from "../../../shared/modelsAndTheirServices/basket";
-import {Merchandise} from "../../../shared/modelsAndTheirServices/merchandise";
-import {MerchandiseService} from "../../../shared/modelsAndTheirServices/merchandise.service";
-import {OrderService} from "../../../shared/modelsAndTheirServices/order.service";
-import {Order} from "../../../shared/modelsAndTheirServices/order";
+import {ApiService} from '../../../shared/api.service';
+import {AuthorizationService} from '../../../shared/authorization.service';
+import {Router} from '@angular/router';
+import {BasketService} from '../../../shared/modelsAndTheirServices/basket.service';
+import {Basket} from '../../../shared/modelsAndTheirServices/basket';
+import {Merchandise} from '../../../shared/modelsAndTheirServices/merchandise';
+import {MerchandiseService} from '../../../shared/modelsAndTheirServices/merchandise.service';
+import {OrderService} from '../../../shared/modelsAndTheirServices/order.service';
+import {Order} from '../../../shared/modelsAndTheirServices/order';
 
 @Component({
   selector: 'app-basket-list',
@@ -61,7 +61,7 @@ export class BasketListComponent implements OnInit {
 
   fillBaskets() {
     this.basketsObservable.subscribe(data => {
-      for(let basketData of data) {
+      for (const basketData of data) {
         this.addBasketToBaskets(new Basket(basketData));
       }
       this.fillMerchandises();
@@ -73,7 +73,7 @@ export class BasketListComponent implements OnInit {
   }
 
   fillMerchandises() {
-    for(let basket of this.baskets) {
+    for (const basket of this.baskets) {
       const merchandiseObservable = this.merchandiseService.getOne(basket.getBasketID());
       this.addMerchandiseToMerchandises(merchandiseObservable);
     }
@@ -88,7 +88,7 @@ export class BasketListComponent implements OnInit {
 
   calculateTotalPrice() {
     this.totalPrice = 0;
-    for(var i = 0; i < this.baskets.length; i++) {
+    for (let i = 0; i < this.baskets.length; i++) {
       this.totalPrice += (this.merchandises[i].merchandisePrice * this.baskets[i].basketItemAmount);
     }
     this.setComponentReadyToDisplay();
@@ -103,15 +103,15 @@ export class BasketListComponent implements OnInit {
   }
 
   orderEverythingInMyBasket() {
-    let deliveryDate = this.getDateOfDayIn3DaysFromNow(); // Delivery date is always 3 days after today
-    for(let basketToOrder of this.baskets) {
+    const deliveryDate = this.getDateOfDayIn3DaysFromNow(); // Delivery date is always 3 days after today
+    for (const basketToOrder of this.baskets) {
       this.makeOrderFromBasket(basketToOrder, deliveryDate);
     }
     this.deleteBasketsFromUser();
   }
 
   getDateOfDayIn3DaysFromNow() {
-    let today = this.getDateOfToday();
+    const today = this.getDateOfToday();
     const threeDaysFromNow = this.add3DaysToDate(today);
     return new Date(threeDaysFromNow);
   }

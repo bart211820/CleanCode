@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import {ApiService} from "../api.service";
-import {AuthorizationService} from "../authorization.service";
-import {Order} from "./order";
-import {User} from "./user";
+import {ApiService} from '../api.service';
+import {AuthorizationService} from '../authorization.service';
+import {Order} from './order';
 
 @Injectable({
   providedIn: ApiService,

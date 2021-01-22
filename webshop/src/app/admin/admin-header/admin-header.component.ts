@@ -1,7 +1,7 @@
 import { Component, } from '@angular/core';
-import {UserService} from "../../shared/modelsAndTheirServices/user.service";
-import {ApiService} from "../../shared/api.service";
-import {AuthorizationService} from "../../shared/authorization.service";
+import {UserService} from '../../shared/modelsAndTheirServices/user.service';
+import {ApiService} from '../../shared/api.service';
+import {AuthorizationService} from '../../shared/authorization.service';
 
 @Component({
   selector: 'app-admin-header',
@@ -17,7 +17,7 @@ export class AdminHeaderComponent {
 
   constructor(private userService: UserService) { }
 
-  logOut(){
+  logOut() {
     this.userService.logout();
   }
 }

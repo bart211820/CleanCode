@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {ApiService} from "../../shared/api.service";
-import {AuthorizationService} from "../../shared/authorization.service";
-import {AnimatorService} from "../../shared/modelsAndTheirServices/animator.service";
-import {Router} from "@angular/router";
-import {Animator} from "../../shared/modelsAndTheirServices/animator";
+import {ApiService} from '../../shared/api.service';
+import {AuthorizationService} from '../../shared/authorization.service';
+import {AnimatorService} from '../../shared/modelsAndTheirServices/animator.service';
+import {Router} from '@angular/router';
+import {Animator} from '../../shared/modelsAndTheirServices/animator';
 
 @Component({
   selector: 'app-manage-animators',
@@ -43,14 +43,14 @@ export class ManageAnimatorsComponent implements OnInit {
 
   fillAnimators() {
     this.animatorObservable.subscribe(data => {
-      for(let animatorData of data) {
+      for (const animatorData of data) {
         this.addAnimatorToAnimators(new Animator(animatorData));
       }
       this.setComponentReadyToDisplay();
     });
   }
 
-  addAnimatorToAnimators(animator){
+  addAnimatorToAnimators(animator) {
     this.animators.push(animator);
   }
 

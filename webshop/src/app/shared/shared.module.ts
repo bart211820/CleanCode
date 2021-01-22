@@ -1,10 +1,8 @@
-import {Component, NgModule} from '@angular/core';
-
+import { NgModule } from '@angular/core';
 import { PublicModule } from '../public.module';
-
 import { AuthorizationService } from './authorization.service';
 import { ApiService } from './api.service';
-import {ShopComponent} from "../webshop/shop/shop.component";
+import { ShopComponent } from '../webshop/shop/shop.component';
 
 @NgModule({
   imports: [ PublicModule ],

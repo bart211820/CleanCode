@@ -1,9 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Merchandise} from "../../../../shared/modelsAndTheirServices/merchandise";
-import {ApiService} from "../../../../shared/api.service";
-import {AuthorizationService} from "../../../../shared/authorization.service";
-import {Router} from "@angular/router";
-import {MerchandiseService} from "../../../../shared/modelsAndTheirServices/merchandise.service";
+import {Component, Input, OnInit} from '@angular/core';
+import {Merchandise} from '../../../../shared/modelsAndTheirServices/merchandise';
+import {ApiService} from '../../../../shared/api.service';
+import {AuthorizationService} from '../../../../shared/authorization.service';
+import {Router} from '@angular/router';
+import {MerchandiseService} from '../../../../shared/modelsAndTheirServices/merchandise.service';
 
 @Component({
   selector: 'app-order-item',

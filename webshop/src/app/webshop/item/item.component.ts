@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {ApiService} from "../../shared/api.service";
-import {AuthorizationService} from "../../shared/authorization.service";
-import {MerchandiseService} from "../../shared/modelsAndTheirServices/merchandise.service";
-import {Merchandise} from "../../shared/modelsAndTheirServices/merchandise";
-import {AnimatorService} from "../../shared/modelsAndTheirServices/animator.service";
-import {Animator} from "../../shared/modelsAndTheirServices/animator";
-import {Basket} from "../../shared/modelsAndTheirServices/basket";
-import {BasketService} from "../../shared/modelsAndTheirServices/basket.service";
+import {ActivatedRoute, Router} from '@angular/router';
+import {ApiService} from '../../shared/api.service';
+import {AuthorizationService} from '../../shared/authorization.service';
+import {MerchandiseService} from '../../shared/modelsAndTheirServices/merchandise.service';
+import {Merchandise} from '../../shared/modelsAndTheirServices/merchandise';
+import {AnimatorService} from '../../shared/modelsAndTheirServices/animator.service';
+import {Animator} from '../../shared/modelsAndTheirServices/animator';
+import {BasketService} from '../../shared/modelsAndTheirServices/basket.service';
 
 @Component({
   selector: 'app-item',
@@ -72,7 +71,7 @@ export class ItemComponent implements OnInit {
     try {
       this.tryAddToCard();
     } catch (e) {
-      if(e.message === "NotSignedIn"){
+      if (e.message === 'NotSignedIn') {
         this.router.navigate(['/login']);
       } else {
         console.error(e);

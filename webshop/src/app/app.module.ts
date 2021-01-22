@@ -9,12 +9,12 @@ import { FooterComponent } from './webshop/footer/footer.component';
 import { HeaderComponent } from './webshop/header/header.component';
 import { ShopComponent } from './webshop/shop/shop.component';
 import { ShopItemComponent } from './webshop/shop/shop-item/shop-item.component';
-import { ItemComponent } from "./webshop/item/item.component";
-import { RegistInComponent } from "./webshop/regist-in/regist-in.component";
-import { LoginComponent } from "./webshop/regist-in/login/login.component";
-import { RegisterComponent } from "./webshop/regist-in/register/register.component";
-import { FormsModule } from "@angular/forms";
-import { AdminIndexComponent } from "./admin/admin-index/admin-index.component";
+import { ItemComponent } from './webshop/item/item.component';
+import { RegistInComponent } from './webshop/regist-in/regist-in.component';
+import { LoginComponent } from './webshop/regist-in/login/login.component';
+import { RegisterComponent } from './webshop/regist-in/register/register.component';
+import { FormsModule } from '@angular/forms';
+import { AdminIndexComponent } from './admin/admin-index/admin-index.component';
 import { MeComponent } from './webshop/me/me.component';
 import { AdminComponent } from './admin/admin.component';
 import { BasketListComponent } from './webshop/me/basket-list/basket-list.component';
@@ -30,8 +30,8 @@ import { AnimatorRowComponent } from './admin/manage-animators/animator-row/anim
 import { MakeAdminComponent } from './admin/make-admin/make-admin.component';
 import { AddItemComponent } from './admin/manage-items/add-item/add-item.component';
 import { AddAnimatorComponent } from './admin/manage-animators/add-animator/add-animator.component';
-import { AuthGuard } from "./auth-guard";
-import {AuthorizationService} from "./shared/authorization.service";
+import { AuthGuard } from './auth-guard';
+import {AuthorizationService} from './shared/authorization.service';
 
 @NgModule({
   declarations: [

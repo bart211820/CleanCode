@@ -1,13 +1,11 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Basket} from "../../../../shared/modelsAndTheirServices/basket";
-import {ApiService} from "../../../../shared/api.service";
-import {AuthorizationService} from "../../../../shared/authorization.service";
-import {Router} from "@angular/router";
-import {MerchandiseService} from "../../../../shared/modelsAndTheirServices/merchandise.service";
-import {Merchandise} from "../../../../shared/modelsAndTheirServices/merchandise";
-import {NgForm} from "@angular/forms";
-import {BasketService} from "../../../../shared/modelsAndTheirServices/basket.service";
-import {Animator} from "../../../../shared/modelsAndTheirServices/animator";
+import {Basket} from '../../../../shared/modelsAndTheirServices/basket';
+import {ApiService} from '../../../../shared/api.service';
+import {AuthorizationService} from '../../../../shared/authorization.service';
+import {Router} from '@angular/router';
+import {MerchandiseService} from '../../../../shared/modelsAndTheirServices/merchandise.service';
+import {Merchandise} from '../../../../shared/modelsAndTheirServices/merchandise';
+import {BasketService} from '../../../../shared/modelsAndTheirServices/basket.service';
 
 @Component({
   selector: 'app-basket-item',
@@ -37,7 +35,7 @@ export class BasketItemComponent implements OnInit {
     this.setMerchandiseAmount(this.basket.getBasketItemAmount());
   }
 
-  getMerchandiseObservable(){
+  getMerchandiseObservable() {
     this.merchandiseObservable = this.merchandiseService.getOne(this.basket.getBasketItemID());
   }
 
@@ -62,7 +60,7 @@ export class BasketItemComponent implements OnInit {
     this.emitBasketUpdate();
   }
 
-  makeBasketDataObjectFromBasket(){
+  makeBasketDataObjectFromBasket() {
     return {
       basketID: this.basket.getBasketID(),
       basketUserID: this.basket.getBasketUserID(),

@@ -1,8 +1,8 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {UserService} from "../../shared/modelsAndTheirServices/user.service";
-import {ApiService} from "../../shared/api.service";
-import {AuthorizationService} from "../../shared/authorization.service";
-import {Router} from "@angular/router";
+import {UserService} from '../../shared/modelsAndTheirServices/user.service';
+import {ApiService} from '../../shared/api.service';
+import {AuthorizationService} from '../../shared/authorization.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-regist-in',
@@ -26,7 +26,7 @@ export class RegistInComponent implements OnInit {
   }
 
   navigateAwayFromPageIfAlreadyLogedIn() {
-    if(this.authService.checkIfLoggedIn()){
+    if (this.authService.checkIfLoggedIn()) {
       this.userService.goToPageAfterLogin();
     }
   }
