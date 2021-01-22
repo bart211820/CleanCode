@@ -2,7 +2,7 @@
 <div class="itemsHolder" *ngIf="componentIsReadyToDisplay">
   <app-basket-item *ngFor="let thisBasket of baskets" [basket]="thisBasket" (basketUpdate)="handleBasketUpdate($event)"></app-basket-item>
 </div>
-<form (ngSubmit)="orderEverything(f)" #f="ngForm" id="orderFrom">
+<form (ngSubmit)="orderEverythingInMyBasket(f)" #f="ngForm" id="orderFrom">
   <p>The total price of your order will be: &euro; {{ totalPrice }}.</p>
   <button value="Order now" class="yamsButton" type="submit">Order now</button>
 </form>

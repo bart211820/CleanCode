@@ -102,7 +102,7 @@ export class BasketListComponent implements OnInit {
     this.loadBasketData();
   }
 
-  orderEverything() {
+  orderEverythingInMyBasket() {
     let deliveryDate = this.getDateOfDayIn3DaysFromNow();
     for(let basketToOrder of this.baskets) {
       this.makeOrderFromBasket(basketToOrder, deliveryDate);
